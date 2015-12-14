@@ -7,8 +7,8 @@ import javax.ws.rs.ext.Provider;
 
 import org.jboss.logging.Logger;
 import org.repeid.messages.MessagesProviderFactory;
-import org.repeid.models.ModelException;
 import org.repeid.services.ErrorResponse;
+import org.sistcoopform.models.ModelException;
 
 /**
  * @author <a href="mailto:leonardo.zanivan@gmail.com">Leonardo Zanivan</a>

@@ -8,12 +8,12 @@ import javax.ws.rs.core.Response;
 
 import org.repeid.admin.client.resource.AccionistasResource;
 import org.repeid.admin.client.resource.PersonaJuridicaResource;
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaJuridicaProvider;
-import org.repeid.models.utils.ModelToRepresentation;
 import org.repeid.representations.idm.PersonaJuridicaRepresentation;
 import org.repeid.services.ErrorResponse;
 import org.repeid.services.managers.PersonaJuridicaManager;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaJuridicaProvider;
+import org.sistcoopform.models.utils.ModelToRepresentation;
 
 @Stateless
 public class PersonaJuridicaResourceImpl implements PersonaJuridicaResource {

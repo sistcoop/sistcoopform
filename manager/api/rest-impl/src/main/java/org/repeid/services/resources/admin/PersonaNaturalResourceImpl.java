@@ -16,17 +16,17 @@ import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.repeid.admin.client.resource.PersonaNaturalResource;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.PersonaNaturalProvider;
-import org.repeid.models.StoreConfigurationModel;
-import org.repeid.models.StoreConfigurationProvider;
-import org.repeid.models.StoredFileModel;
-import org.repeid.models.StoredFileProvider;
-import org.repeid.models.utils.ModelToRepresentation;
 import org.repeid.representations.idm.PersonaNaturalRepresentation;
 import org.repeid.representations.idm.StoredFileRepresentation;
 import org.repeid.services.ErrorResponse;
 import org.repeid.services.managers.PersonaNaturalManager;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.PersonaNaturalProvider;
+import org.sistcoopform.models.StoreConfigurationModel;
+import org.sistcoopform.models.StoreConfigurationProvider;
+import org.sistcoopform.models.StoredFileModel;
+import org.sistcoopform.models.StoredFileProvider;
+import org.sistcoopform.models.utils.ModelToRepresentation;
 
 @Stateless
 public class PersonaNaturalResourceImpl implements PersonaNaturalResource {

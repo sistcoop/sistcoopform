@@ -12,19 +12,19 @@ import javax.ws.rs.core.UriInfo;
 
 import org.repeid.admin.client.resource.AccionistaResource;
 import org.repeid.admin.client.resource.AccionistasResource;
-import org.repeid.models.AccionistaModel;
-import org.repeid.models.AccionistaProvider;
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaJuridicaProvider;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.PersonaNaturalProvider;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.TipoDocumentoProvider;
-import org.repeid.models.utils.ModelToRepresentation;
-import org.repeid.models.utils.RepresentationToModel;
 import org.repeid.representations.idm.AccionistaRepresentation;
 import org.repeid.representations.idm.PersonaNaturalRepresentation;
 import org.repeid.services.ErrorResponse;
+import org.sistcoopform.models.AccionistaModel;
+import org.sistcoopform.models.AccionistaProvider;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaJuridicaProvider;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.PersonaNaturalProvider;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.FormularioProvider;
+import org.sistcoopform.models.utils.ModelToRepresentation;
+import org.sistcoopform.models.utils.RepresentationToModel;
 
 @Stateless
 public class AccionistasResourceImpl implements AccionistasResource {
@@ -33,7 +33,7 @@ public class AccionistasResourceImpl implements AccionistasResource {
 	private String idPersonaJuridica;
 
 	@Inject
-	private TipoDocumentoProvider tipoDocumentoProvider;
+	private FormularioProvider tipoDocumentoProvider;
 
 	@Inject
 	private PersonaJuridicaProvider personaJuridicaProvider;
@@ -67,7 +67,7 @@ public class AccionistasResourceImpl implements AccionistasResource {
 		PersonaJuridicaModel personaJuridica = getPersonaJuridicaModel();
 
 		PersonaNaturalRepresentation personaNaturalRep = rep.getPersonaNatural();
-		TipoDocumentoModel tipoDocumento = tipoDocumentoProvider
+		FormularioModel tipoDocumento = tipoDocumentoProvider
 				.findByAbreviatura(personaNaturalRep.getTipoDocumento());
 		PersonaNaturalModel personaNatural = personaNaturalProvider.findByTipoNumeroDocumento(tipoDocumento,
 				personaNaturalRep.getNumeroDocumento());

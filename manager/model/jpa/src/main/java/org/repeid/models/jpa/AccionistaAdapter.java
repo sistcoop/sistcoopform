@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 
-import org.repeid.models.AccionistaModel;
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.jpa.entities.AccionistaEntity;
+import org.sistcoopform.models.AccionistaModel;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.jpa.entities.AccionistaEntity;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>

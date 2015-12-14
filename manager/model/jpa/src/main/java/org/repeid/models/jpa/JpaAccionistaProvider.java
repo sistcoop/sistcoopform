@@ -14,14 +14,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.repeid.models.AccionistaModel;
-import org.repeid.models.AccionistaProvider;
-import org.repeid.models.ModelDuplicateException;
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.jpa.entities.AccionistaEntity;
-import org.repeid.models.jpa.entities.PersonaJuridicaEntity;
-import org.repeid.models.jpa.entities.PersonaNaturalEntity;
+import org.sistcoopform.models.AccionistaModel;
+import org.sistcoopform.models.AccionistaProvider;
+import org.sistcoopform.models.ModelDuplicateException;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.jpa.entities.AccionistaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaJuridicaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>

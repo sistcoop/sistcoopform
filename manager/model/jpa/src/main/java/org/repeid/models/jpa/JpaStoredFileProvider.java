@@ -12,13 +12,13 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.repeid.models.StoreConfigurationModel;
-import org.repeid.models.StoredFileModel;
-import org.repeid.models.StoredFileProvider;
-import org.repeid.models.enums.StoreFileProviderName;
-import org.repeid.models.jpa.entities.FileEntity;
-import org.repeid.models.jpa.entities.StoreConfigurationEntity;
-import org.repeid.models.jpa.entities.StoredFileEntity;
+import org.sistcoopform.models.StoreConfigurationModel;
+import org.sistcoopform.models.StoredFileModel;
+import org.sistcoopform.models.StoredFileProvider;
+import org.sistcoopform.models.enums.StoreFileProviderName;
+import org.sistcoopform.models.jpa.entities.FileEntity;
+import org.sistcoopform.models.jpa.entities.StoreConfigurationEntity;
+import org.sistcoopform.models.jpa.entities.StoredFileEntity;
 
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxEntry;

@@ -4,8 +4,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import org.repeid.models.AccionistaModel;
 import org.repeid.representations.idm.AccionistaRepresentation;
+import org.sistcoopform.models.AccionistaModel;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)

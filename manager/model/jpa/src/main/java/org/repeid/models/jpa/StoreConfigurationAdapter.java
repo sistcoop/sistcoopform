@@ -2,9 +2,9 @@ package org.repeid.models.jpa;
 
 import javax.persistence.EntityManager;
 
-import org.repeid.models.StoreConfigurationModel;
-import org.repeid.models.enums.StoreFileProviderName;
-import org.repeid.models.jpa.entities.StoreConfigurationEntity;
+import org.sistcoopform.models.StoreConfigurationModel;
+import org.sistcoopform.models.enums.StoreFileProviderName;
+import org.sistcoopform.models.jpa.entities.StoreConfigurationEntity;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>

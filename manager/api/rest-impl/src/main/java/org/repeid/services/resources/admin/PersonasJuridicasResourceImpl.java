@@ -13,18 +13,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.repeid.admin.client.resource.PersonaJuridicaResource;
 import org.repeid.admin.client.resource.PersonasJuridicasResource;
-import org.repeid.models.ModelDuplicateException;
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaJuridicaProvider;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.PersonaNaturalProvider;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.TipoDocumentoProvider;
-import org.repeid.models.search.SearchCriteriaFilterOperator;
-import org.repeid.models.search.SearchCriteriaModel;
-import org.repeid.models.search.SearchResultsModel;
-import org.repeid.models.utils.ModelToRepresentation;
-import org.repeid.models.utils.RepresentationToModel;
 import org.repeid.representations.idm.PersonaJuridicaRepresentation;
 import org.repeid.representations.idm.PersonaNaturalRepresentation;
 import org.repeid.representations.idm.search.OrderByRepresentation;
@@ -33,12 +21,24 @@ import org.repeid.representations.idm.search.SearchCriteriaFilterRepresentation;
 import org.repeid.representations.idm.search.SearchCriteriaRepresentation;
 import org.repeid.representations.idm.search.SearchResultsRepresentation;
 import org.repeid.services.ErrorResponse;
+import org.sistcoopform.models.ModelDuplicateException;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaJuridicaProvider;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.PersonaNaturalProvider;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.FormularioProvider;
+import org.sistcoopform.models.search.SearchCriteriaFilterOperator;
+import org.sistcoopform.models.search.SearchCriteriaModel;
+import org.sistcoopform.models.search.SearchResultsModel;
+import org.sistcoopform.models.utils.ModelToRepresentation;
+import org.sistcoopform.models.utils.RepresentationToModel;
 
 @Stateless
 public class PersonasJuridicasResourceImpl implements PersonasJuridicasResource {
 
     @Inject
-    private TipoDocumentoProvider tipoDocumentoProvider;
+    private FormularioProvider tipoDocumentoProvider;
 
     @Inject
     private PersonaNaturalProvider personaNaturalProvider;
@@ -62,7 +62,7 @@ public class PersonasJuridicasResourceImpl implements PersonasJuridicasResource 
 
     @Override
     public Response create(PersonaJuridicaRepresentation rep) {
-        TipoDocumentoModel tipoDocumentoPersonaJuridica = tipoDocumentoProvider
+        FormularioModel tipoDocumentoPersonaJuridica = tipoDocumentoProvider
                 .findByAbreviatura(rep.getTipoDocumento());
 
         // Check duplicated tipo y numero de documento
@@ -72,7 +72,7 @@ public class PersonasJuridicasResourceImpl implements PersonasJuridicasResource 
         }
 
         PersonaNaturalRepresentation representanteRep = rep.getRepresentanteLegal();
-        TipoDocumentoModel tipoDocumentoRepresentante = tipoDocumentoProvider
+        FormularioModel tipoDocumentoRepresentante = tipoDocumentoProvider
                 .findByAbreviatura(representanteRep.getTipoDocumento());
         PersonaNaturalModel representante = personaNaturalProvider
                 .findByTipoNumeroDocumento(tipoDocumentoRepresentante, representanteRep.getNumeroDocumento());
@@ -109,7 +109,7 @@ public class PersonasJuridicasResourceImpl implements PersonasJuridicasResource 
             personaJuridicaModels = personaJuridicaProvider.search(filterText.trim(), firstResult,
                     maxResults);
         } else if (tipoDocumento != null || numeroDocumento != null) {
-            TipoDocumentoModel tipoDocumentoModel = tipoDocumentoProvider.findByAbreviatura(tipoDocumento);
+            FormularioModel tipoDocumentoModel = tipoDocumentoProvider.findByAbreviatura(tipoDocumento);
             PersonaJuridicaModel personaJuridica = personaJuridicaProvider
                     .findByTipoNumeroDocumento(tipoDocumentoModel, numeroDocumento);
             personaJuridicaModels = new ArrayList<>();

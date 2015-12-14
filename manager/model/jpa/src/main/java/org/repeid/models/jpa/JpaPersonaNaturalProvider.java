@@ -14,17 +14,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.repeid.models.ModelDuplicateException;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.PersonaNaturalProvider;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.enums.Sexo;
-import org.repeid.models.jpa.entities.AccionistaEntity;
-import org.repeid.models.jpa.entities.PersonaJuridicaEntity;
-import org.repeid.models.jpa.entities.PersonaNaturalEntity;
-import org.repeid.models.jpa.entities.TipoDocumentoEntity;
-import org.repeid.models.search.SearchCriteriaModel;
-import org.repeid.models.search.SearchResultsModel;
+import org.sistcoopform.models.ModelDuplicateException;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.PersonaNaturalProvider;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.enums.Sexo;
+import org.sistcoopform.models.jpa.entities.AccionistaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaJuridicaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
+import org.sistcoopform.models.jpa.entities.TipoDocumentoEntity;
+import org.sistcoopform.models.search.SearchCriteriaModel;
+import org.sistcoopform.models.search.SearchResultsModel;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -55,7 +55,7 @@ public class JpaPersonaNaturalProvider extends AbstractHibernateStorage implemen
     }
 
     @Override
-    public PersonaNaturalModel create(String codigoPais, TipoDocumentoModel tipoDocumentoModel,
+    public PersonaNaturalModel create(String codigoPais, FormularioModel tipoDocumentoModel,
             String numeroDocumento, String apellidoPaterno, String apellidoMaterno, String nombres,
             Date fechaNacimiento, Sexo sexo) {
         if (findByTipoNumeroDocumento(tipoDocumentoModel, numeroDocumento) != null) {
@@ -115,7 +115,7 @@ public class JpaPersonaNaturalProvider extends AbstractHibernateStorage implemen
     }
 
     @Override
-    public PersonaNaturalModel findByTipoNumeroDocumento(TipoDocumentoModel tipoDocumento,
+    public PersonaNaturalModel findByTipoNumeroDocumento(FormularioModel tipoDocumento,
             String numeroDocumento) {
         TypedQuery<PersonaNaturalEntity> query = em.createNamedQuery(
                 "PersonaNaturalEntity.findByTipoNumeroDocumento", PersonaNaturalEntity.class);

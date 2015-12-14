@@ -14,17 +14,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.repeid.models.ModelDuplicateException;
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaJuridicaProvider;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.enums.TipoEmpresa;
-import org.repeid.models.jpa.entities.PersonaJuridicaEntity;
-import org.repeid.models.jpa.entities.PersonaNaturalEntity;
-import org.repeid.models.jpa.entities.TipoDocumentoEntity;
-import org.repeid.models.search.SearchCriteriaModel;
-import org.repeid.models.search.SearchResultsModel;
+import org.sistcoopform.models.ModelDuplicateException;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaJuridicaProvider;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.enums.TipoEmpresa;
+import org.sistcoopform.models.jpa.entities.PersonaJuridicaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
+import org.sistcoopform.models.jpa.entities.TipoDocumentoEntity;
+import org.sistcoopform.models.search.SearchCriteriaModel;
+import org.sistcoopform.models.search.SearchResultsModel;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -55,7 +55,7 @@ public class JpaPersonaJuridicaProvider extends AbstractHibernateStorage impleme
 
     @Override
     public PersonaJuridicaModel create(PersonaNaturalModel representanteLegal, String codigoPais,
-            TipoDocumentoModel tipoDocumentoModel, String numeroDocumento, String razonSocial,
+            FormularioModel tipoDocumentoModel, String numeroDocumento, String razonSocial,
             Date fechaConstitucion, TipoEmpresa tipoEmpresa, boolean finLucro) {
         if (findByTipoNumeroDocumento(tipoDocumentoModel, numeroDocumento) != null) {
             throw new ModelDuplicateException(
@@ -100,7 +100,7 @@ public class JpaPersonaJuridicaProvider extends AbstractHibernateStorage impleme
     }
 
     @Override
-    public PersonaJuridicaModel findByTipoNumeroDocumento(TipoDocumentoModel tipoDocumento,
+    public PersonaJuridicaModel findByTipoNumeroDocumento(FormularioModel tipoDocumento,
             String numeroDocumento) {
         TypedQuery<PersonaJuridicaEntity> query = em.createNamedQuery(
                 "PersonaJuridicaEntity.findByTipoNumeroDocumento", PersonaJuridicaEntity.class);

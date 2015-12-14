@@ -4,13 +4,13 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.StoreConfigurationModel;
-import org.repeid.models.StoredFileModel;
-import org.repeid.models.StoredFileProvider;
-import org.repeid.models.enums.EstadoCivil;
-import org.repeid.models.enums.Sexo;
 import org.repeid.representations.idm.PersonaNaturalRepresentation;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.StoreConfigurationModel;
+import org.sistcoopform.models.StoredFileModel;
+import org.sistcoopform.models.StoredFileProvider;
+import org.sistcoopform.models.enums.EstadoCivil;
+import org.sistcoopform.models.enums.Sexo;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)

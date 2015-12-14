@@ -6,10 +6,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import org.repeid.admin.client.resource.MaestroResource;
-import org.repeid.models.enums.EstadoCivil;
-import org.repeid.models.enums.Sexo;
-import org.repeid.models.enums.TipoEmpresa;
-import org.repeid.models.enums.TipoPersona;
+import org.sistcoopform.models.enums.EstadoCivil;
+import org.sistcoopform.models.enums.Sexo;
+import org.sistcoopform.models.enums.TipoEmpresa;
+import org.sistcoopform.models.enums.TipoPersona;
 
 @Stateless
 public class MaestroResourceImpl implements MaestroResource {

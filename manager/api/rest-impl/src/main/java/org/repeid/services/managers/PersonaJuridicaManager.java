@@ -5,21 +5,21 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.PersonaNaturalProvider;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.TipoDocumentoProvider;
-import org.repeid.models.enums.TipoEmpresa;
 import org.repeid.representations.idm.PersonaJuridicaRepresentation;
 import org.repeid.representations.idm.PersonaNaturalRepresentation;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.PersonaNaturalProvider;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.FormularioProvider;
+import org.sistcoopform.models.enums.TipoEmpresa;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class PersonaJuridicaManager {
 
     @Inject
-    private TipoDocumentoProvider tipoDocumentoProvider;
+    private FormularioProvider tipoDocumentoProvider;
 
     @Inject
     private PersonaNaturalProvider personaNaturalProvider;
@@ -43,7 +43,7 @@ public class PersonaJuridicaManager {
         PersonaNaturalRepresentation representanteRep = rep.getRepresentanteLegal();
         if (representanteRep != null) {
             PersonaNaturalRepresentation representanteRepresentation = rep.getRepresentanteLegal();
-            TipoDocumentoModel tipoDocumentoRepresentanteModel = tipoDocumentoProvider
+            FormularioModel tipoDocumentoRepresentanteModel = tipoDocumentoProvider
                     .findByAbreviatura(representanteRepresentation.getTipoDocumento());
             PersonaNaturalModel representanteModel = personaNaturalProvider.findByTipoNumeroDocumento(
                     tipoDocumentoRepresentanteModel, representanteRepresentation.getNumeroDocumento());

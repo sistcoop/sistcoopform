@@ -13,16 +13,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.repeid.admin.client.resource.PersonaNaturalResource;
 import org.repeid.admin.client.resource.PersonasNaturalesResource;
-import org.repeid.models.ModelDuplicateException;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.PersonaNaturalProvider;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.TipoDocumentoProvider;
-import org.repeid.models.search.SearchCriteriaFilterOperator;
-import org.repeid.models.search.SearchCriteriaModel;
-import org.repeid.models.search.SearchResultsModel;
-import org.repeid.models.utils.ModelToRepresentation;
-import org.repeid.models.utils.RepresentationToModel;
 import org.repeid.representations.idm.PersonaNaturalRepresentation;
 import org.repeid.representations.idm.search.OrderByRepresentation;
 import org.repeid.representations.idm.search.PagingRepresentation;
@@ -30,6 +20,16 @@ import org.repeid.representations.idm.search.SearchCriteriaFilterRepresentation;
 import org.repeid.representations.idm.search.SearchCriteriaRepresentation;
 import org.repeid.representations.idm.search.SearchResultsRepresentation;
 import org.repeid.services.ErrorResponse;
+import org.sistcoopform.models.ModelDuplicateException;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.PersonaNaturalProvider;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.FormularioProvider;
+import org.sistcoopform.models.search.SearchCriteriaFilterOperator;
+import org.sistcoopform.models.search.SearchCriteriaModel;
+import org.sistcoopform.models.search.SearchResultsModel;
+import org.sistcoopform.models.utils.ModelToRepresentation;
+import org.sistcoopform.models.utils.RepresentationToModel;
 
 @Stateless
 public class PersonasNaturalesResourceImpl implements PersonasNaturalesResource {
@@ -38,7 +38,7 @@ public class PersonasNaturalesResourceImpl implements PersonasNaturalesResource 
     private PersonaNaturalProvider personaNaturalProvider;
 
     @Inject
-    private TipoDocumentoProvider tipoDocumentoProvider;
+    private FormularioProvider tipoDocumentoProvider;
 
     @Inject
     private RepresentationToModel representationToModel;
@@ -56,7 +56,7 @@ public class PersonasNaturalesResourceImpl implements PersonasNaturalesResource 
 
     @Override
     public Response create(PersonaNaturalRepresentation rep) {
-        TipoDocumentoModel tipoDocumentoModel = tipoDocumentoProvider
+        FormularioModel tipoDocumentoModel = tipoDocumentoProvider
                 .findByAbreviatura(rep.getTipoDocumento());
 
         // Check duplicated tipo y numero de documento
@@ -88,7 +88,7 @@ public class PersonasNaturalesResourceImpl implements PersonasNaturalesResource 
         if (filterText != null) {
             personaNaturalModels = personaNaturalProvider.search(filterText.trim(), firstResult, maxResults);
         } else if (tipoDocumento != null || numeroDocumento != null) {
-            TipoDocumentoModel tipoDocumentoModel = tipoDocumentoProvider.findByAbreviatura(tipoDocumento);
+            FormularioModel tipoDocumentoModel = tipoDocumentoProvider.findByAbreviatura(tipoDocumento);
             PersonaNaturalModel personaNatural = personaNaturalProvider
                     .findByTipoNumeroDocumento(tipoDocumentoModel, numeroDocumento);
             personaNaturalModels = new ArrayList<>();

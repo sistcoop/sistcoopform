@@ -13,15 +13,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.repeid.models.ModelDuplicateException;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.TipoDocumentoProvider;
-import org.repeid.models.enums.TipoPersona;
-import org.repeid.models.jpa.entities.PersonaJuridicaEntity;
-import org.repeid.models.jpa.entities.PersonaNaturalEntity;
-import org.repeid.models.jpa.entities.TipoDocumentoEntity;
-import org.repeid.models.search.SearchCriteriaModel;
-import org.repeid.models.search.SearchResultsModel;
+import org.sistcoopform.models.ModelDuplicateException;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.FormularioProvider;
+import org.sistcoopform.models.enums.TipoPersona;
+import org.sistcoopform.models.jpa.entities.PersonaJuridicaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
+import org.sistcoopform.models.jpa.entities.TipoDocumentoEntity;
+import org.sistcoopform.models.search.SearchCriteriaModel;
+import org.sistcoopform.models.search.SearchResultsModel;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -29,9 +29,9 @@ import org.repeid.models.search.SearchResultsModel;
 
 @Named
 @Stateless
-@Local(TipoDocumentoProvider.class)
+@Local(FormularioProvider.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implements TipoDocumentoProvider {
+public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implements FormularioProvider {
 
     private static final String ABREVIATURA = "abreviatura";
     private static final String DENOMINACION = "denominacion";
@@ -52,7 +52,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
     }
 
     @Override
-    public TipoDocumentoModel create(String abreviatura, String denominacion, int cantidadCaracteres,
+    public FormularioModel create(String abreviatura, String denominacion, int cantidadCaracteres,
             TipoPersona tipoPersona) {
         if (findByAbreviatura(abreviatura) != null) {
             throw new ModelDuplicateException(
@@ -71,7 +71,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
     }
 
     @Override
-    public TipoDocumentoModel findByAbreviatura(String abreviatura) {
+    public FormularioModel findByAbreviatura(String abreviatura) {
         TypedQuery<TipoDocumentoEntity> query = em.createNamedQuery("TipoDocumentoEntity.findByAbreviatura",
                 TipoDocumentoEntity.class);
         query.setParameter("abreviatura", abreviatura);
@@ -87,13 +87,13 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
     }
 
     @Override
-    public TipoDocumentoModel findById(String id) {
+    public FormularioModel findById(String id) {
         TipoDocumentoEntity tipoDocumentoEntity = em.find(TipoDocumentoEntity.class, id);
         return tipoDocumentoEntity != null ? new TipoDocumentoAdapter(em, tipoDocumentoEntity) : null;
     }
 
     @Override
-    public boolean remove(TipoDocumentoModel tipoDocumentoModel) {
+    public boolean remove(FormularioModel tipoDocumentoModel) {
         TypedQuery<PersonaNaturalEntity> query1 = em
                 .createNamedQuery("PersonaNaturalEntity.findByTipoDocumento", PersonaNaturalEntity.class);
         query1.setParameter("tipoDocumento", tipoDocumentoModel.getAbreviatura());
@@ -120,12 +120,12 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
     }
 
     @Override
-    public List<TipoDocumentoModel> getAll() {
+    public List<FormularioModel> getAll() {
         return getAll(-1, -1);
     }
 
     @Override
-    public List<TipoDocumentoModel> getAll(int firstResult, int maxResults) {
+    public List<FormularioModel> getAll(int firstResult, int maxResults) {
         TypedQuery<TipoDocumentoEntity> query = em.createNamedQuery("TipoDocumentoEntity.findAll",
                 TipoDocumentoEntity.class);
         if (firstResult != -1) {
@@ -135,7 +135,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
             query.setMaxResults(maxResults);
         }
         List<TipoDocumentoEntity> entities = query.getResultList();
-        List<TipoDocumentoModel> models = new ArrayList<TipoDocumentoModel>();
+        List<FormularioModel> models = new ArrayList<FormularioModel>();
         for (TipoDocumentoEntity tipoDocumentoEntity : entities) {
             models.add(new TipoDocumentoAdapter(em, tipoDocumentoEntity));
         }
@@ -143,12 +143,12 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
     }
 
     @Override
-    public List<TipoDocumentoModel> search(String filterText) {
+    public List<FormularioModel> search(String filterText) {
         return search(filterText, -1, -1);
     }
 
     @Override
-    public List<TipoDocumentoModel> search(String filterText, int firstResult, int maxResults) {
+    public List<FormularioModel> search(String filterText, int firstResult, int maxResults) {
         TypedQuery<TipoDocumentoEntity> query = em.createNamedQuery("TipoDocumentoEntity.findByFilterText",
                 TipoDocumentoEntity.class);
         query.setParameter("filterText", "%" + filterText.toLowerCase() + "%");
@@ -159,7 +159,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
             query.setMaxResults(maxResults);
         }
         List<TipoDocumentoEntity> entities = query.getResultList();
-        List<TipoDocumentoModel> models = new ArrayList<TipoDocumentoModel>();
+        List<FormularioModel> models = new ArrayList<FormularioModel>();
         for (TipoDocumentoEntity tipoDocumentoEntity : entities) {
             models.add(new TipoDocumentoAdapter(em, tipoDocumentoEntity));
         }
@@ -168,21 +168,21 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
     }
 
     @Override
-    public List<TipoDocumentoModel> searchByAttributes(Map<String, Object> attributes) {
+    public List<FormularioModel> searchByAttributes(Map<String, Object> attributes) {
         return searchByAttributes(attributes, -1, -1);
     }
 
     @Override
-    public List<TipoDocumentoModel> searchByAttributes(Map<String, Object> attributes, int firstResult,
+    public List<FormularioModel> searchByAttributes(Map<String, Object> attributes, int firstResult,
             int maxResults) {
         StringBuilder builder = new StringBuilder("SELECT t FROM TipoDocumentoEntity");
         for (Map.Entry<String, Object> entry : attributes.entrySet()) {
             String attribute = null;
             String parameterName = null;
-            if (entry.getKey().equals(TipoDocumentoModel.ABREVIATURA)) {
+            if (entry.getKey().equals(FormularioModel.ABREVIATURA)) {
                 attribute = "lower(t.abreviatura)";
                 parameterName = JpaTipoDocumentoProvider.ABREVIATURA;
-            } else if (entry.getKey().equalsIgnoreCase(TipoDocumentoModel.DENOMINACION)) {
+            } else if (entry.getKey().equalsIgnoreCase(FormularioModel.DENOMINACION)) {
                 attribute = "lower(t.denominacion)";
                 parameterName = JpaTipoDocumentoProvider.DENOMINACION;
             }
@@ -191,10 +191,10 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
                 builder.append(" and ");
                 builder.append(attribute).append(" like :").append(parameterName);
             } else {
-                if (entry.getKey().equalsIgnoreCase(TipoDocumentoModel.TIPO_PERSONA)) {
+                if (entry.getKey().equalsIgnoreCase(FormularioModel.TIPO_PERSONA)) {
                     attribute = "lower(t.tipoPersona)";
                     parameterName = JpaTipoDocumentoProvider.TIPO_PERSONA;
-                } else if (entry.getKey().equalsIgnoreCase(TipoDocumentoModel.ESTADO)) {
+                } else if (entry.getKey().equalsIgnoreCase(FormularioModel.ESTADO)) {
                     attribute = "t.estado";
                     parameterName = JpaTipoDocumentoProvider.ESTADO;
                 }
@@ -211,18 +211,18 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
         TypedQuery<TipoDocumentoEntity> query = em.createQuery(q, TipoDocumentoEntity.class);
         for (Map.Entry<String, Object> entry : attributes.entrySet()) {
             String parameterName = null;
-            if (entry.getKey().equals(TipoDocumentoModel.ABREVIATURA)) {
+            if (entry.getKey().equals(FormularioModel.ABREVIATURA)) {
                 parameterName = JpaTipoDocumentoProvider.ABREVIATURA;
-            } else if (entry.getKey().equalsIgnoreCase(TipoDocumentoModel.DENOMINACION)) {
+            } else if (entry.getKey().equalsIgnoreCase(FormularioModel.DENOMINACION)) {
                 parameterName = JpaTipoDocumentoProvider.DENOMINACION;
             }
 
             if (parameterName != null) {
                 query.setParameter(parameterName, "%" + String.valueOf(entry.getValue()).toLowerCase() + "%");
             } else {
-                if (entry.getKey().equalsIgnoreCase(TipoDocumentoModel.TIPO_PERSONA)) {
+                if (entry.getKey().equalsIgnoreCase(FormularioModel.TIPO_PERSONA)) {
                     parameterName = JpaTipoDocumentoProvider.TIPO_PERSONA;
-                } else if (entry.getKey().equalsIgnoreCase(TipoDocumentoModel.ESTADO)) {
+                } else if (entry.getKey().equalsIgnoreCase(FormularioModel.ESTADO)) {
                     parameterName = JpaTipoDocumentoProvider.ESTADO;
                 }
 
@@ -239,18 +239,18 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
             query.setMaxResults(maxResults);
         }
         List<TipoDocumentoEntity> results = query.getResultList();
-        List<TipoDocumentoModel> tipoDocumentos = new ArrayList<TipoDocumentoModel>();
+        List<FormularioModel> tipoDocumentos = new ArrayList<FormularioModel>();
         for (TipoDocumentoEntity entity : results)
             tipoDocumentos.add(new TipoDocumentoAdapter(em, entity));
         return tipoDocumentos;
     }
 
     @Override
-    public SearchResultsModel<TipoDocumentoModel> search(SearchCriteriaModel criteria) {
+    public SearchResultsModel<FormularioModel> search(SearchCriteriaModel criteria) {
         SearchResultsModel<TipoDocumentoEntity> entityResult = find(criteria, TipoDocumentoEntity.class);
 
-        SearchResultsModel<TipoDocumentoModel> modelResult = new SearchResultsModel<>();
-        List<TipoDocumentoModel> list = new ArrayList<>();
+        SearchResultsModel<FormularioModel> modelResult = new SearchResultsModel<>();
+        List<FormularioModel> list = new ArrayList<>();
         for (TipoDocumentoEntity entity : entityResult.getModels()) {
             list.add(new TipoDocumentoAdapter(em, entity));
         }
@@ -260,12 +260,12 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
     }
 
     @Override
-    public SearchResultsModel<TipoDocumentoModel> search(SearchCriteriaModel criteria, String filterText) {
+    public SearchResultsModel<FormularioModel> search(SearchCriteriaModel criteria, String filterText) {
         SearchResultsModel<TipoDocumentoEntity> entityResult = findFullText(criteria,
                 TipoDocumentoEntity.class, filterText, "abreviatura", "denominacion");
 
-        SearchResultsModel<TipoDocumentoModel> modelResult = new SearchResultsModel<>();
-        List<TipoDocumentoModel> list = new ArrayList<>();
+        SearchResultsModel<FormularioModel> modelResult = new SearchResultsModel<>();
+        List<FormularioModel> list = new ArrayList<>();
         for (TipoDocumentoEntity entity : entityResult.getModels()) {
             list.add(new TipoDocumentoAdapter(em, entity));
         }

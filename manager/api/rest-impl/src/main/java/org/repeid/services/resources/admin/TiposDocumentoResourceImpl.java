@@ -13,14 +13,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.repeid.admin.client.resource.TipoDocumentoResource;
 import org.repeid.admin.client.resource.TiposDocumentoResource;
-import org.repeid.models.ModelDuplicateException;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.TipoDocumentoProvider;
-import org.repeid.models.search.SearchCriteriaFilterOperator;
-import org.repeid.models.search.SearchCriteriaModel;
-import org.repeid.models.search.SearchResultsModel;
-import org.repeid.models.utils.ModelToRepresentation;
-import org.repeid.models.utils.RepresentationToModel;
 import org.repeid.representations.idm.TipoDocumentoRepresentation;
 import org.repeid.representations.idm.search.OrderByRepresentation;
 import org.repeid.representations.idm.search.PagingRepresentation;
@@ -28,12 +20,20 @@ import org.repeid.representations.idm.search.SearchCriteriaFilterRepresentation;
 import org.repeid.representations.idm.search.SearchCriteriaRepresentation;
 import org.repeid.representations.idm.search.SearchResultsRepresentation;
 import org.repeid.services.ErrorResponse;
+import org.sistcoopform.models.ModelDuplicateException;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.FormularioProvider;
+import org.sistcoopform.models.search.SearchCriteriaFilterOperator;
+import org.sistcoopform.models.search.SearchCriteriaModel;
+import org.sistcoopform.models.search.SearchResultsModel;
+import org.sistcoopform.models.utils.ModelToRepresentation;
+import org.sistcoopform.models.utils.RepresentationToModel;
 
 @Stateless
 public class TiposDocumentoResourceImpl implements TiposDocumentoResource {
 
 	@Inject
-	private TipoDocumentoProvider tipoDocumentoProvider;
+	private FormularioProvider tipoDocumentoProvider;
 
 	@Inject
 	private RepresentationToModel representationToModel;
@@ -56,7 +56,7 @@ public class TiposDocumentoResourceImpl implements TiposDocumentoResource {
 			return ErrorResponse.exists("TipoDocumento existe con la misma abreviatura");
 		}
 		try {
-			TipoDocumentoModel model = representationToModel.createTipoDocumento(rep, tipoDocumentoProvider);
+			FormularioModel model = representationToModel.createTipoDocumento(rep, tipoDocumentoProvider);
 			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getAbreviatura()).build())
 					.header("Access-Control-Expose-Headers", "Location")
 					.entity(ModelToRepresentation.toRepresentation(model)).build();
@@ -72,29 +72,29 @@ public class TiposDocumentoResourceImpl implements TiposDocumentoResource {
 		maxResults = maxResults != null ? maxResults : -1;
 
 		List<TipoDocumentoRepresentation> results = new ArrayList<TipoDocumentoRepresentation>();
-		List<TipoDocumentoModel> tipoDocumentoModels;
+		List<FormularioModel> tipoDocumentoModels;
 		if (filterText != null) {
 			tipoDocumentoModels = tipoDocumentoProvider.search(filterText.trim(), firstResult, maxResults);
 		} else if (denominacion != null || abreviatura != null || tipoPersona != null || estado != null) {
 			Map<String, Object> attributes = new HashMap<String, Object>();
 			if (denominacion != null) {
-				attributes.put(TipoDocumentoModel.DENOMINACION, denominacion);
+				attributes.put(FormularioModel.DENOMINACION, denominacion);
 			}
 			if (abreviatura != null) {
-				attributes.put(TipoDocumentoModel.ABREVIATURA, abreviatura);
+				attributes.put(FormularioModel.ABREVIATURA, abreviatura);
 			}
 			if (tipoPersona != null) {
-				attributes.put(TipoDocumentoModel.TIPO_PERSONA, tipoPersona);
+				attributes.put(FormularioModel.TIPO_PERSONA, tipoPersona);
 			}
 			if (estado != null) {
-				attributes.put(TipoDocumentoModel.ESTADO, estado);
+				attributes.put(FormularioModel.ESTADO, estado);
 			}
 			tipoDocumentoModels = tipoDocumentoProvider.searchByAttributes(attributes, firstResult, maxResults);
 		} else {
 			tipoDocumentoModels = tipoDocumentoProvider.getAll(firstResult, maxResults);
 		}
 
-		for (TipoDocumentoModel model : tipoDocumentoModels) {
+		for (FormularioModel model : tipoDocumentoModels) {
 			results.add(ModelToRepresentation.toRepresentation(model));
 		}
 		return results;
@@ -127,7 +127,7 @@ public class TiposDocumentoResourceImpl implements TiposDocumentoResource {
 		String filterText = criteria.getFilterText();
 
 		// search
-		SearchResultsModel<TipoDocumentoModel> results = null;
+		SearchResultsModel<FormularioModel> results = null;
 		if (filterText == null) {
 			results = tipoDocumentoProvider.search(criteriaModel);
 		} else {
@@ -136,7 +136,7 @@ public class TiposDocumentoResourceImpl implements TiposDocumentoResource {
 
 		SearchResultsRepresentation<TipoDocumentoRepresentation> rep = new SearchResultsRepresentation<>();
 		List<TipoDocumentoRepresentation> items = new ArrayList<>();
-		for (TipoDocumentoModel model : results.getModels()) {
+		for (FormularioModel model : results.getModels()) {
 			items.add(ModelToRepresentation.toRepresentation(model));
 		}
 		rep.setItems(items);

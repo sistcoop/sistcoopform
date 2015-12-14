@@ -12,12 +12,12 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.repeid.models.search.OrderByModel;
-import org.repeid.models.search.PagingModel;
-import org.repeid.models.search.SearchCriteriaFilterModel;
-import org.repeid.models.search.SearchCriteriaFilterOperator;
-import org.repeid.models.search.SearchCriteriaModel;
-import org.repeid.models.search.SearchResultsModel;
+import org.sistcoopform.models.search.OrderByModel;
+import org.sistcoopform.models.search.PagingModel;
+import org.sistcoopform.models.search.SearchCriteriaFilterModel;
+import org.sistcoopform.models.search.SearchCriteriaFilterOperator;
+import org.sistcoopform.models.search.SearchCriteriaModel;
+import org.sistcoopform.models.search.SearchResultsModel;
 
 /**
  * A base class that Hibernate storage impls can extend.

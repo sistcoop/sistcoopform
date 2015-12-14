@@ -4,13 +4,13 @@ import java.util.Date;
 
 import javax.persistence.EntityManager;
 
-import org.repeid.models.StoredFileModel;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.enums.EstadoCivil;
-import org.repeid.models.enums.Sexo;
-import org.repeid.models.jpa.entities.PersonaNaturalEntity;
-import org.repeid.models.jpa.entities.StoredFileEntity;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.StoredFileModel;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.enums.EstadoCivil;
+import org.sistcoopform.models.enums.Sexo;
+import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
+import org.sistcoopform.models.jpa.entities.StoredFileEntity;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -63,7 +63,7 @@ public class PersonaNaturalAdapter implements PersonaNaturalModel {
     }
 
     @Override
-    public TipoDocumentoModel getTipoDocumento() {
+    public FormularioModel getTipoDocumento() {
         return new TipoDocumentoAdapter(em, personaNaturalEntity.getTipoDocumento());
     }
 

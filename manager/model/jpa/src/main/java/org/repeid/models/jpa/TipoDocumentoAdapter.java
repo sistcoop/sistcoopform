@@ -2,15 +2,15 @@ package org.repeid.models.jpa;
 
 import javax.persistence.EntityManager;
 
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.enums.TipoPersona;
-import org.repeid.models.jpa.entities.TipoDocumentoEntity;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.enums.TipoPersona;
+import org.sistcoopform.models.jpa.entities.TipoDocumentoEntity;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
  */
 
-public class TipoDocumentoAdapter implements TipoDocumentoModel {
+public class TipoDocumentoAdapter implements FormularioModel {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class TipoDocumentoAdapter implements TipoDocumentoModel {
         this.tipoDocumentoEntity = tipoDocumentoEntity;
     }
 
-    public static TipoDocumentoEntity toTipoDocumentoEntity(TipoDocumentoModel model, EntityManager em) {
+    public static TipoDocumentoEntity toTipoDocumentoEntity(FormularioModel model, EntityManager em) {
         if (model instanceof TipoDocumentoAdapter) {
             return ((TipoDocumentoAdapter) model).getTipoDocumentEntity();
         }
@@ -108,9 +108,9 @@ public class TipoDocumentoAdapter implements TipoDocumentoModel {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof TipoDocumentoModel))
+        if (!(obj instanceof FormularioModel))
             return false;
-        TipoDocumentoModel other = (TipoDocumentoModel) obj;
+        FormularioModel other = (FormularioModel) obj;
         if (getAbreviatura() == null) {
             if (other.getAbreviatura() != null)
                 return false;

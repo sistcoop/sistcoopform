@@ -7,14 +7,14 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import org.repeid.models.AccionistaModel;
-import org.repeid.models.PersonaJuridicaModel;
-import org.repeid.models.PersonaNaturalModel;
-import org.repeid.models.TipoDocumentoModel;
-import org.repeid.models.enums.TipoEmpresa;
-import org.repeid.models.jpa.entities.AccionistaEntity;
-import org.repeid.models.jpa.entities.PersonaJuridicaEntity;
-import org.repeid.models.jpa.entities.PersonaNaturalEntity;
+import org.sistcoopform.models.AccionistaModel;
+import org.sistcoopform.models.PersonaJuridicaModel;
+import org.sistcoopform.models.PersonaNaturalModel;
+import org.sistcoopform.models.FormularioModel;
+import org.sistcoopform.models.enums.TipoEmpresa;
+import org.sistcoopform.models.jpa.entities.AccionistaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaJuridicaEntity;
+import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -77,7 +77,7 @@ public class PersonaJuridicaAdapter implements PersonaJuridicaModel {
     }
 
     @Override
-    public TipoDocumentoModel getTipoDocumento() {
+    public FormularioModel getTipoDocumento() {
         return new TipoDocumentoAdapter(em, personaJuridicaEntity.getTipoDocumento());
     }
 

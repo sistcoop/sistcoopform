@@ -7,12 +7,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.repeid.admin.client.resource.AccionistaResource;
-import org.repeid.models.AccionistaModel;
-import org.repeid.models.AccionistaProvider;
-import org.repeid.models.utils.ModelToRepresentation;
 import org.repeid.representations.idm.AccionistaRepresentation;
 import org.repeid.services.ErrorResponse;
 import org.repeid.services.managers.AccionistaManager;
+import org.sistcoopform.models.AccionistaModel;
+import org.sistcoopform.models.AccionistaProvider;
+import org.sistcoopform.models.utils.ModelToRepresentation;
 
 @Stateless
 public class AccionistaResourceImpl implements AccionistaResource {

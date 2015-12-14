@@ -2,10 +2,10 @@ package org.repeid.models.jpa;
 
 import javax.persistence.EntityManager;
 
-import org.repeid.models.StoreConfigurationModel;
-import org.repeid.models.StoredFileModel;
-import org.repeid.models.jpa.entities.StoreConfigurationEntity;
-import org.repeid.models.jpa.entities.StoredFileEntity;
+import org.sistcoopform.models.StoreConfigurationModel;
+import org.sistcoopform.models.StoredFileModel;
+import org.sistcoopform.models.jpa.entities.StoreConfigurationEntity;
+import org.sistcoopform.models.jpa.entities.StoredFileEntity;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
