@@ -1,0 +1,4 @@
+dependencies {
+	// Third Party Dependencies
+    compile 'commons-codec:commons-codec:1.10'
+}

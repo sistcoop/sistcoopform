@@ -1,0 +1,17 @@
+dependencies {
+	// Project Dependencies	
+	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-rest")
+	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-security")
+	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-core")
+	compile project(":sistcoopform-manager:sistcoopform-manager-model:sistcoopform-manager-model-api")
+		
+	// Third Party Dependencies
+	compile 'commons-io:commons-io:2.4'
+	compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+	compile 'javax.ejb:ejb-api:3.0'
+	compile 'javax.json:javax.json-api:1.0'	
+	provided 'javax.enterprise:cdi-api:1.2'
+	provided 'org.jboss.resteasy:resteasy-jaxrs:3.0.13.Final'
+	provided 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec:1.0.2.Final'	
+}

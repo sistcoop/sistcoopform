@@ -1,0 +1,7 @@
+dependencies {
+	// Project Dependencies
+	compile project(":sistcoopform-common:sistcoopform-common-util")
+		
+	// Third Party Dependencies	
+	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'		
+}

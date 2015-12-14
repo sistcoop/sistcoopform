@@ -1,0 +1,11 @@
+dependencies {
+	// Project Dependencies
+	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-beans")
+	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-core")
+		
+	// Third Party Dependencies
+	compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+	compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.13.Final'
+	compile 'org.jboss.resteasy:resteasy-multipart-provider:3.0.13.Final'	
+	provided 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec:1.0.2.Final'	
+}

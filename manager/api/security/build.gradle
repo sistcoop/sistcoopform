@@ -1,0 +1,12 @@
+dependencies {
+	// Project Dependencies
+	compile project(":sistcoopform-common:sistcoopform-common-util")
+	compile project(":sistcoopform-common:sistcoopform-common-util")
+	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-beans")
+	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-core")
+
+    // Third Party Dependencies
+    provided 'javax.enterprise:cdi-api:1.2'
+    provided 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec:1.0.2.Final'  
+    provided 'org.keycloak:keycloak-core:1.7.0.Final'    
+}

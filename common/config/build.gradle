@@ -1,0 +1,11 @@
+dependencies {
+	// Project Dependencies
+	compile project(":sistcoopform-common:sistcoopform-common-util")
+   
+    // Third Party Dependencies
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'commons-io:commons-io:2.4'
+    compile 'commons-configuration:commons-configuration:1.10'    
+
+	provided 'org.picketbox:jboss-security-spi:4.9.4.Final'	
+}

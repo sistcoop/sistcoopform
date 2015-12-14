@@ -1,0 +1,8 @@
+subprojects {
+    apply plugin: "java"
+    apply plugin: "eclipse"
+    
+    dependencies {	
+		provided 'org.slf4j:slf4j-api:1.7.13'    
+	}  
+}

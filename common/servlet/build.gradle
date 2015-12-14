@@ -1,0 +1,16 @@
+dependencies {
+	compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'	
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    
+    // Project Dependencies
+	compile project(":sistcoopform-common:sistcoopform-common-auth")
+	compile project(":sistcoopform-common:sistcoopform-common-util")
+    
+    // Third Party Dependencies
+    compile 'commons-codec:commons-codec:1.10'
+
+    // Spec Libraries
+    provided 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec:1.0.2.Final'       
+}
