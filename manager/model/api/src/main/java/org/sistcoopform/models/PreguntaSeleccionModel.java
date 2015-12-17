@@ -12,9 +12,9 @@ public interface PreguntaSeleccionModel extends PreguntaModel {
 
     boolean isObligatorio();
 
-    void setObligatorio();
+    void setObligatorio(boolean obligatorio);
 
-    TipoPreguntaTexto getTipoPregunta();
+    TipoPreguntaSeleccion getTipoPregunta();
 
     void setTipoPregunta(TipoPreguntaSeleccion tipoPregunta);
 
