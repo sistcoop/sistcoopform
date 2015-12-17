@@ -19,7 +19,7 @@ import org.sistcoopform.models.FormularioProvider;
 import org.sistcoopform.models.enums.EstadoCivil;
 import org.sistcoopform.models.enums.Sexo;
 import org.sistcoopform.models.enums.TipoEmpresa;
-import org.sistcoopform.models.enums.TipoPersona;
+import org.sistcoopform.models.enums.TipoPreguntaSeleccion;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -28,7 +28,7 @@ public class RepresentationToModel {
     public FormularioModel createTipoDocumento(TipoDocumentoRepresentation rep,
             FormularioProvider provider) {
         FormularioModel model = provider.create(rep.getAbreviatura(), rep.getDenominacion(),
-                rep.getCantidadCaracteres(), TipoPersona.valueOf(rep.getTipoPersona()));
+                rep.getCantidadCaracteres(), TipoPreguntaSeleccion.valueOf(rep.getTipoPersona()));
         return model;
     }
 

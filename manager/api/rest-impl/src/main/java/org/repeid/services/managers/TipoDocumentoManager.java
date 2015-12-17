@@ -6,7 +6,7 @@ import javax.ejb.TransactionAttributeType;
 
 import org.repeid.representations.idm.TipoDocumentoRepresentation;
 import org.sistcoopform.models.FormularioModel;
-import org.sistcoopform.models.enums.TipoPersona;
+import org.sistcoopform.models.enums.TipoPreguntaSeleccion;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -15,7 +15,7 @@ public class TipoDocumentoManager {
     public void update(FormularioModel model, TipoDocumentoRepresentation rep) {
         model.setDenominacion(rep.getDenominacion());
         model.setCantidadCaracteres(rep.getCantidadCaracteres());
-        model.setTipoPersona(TipoPersona.valueOf(rep.getTipoPersona()));
+        model.setTipoPersona(TipoPreguntaSeleccion.valueOf(rep.getTipoPersona()));
         model.commit();
     }
 

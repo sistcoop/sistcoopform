@@ -3,7 +3,7 @@ package org.repeid.models.jpa;
 import javax.persistence.EntityManager;
 
 import org.sistcoopform.models.FormularioModel;
-import org.sistcoopform.models.enums.TipoPersona;
+import org.sistcoopform.models.enums.TipoPreguntaSeleccion;
 import org.sistcoopform.models.jpa.entities.TipoDocumentoEntity;
 
 /**
@@ -69,13 +69,13 @@ public class TipoDocumentoAdapter implements FormularioModel {
     }
 
     @Override
-    public TipoPersona getTipoPersona() {
+    public TipoPreguntaSeleccion getTipoPersona() {
         String tipoPersona = tipoDocumentoEntity.getTipoPersona();
-        return TipoPersona.valueOf(tipoPersona);
+        return TipoPreguntaSeleccion.valueOf(tipoPersona);
     }
 
     @Override
-    public void setTipoPersona(TipoPersona tipoPersona) {
+    public void setTipoPersona(TipoPreguntaSeleccion tipoPersona) {
         tipoDocumentoEntity.setTipoPersona(tipoPersona.toString());
     }
 

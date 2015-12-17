@@ -9,14 +9,14 @@ import org.repeid.admin.client.resource.MaestroResource;
 import org.sistcoopform.models.enums.EstadoCivil;
 import org.sistcoopform.models.enums.Sexo;
 import org.sistcoopform.models.enums.TipoEmpresa;
-import org.sistcoopform.models.enums.TipoPersona;
+import org.sistcoopform.models.enums.TipoPreguntaSeleccion;
 
 @Stateless
 public class MaestroResourceImpl implements MaestroResource {
 
 	@Override
 	public List<String> getAllTipoPersonas() {
-		TipoPersona[] enums = TipoPersona.values();
+		TipoPreguntaSeleccion[] enums = TipoPreguntaSeleccion.values();
 
 		List<String> representations = new ArrayList<>();
 		for (int i = 0; i < enums.length; i++) {

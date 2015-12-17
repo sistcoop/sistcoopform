@@ -16,7 +16,7 @@ import javax.persistence.TypedQuery;
 import org.sistcoopform.models.ModelDuplicateException;
 import org.sistcoopform.models.FormularioModel;
 import org.sistcoopform.models.FormularioProvider;
-import org.sistcoopform.models.enums.TipoPersona;
+import org.sistcoopform.models.enums.TipoPreguntaSeleccion;
 import org.sistcoopform.models.jpa.entities.PersonaJuridicaEntity;
 import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
 import org.sistcoopform.models.jpa.entities.TipoDocumentoEntity;
@@ -53,7 +53,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
 
     @Override
     public FormularioModel create(String abreviatura, String denominacion, int cantidadCaracteres,
-            TipoPersona tipoPersona) {
+            TipoPreguntaSeleccion tipoPersona) {
         if (findByAbreviatura(abreviatura) != null) {
             throw new ModelDuplicateException(
                     "TipoDocumentoEntity abreviatura debe ser unico, se encontro otra entidad con abreviatura:"
