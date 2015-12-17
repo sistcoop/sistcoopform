@@ -1,7 +1,6 @@
 dependencies {
 	// Project Dependencies
 	compile project(":sistcoopform-common:sistcoopform-common-util")
-	compile project(":sistcoopform-common:sistcoopform-common-util")
 	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-beans")
 	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-core")
 

@@ -1,6 +1,0 @@
-dependencies { 
-    // Third Party libraries
-    compile 'commons-io:commons-io:2.4'
-    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
-    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'   
-}

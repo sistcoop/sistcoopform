@@ -4,7 +4,7 @@ public interface SeccionModel extends Model {
 
     String TITULO = "titulo";
     String DESCRIPCION = "descripcion";
-    String ORDEN = "orden";
+    String NUMERO = "numero";
 
     String getId();
 
@@ -16,9 +16,9 @@ public interface SeccionModel extends Model {
 
     void setDescripcion(String descripcion);
 
-    int getOrden();
+    int getNumero();
 
-    void setOrden(int orden);
+    void setNumero(int numero);
 
     FormularioModel getFormulario();
 

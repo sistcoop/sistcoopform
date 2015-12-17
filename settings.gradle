@@ -1,7 +1,6 @@
 include "common"
 include "common:auth"
 include "common:config"
-include "common:plugin"
 include "common:servlet"
 include "common:util"
 
@@ -27,7 +26,6 @@ rootProject.name = "sistcoopform"
 project(":common").name = "sistcoopform-common"
 project(":common:auth").name = "sistcoopform-common-auth"
 project(":common:config").name = "sistcoopform-common-config"
-project(":common:plugin").name = "sistcoopform-common-plugin"
 project(":common:servlet").name = "sistcoopform-common-servlet"
 project(":common:util").name = "sistcoopform-common-util"
 

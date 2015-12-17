@@ -67,7 +67,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
         tipoDocumentoEntity.setTipoPersona(tipoPersona.toString());
         tipoDocumentoEntity.setEstado(true);
         em.persist(tipoDocumentoEntity);
-        return new TipoDocumentoAdapter(em, tipoDocumentoEntity);
+        return new FormularioAdapter(em, tipoDocumentoEntity);
     }
 
     @Override
@@ -82,14 +82,14 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
             throw new IllegalStateException(
                     "Mas de un TipoDocumentoEntity con abreviatura=" + abreviatura + ", results=" + results);
         } else {
-            return new TipoDocumentoAdapter(em, results.get(0));
+            return new FormularioAdapter(em, results.get(0));
         }
     }
 
     @Override
     public FormularioModel findById(String id) {
         TipoDocumentoEntity tipoDocumentoEntity = em.find(TipoDocumentoEntity.class, id);
-        return tipoDocumentoEntity != null ? new TipoDocumentoAdapter(em, tipoDocumentoEntity) : null;
+        return tipoDocumentoEntity != null ? new FormularioAdapter(em, tipoDocumentoEntity) : null;
     }
 
     @Override
@@ -137,7 +137,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
         List<TipoDocumentoEntity> entities = query.getResultList();
         List<FormularioModel> models = new ArrayList<FormularioModel>();
         for (TipoDocumentoEntity tipoDocumentoEntity : entities) {
-            models.add(new TipoDocumentoAdapter(em, tipoDocumentoEntity));
+            models.add(new FormularioAdapter(em, tipoDocumentoEntity));
         }
         return models;
     }
@@ -161,7 +161,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
         List<TipoDocumentoEntity> entities = query.getResultList();
         List<FormularioModel> models = new ArrayList<FormularioModel>();
         for (TipoDocumentoEntity tipoDocumentoEntity : entities) {
-            models.add(new TipoDocumentoAdapter(em, tipoDocumentoEntity));
+            models.add(new FormularioAdapter(em, tipoDocumentoEntity));
         }
 
         return models;
@@ -241,7 +241,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
         List<TipoDocumentoEntity> results = query.getResultList();
         List<FormularioModel> tipoDocumentos = new ArrayList<FormularioModel>();
         for (TipoDocumentoEntity entity : results)
-            tipoDocumentos.add(new TipoDocumentoAdapter(em, entity));
+            tipoDocumentos.add(new FormularioAdapter(em, entity));
         return tipoDocumentos;
     }
 
@@ -252,7 +252,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
         SearchResultsModel<FormularioModel> modelResult = new SearchResultsModel<>();
         List<FormularioModel> list = new ArrayList<>();
         for (TipoDocumentoEntity entity : entityResult.getModels()) {
-            list.add(new TipoDocumentoAdapter(em, entity));
+            list.add(new FormularioAdapter(em, entity));
         }
         modelResult.setTotalSize(entityResult.getTotalSize());
         modelResult.setModels(list);
@@ -267,7 +267,7 @@ public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implement
         SearchResultsModel<FormularioModel> modelResult = new SearchResultsModel<>();
         List<FormularioModel> list = new ArrayList<>();
         for (TipoDocumentoEntity entity : entityResult.getModels()) {
-            list.add(new TipoDocumentoAdapter(em, entity));
+            list.add(new FormularioAdapter(em, entity));
         }
         modelResult.setTotalSize(entityResult.getTotalSize());
         modelResult.setModels(list);

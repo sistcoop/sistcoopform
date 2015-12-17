@@ -1,7 +1,6 @@
 package org.sistcoopform.models;
 
-import org.sistcoopform.models.enums.TipoPreguntaTemporal;
-import org.sistcoopform.models.enums.TipoPreguntaTexto;
+import org.sistcoopform.models.enums.TipoPreguntaTiempo;
 
 public interface PreguntaTiempoModel extends PreguntaModel {
 
@@ -10,10 +9,10 @@ public interface PreguntaTiempoModel extends PreguntaModel {
 
     boolean isObligatorio();
 
-    void setObligatorio();
+    void setObligatorio(boolean obligatorio);
 
-    TipoPreguntaTexto getTipoPregunta();
+    TipoPreguntaTiempo getTipoPregunta();
 
-    void setTipoPregunta(TipoPreguntaTemporal tipoPregunta);
+    void setTipoPregunta(TipoPreguntaTiempo tipoPregunta);
 
 }

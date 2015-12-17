@@ -9,7 +9,7 @@ public interface PreguntaTextoModel extends PreguntaModel {
 
     boolean isObligatorio();
 
-    void setObligatorio();
+    void setObligatorio(boolean obligatorio);
 
     TipoPreguntaTexto getTipoPregunta();
 

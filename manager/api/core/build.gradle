@@ -2,7 +2,6 @@ dependencies {
 	// Project Dependencies
 	compile project(":sistcoopform-common:sistcoopform-common-util")
 	compile project(":sistcoopform-common:sistcoopform-common-config")
-	compile project(":sistcoopform-common:sistcoopform-common-plugin")
 	compile project(":sistcoopform-manager:sistcoopform-manager-api:sistcoopform-manager-api-beans")
 	
 	// Apis
