@@ -1,5 +1,7 @@
 package org.sistcoopform.models;
 
+import java.util.List;
+
 public interface PreguntaCuadriculaOpcionesModel extends PreguntaModel {
 
     String REQUIERE_RESPUESTA_POR_FILA = "requiereRespuestaPorFila";
@@ -7,5 +9,9 @@ public interface PreguntaCuadriculaOpcionesModel extends PreguntaModel {
     boolean isRequiereRespuestaPorFila();
 
     void setRequiereRespuestaPorFila(boolean requiereRespuestaPorFila);
+
+    List<FilaCuadriculaModel> getFilas();
+
+    List<ColumnaCuadriculaModel> getColumnas();
 
 }

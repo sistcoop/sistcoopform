@@ -13,13 +13,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.sistcoopform.models.ModelDuplicateException;
 import org.sistcoopform.models.FormularioModel;
 import org.sistcoopform.models.FormularioProvider;
+import org.sistcoopform.models.ModelDuplicateException;
 import org.sistcoopform.models.enums.TipoPreguntaSeleccion;
-import org.sistcoopform.models.jpa.entities.PersonaJuridicaEntity;
-import org.sistcoopform.models.jpa.entities.PersonaNaturalEntity;
-import org.sistcoopform.models.jpa.entities.TipoDocumentoEntity;
 import org.sistcoopform.models.search.SearchCriteriaModel;
 import org.sistcoopform.models.search.SearchResultsModel;
 
@@ -33,10 +30,7 @@ import org.sistcoopform.models.search.SearchResultsModel;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class JpaTipoDocumentoProvider extends AbstractHibernateStorage implements FormularioProvider {
 
-    private static final String ABREVIATURA = "abreviatura";
-    private static final String DENOMINACION = "denominacion";
-    private static final String TIPO_PERSONA = "tipoPersona";
-    private static final String ESTADO = "estado";
+    private static final String TITULO = "titulo";
 
     @PersistenceContext
     private EntityManager em;
