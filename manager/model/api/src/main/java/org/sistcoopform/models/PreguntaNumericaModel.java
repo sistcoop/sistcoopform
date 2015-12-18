@@ -1,7 +1,6 @@
 package org.sistcoopform.models;
 
 import org.sistcoopform.models.enums.TipoPreguntaNumero;
-import org.sistcoopform.models.enums.TipoPreguntaTexto;
 
 public interface PreguntaNumericaModel extends PreguntaModel {
     String OBLIGATORIO = "obligatorio";
@@ -9,9 +8,9 @@ public interface PreguntaNumericaModel extends PreguntaModel {
 
     boolean isObligatorio();
 
-    void setObligatorio();
+    void setObligatorio(boolean obligatorio);
 
-    TipoPreguntaTexto getTipoPregunta();
+    TipoPreguntaNumero getTipoPregunta();
 
     void setTipoPregunta(TipoPreguntaNumero tipoPregunta);
 
