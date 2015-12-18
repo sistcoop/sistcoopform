@@ -10,7 +10,7 @@ public interface PreguntaEscalaLinealModel extends PreguntaModel {
 
     boolean isObligatorio();
 
-    void setObligatorio();
+    void setObligatorio(boolean obligatorio);
 
     String getEtiqueta1();
 
