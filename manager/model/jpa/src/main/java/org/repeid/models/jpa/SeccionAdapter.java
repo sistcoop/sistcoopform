@@ -65,12 +65,12 @@ public class SeccionAdapter implements SeccionModel {
 
     @Override
     public int getNumero() {
-        return seccionEntity.getOrden();
+        return seccionEntity.getNumero();
     }
 
     @Override
     public void setNumero(int numero) {
-        seccionEntity.setOrden(numero);
+        seccionEntity.setNumero(numero);
     }
 
     @Override

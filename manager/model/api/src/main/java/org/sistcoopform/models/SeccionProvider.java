@@ -11,12 +11,12 @@ public interface SeccionProvider extends Provider {
 
     SeccionModel findById(String id);
 
-    SeccionModel create(FormularioModel formulario, String titulo, String descripcion, int orden);
+    SeccionModel create(FormularioModel formulario, String titulo, String descripcion, int numero);
 
     boolean remove(SeccionModel seccion);
 
-    List<FormularioModel> getAll(FormularioModel formulario);
+    List<SeccionModel> getAll(FormularioModel formulario);
 
-    List<FormularioModel> getAll(FormularioModel formulario, int firstResult, int maxResults);
+    List<SeccionModel> getAll(FormularioModel formulario, int firstResult, int maxResults);
 
 }

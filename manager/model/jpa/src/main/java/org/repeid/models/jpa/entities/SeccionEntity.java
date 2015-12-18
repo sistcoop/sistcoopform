@@ -25,9 +25,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "SECCION")
-@NamedQueries(value = {
-        @NamedQuery(name = "FormularioEntity.findAll", query = "SELECT f FROM FormularioEntity f"),
-        @NamedQuery(name = "FormularioEntity.findByTitulo", query = "SELECT f FROM FormularioEntity f WHERE f.titulo = :titulo") })
+@NamedQueries(value = { @NamedQuery(name = "SeccionEntity.findAll", query = "SELECT s FROM SeccionEntity s"),
+        @NamedQuery(name = "SeccionEntity.findByIdFormulario", query = "SELECT s FROM SeccionEntity s INNER JOIN s.formulario f WHERE f.id = :idFormulario") })
 public class SeccionEntity implements Serializable {
 
     /**
@@ -52,8 +51,8 @@ public class SeccionEntity implements Serializable {
 
     @NotNull
     @Min(value = 0)
-    @Column(name = "ORDEN")
-    private int orden;
+    @Column(name = "NUMERO")
+    private int numero;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -84,12 +83,12 @@ public class SeccionEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public int getOrden() {
-        return orden;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setOrden(int orden) {
-        this.orden = orden;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public FormularioEntity getFormulario() {
