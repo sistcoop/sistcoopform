@@ -22,7 +22,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "TIPO_DOCUMENTO")
 @NamedQueries(value = {
         @NamedQuery(name = "FormularioEntity.findAll", query = "SELECT f FROM FormularioEntity f"),
-        @NamedQuery(name = "FormularioEntity.findByTitulo", query = "SELECT f FROM FormularioEntity f WHERE f.titulo = :titulo") })
+        @NamedQuery(name = "FormularioEntity.findByTitulo", query = "SELECT f FROM FormularioEntity f WHERE f.titulo = :titulo"),
+        @NamedQuery(name = "FormularioEntity.findByFilterText", query = "SELECT f FROM FormularioEntity f WHERE LOWER(f.titulo) LIKE LOWER(:filterText)")})
 public class FormularioEntity implements Serializable {
 
     /**
