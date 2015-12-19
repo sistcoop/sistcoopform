@@ -2,7 +2,7 @@ package org.repeid.models.jpa;
 
 import javax.persistence.EntityManager;
 
-import org.repeid.models.jpa.entities.PreguntaTiempoEntity;
+import org.repeid.models.jpa.entities.PreguntaTextoEntity;
 import org.sistcoopform.models.PreguntaModel;
 import org.sistcoopform.models.PreguntaTextoModel;
 import org.sistcoopform.models.SeccionModel;
@@ -16,92 +16,92 @@ public class PreguntaTextoAdapter implements PreguntaTextoModel {
 
     private static final long serialVersionUID = 1L;
 
-    private PreguntaTiempoEntity preguntaTiempoEntity;
+    private PreguntaTextoEntity preguntaTextoEntity;
     private EntityManager em;
 
-    public PreguntaTextoAdapter(EntityManager em, PreguntaTiempoEntity preguntaTiempoEntity) {
+    public PreguntaTextoAdapter(EntityManager em, PreguntaTextoEntity preguntaTextoEntity) {
         this.em = em;
-        this.preguntaTiempoEntity = preguntaTiempoEntity;
+        this.preguntaTextoEntity = preguntaTextoEntity;
     }
 
-    public static PreguntaTiempoEntity toPreguntaTiempoEntity(SeccionModel model, EntityManager em) {
+    public static PreguntaTextoEntity toPreguntaTiempoEntity(PreguntaTextoModel model, EntityManager em) {
         if (model instanceof PreguntaTextoAdapter) {
-            return ((PreguntaTextoAdapter) model).getPreguntaTiempoEntity();
+            return ((PreguntaTextoAdapter) model).getPreguntaTextoEntity();
         }
-        return em.getReference(PreguntaTiempoEntity.class, model.getId());
+        return em.getReference(PreguntaTextoEntity.class, model.getId());
     }
 
-    public PreguntaTiempoEntity getPreguntaTiempoEntity() {
-        return preguntaTiempoEntity;
+    public PreguntaTextoEntity getPreguntaTextoEntity() {
+        return preguntaTextoEntity;
     }
 
     @Override
     public void commit() {
-        em.merge(preguntaTiempoEntity);
+        em.merge(preguntaTextoEntity);
     }
 
     @Override
     public String getId() {
-        return preguntaTiempoEntity.getId();
+        return preguntaTextoEntity.getId();
     }
 
     @Override
     public String getTitulo() {
-        return preguntaTiempoEntity.getTitulo();
+        return preguntaTextoEntity.getTitulo();
     }
 
     @Override
     public void setTitulo(String titulo) {
-        preguntaTiempoEntity.setTitulo(titulo);
+        preguntaTextoEntity.setTitulo(titulo);
     }
 
     @Override
     public String getDescripcion() {
-        return preguntaTiempoEntity.getDescripcion();
+        return preguntaTextoEntity.getDescripcion();
     }
 
     @Override
     public void setDescripcion(String descripcion) {
-        preguntaTiempoEntity.setDescripcion(descripcion);
+        preguntaTextoEntity.setDescripcion(descripcion);
     }
 
     @Override
     public int getNumero() {
-        return preguntaTiempoEntity.getNumero();
+        return preguntaTextoEntity.getNumero();
     }
 
     @Override
     public void setNumero(int numero) {
-        preguntaTiempoEntity.setNumero(numero);
+        preguntaTextoEntity.setNumero(numero);
     }
 
     @Override
     public boolean isObligatorio() {
-        return preguntaTiempoEntity.isObligatorio();
+        return preguntaTextoEntity.isObligatorio();
     }
 
     @Override
     public void setObligatorio(boolean obligatorio) {
-        preguntaTiempoEntity.setObligatorio(obligatorio);
+        preguntaTextoEntity.setObligatorio(obligatorio);
     }
 
     @Override
     public TipoPreguntaTexto getTipoPregunta() {
-        return TipoPreguntaTexto.valueOf(preguntaTiempoEntity.getTipoPregunta());
+        return TipoPreguntaTexto.valueOf(preguntaTextoEntity.getTipoPregunta());
     }
 
     @Override
     public void setTipoPregunta(TipoPreguntaTexto tipoPregunta) {
         if (tipoPregunta != null) {
-            preguntaTiempoEntity.setTipoPregunta(tipoPregunta.toString());
+            preguntaTextoEntity.setTipoPregunta(tipoPregunta.toString());
         } else {
-            preguntaTiempoEntity.setTipoPregunta(null);
+            preguntaTextoEntity.setTipoPregunta(null);
         }
     }
 
     @Override
     public SeccionModel getSeccion() {
-        return new SeccionAdapter(em, preguntaTiempoEntity.getSeccion());
+        return new SeccionAdapter(em, preguntaTextoEntity.getSeccion());
     }
 
     @Override
