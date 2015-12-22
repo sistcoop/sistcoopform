@@ -6,7 +6,7 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import org.repeid.admin.client.resource.TipoDocumentoResource;
+import org.repeid.admin.client.resource.FormularioResource;
 import org.repeid.representations.idm.TipoDocumentoRepresentation;
 import org.repeid.services.ErrorResponse;
 import org.repeid.services.managers.TipoDocumentoManager;
@@ -15,7 +15,7 @@ import org.sistcoopform.models.FormularioProvider;
 import org.sistcoopform.models.utils.ModelToRepresentation;
 
 @Stateless
-public class TipoDocumentoResourceImpl implements TipoDocumentoResource {
+public class TipoDocumentoResourceImpl implements FormularioResource {
 
 	@PathParam("idTipoDocumento")
 	private String idTipoDocumento;

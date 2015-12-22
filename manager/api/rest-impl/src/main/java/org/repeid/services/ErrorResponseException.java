@@ -7,7 +7,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.repeid.OAuth2Constants;
+import org.keycloak.OAuth2Constants;
 
 /**
  * @author <a href="mailto:sthorger@redhat.com">Stian Thorgersen</a>

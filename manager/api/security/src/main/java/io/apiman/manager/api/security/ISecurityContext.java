@@ -56,7 +56,7 @@ public interface ISecurityContext {
      * @param organizationId the org id
      * @return true if has permission, else false
      */
-    public boolean hasPermission(PermissionType permission, String organizationId);
+    public boolean hasPermission(PermissionType permission, String idOrganizacion);
 
     /**
      * Returns the set of organizations for which the current user is allowed

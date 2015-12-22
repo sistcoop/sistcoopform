@@ -11,8 +11,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.repeid.admin.client.resource.TipoDocumentoResource;
-import org.repeid.admin.client.resource.TiposDocumentoResource;
+import org.repeid.admin.client.resource.FormularioResource;
+import org.repeid.admin.client.resource.FormulariosResource;
 import org.repeid.representations.idm.TipoDocumentoRepresentation;
 import org.repeid.representations.idm.search.OrderByRepresentation;
 import org.repeid.representations.idm.search.PagingRepresentation;
@@ -30,7 +30,7 @@ import org.sistcoopform.models.utils.ModelToRepresentation;
 import org.sistcoopform.models.utils.RepresentationToModel;
 
 @Stateless
-public class TiposDocumentoResourceImpl implements TiposDocumentoResource {
+public class TiposDocumentoResourceImpl implements FormulariosResource {
 
 	@Inject
 	private FormularioProvider tipoDocumentoProvider;
@@ -42,10 +42,10 @@ public class TiposDocumentoResourceImpl implements TiposDocumentoResource {
 	private UriInfo uriInfo;
 
 	@Inject
-	private TipoDocumentoResource tipoDocumentoResource;
+	private FormularioResource tipoDocumentoResource;
 
 	@Override
-	public TipoDocumentoResource tipoDocumento(String documento) {
+	public FormularioResource tipoDocumento(String documento) {
 		return tipoDocumentoResource;
 	}
 

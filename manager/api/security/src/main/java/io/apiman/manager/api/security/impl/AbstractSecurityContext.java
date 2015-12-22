@@ -54,11 +54,11 @@ public abstract class AbstractSecurityContext implements ISecurityContext {
      * @see io.apiman.manager.api.security.ISecurityContext#hasPermission(io.apiman.manager.api.beans.idm.PermissionType, java.lang.String)
      */
     @Override
-    public boolean hasPermission(PermissionType permission, String organizationId) {
+    public boolean hasPermission(PermissionType permission, String idOrganizacion) {
         // Admins can do everything.
         if (isAdmin())
             return true;
-        return getPermissions().hasQualifiedPermission(permission, organizationId);
+        return getPermissions().hasQualifiedPermission(permission, idOrganizacion);
     }
 
     /**
