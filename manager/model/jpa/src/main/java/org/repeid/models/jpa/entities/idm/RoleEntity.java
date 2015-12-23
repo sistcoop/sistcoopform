@@ -28,6 +28,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+import io.apiman.manager.api.beans.idm.PermissionType;
+
 /**
  * A role definition. The definition of the role determines whether the role is
  * automatically granted to the user creating an org, as well as the specific

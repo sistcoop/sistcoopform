@@ -15,20 +15,19 @@
  */
 package io.apiman.manager.api.security.impl;
 
-import io.apiman.manager.api.beans.idm.PermissionBean;
-import io.apiman.manager.api.beans.idm.PermissionType;
-import io.apiman.manager.api.core.IStorageQuery;
-import io.apiman.manager.api.core.exceptions.StorageException;
-import io.apiman.manager.api.security.ISecurityContext;
-import io.apiman.manager.api.security.i18n.Messages;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.sistcoopform.provider.IStorageQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.apiman.manager.api.beans.idm.PermissionType;
+import io.apiman.manager.api.core.exceptions.StorageException;
+import io.apiman.manager.api.security.ISecurityContext;
+import io.apiman.manager.api.security.i18n.Messages;
 
 /**
  * Base class for security context implementations.
@@ -72,19 +71,19 @@ public abstract class AbstractSecurityContext implements ISecurityContext {
     /**
      * @return the user permissions for the current user
      */
-    private IndexedPermissions getPermissions() {
+    /*private IndexedPermissions getPermissions() {
         IndexedPermissions rval = permissions.get();
         if (rval == null) {
             rval = loadPermissions();
             permissions.set(rval);
         }
         return rval;
-    }
+    }*/
 
     /**
      * Loads the current user's permissions into a thread local variable.
      */
-    private IndexedPermissions loadPermissions() {
+    /*private IndexedPermissions loadPermissions() {
         String userId = getCurrentUser();
         try {
             return new IndexedPermissions(getQuery().getPermissions(userId));
@@ -92,7 +91,7 @@ public abstract class AbstractSecurityContext implements ISecurityContext {
             logger.error(Messages.getString("AbstractSecurityContext.ErrorLoadingPermissions") + userId, e); //$NON-NLS-1$
             return new IndexedPermissions(new HashSet<PermissionBean>());
         }
-    }
+    }*/
     
     /**
      * Called to clear the current thread local permissions bean.
@@ -104,15 +103,15 @@ public abstract class AbstractSecurityContext implements ISecurityContext {
     /**
      * @return the query
      */
-    public IStorageQuery getQuery() {
+    /*public IStorageQuery getQuery() {
         return query;
-    }
+    }*/
 
     /**
      * @param query the query to set
      */
-    public void setQuery(IStorageQuery query) {
+    /*public void setQuery(IStorageQuery query) {
         this.query = query;
-    }
+    }*/
 
 }

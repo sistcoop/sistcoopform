@@ -4,7 +4,7 @@ package org.repeid.representations.idm;
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
  */
 
-public abstract class PreguntaEntity {
+public abstract class PreguntaRepresentation {
 
     private String id;
     private String titulo;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.repeid.models.jpa.entities.idm;
+package io.apiman.manager.api.beans.idm;
 
 /**
  * A list of all the permissions supported by the system.
@@ -21,12 +21,7 @@ package org.repeid.models.jpa.entities.idm;
  * @author eric.wittmann@redhat.com
  */
 public enum PermissionType {
-    
-    orgView,  orgEdit,  orgAdmin,
-    svcView,  svcEdit,  svcAdmin,
-    appView,  appEdit,  appAdmin,
-    planView, planEdit, planAdmin,
-    
-    organizacionView, organizacionEdit, OrganizacionAdmin
-    
+
+    orgView, orgEdit, orgAdmin
+
 }

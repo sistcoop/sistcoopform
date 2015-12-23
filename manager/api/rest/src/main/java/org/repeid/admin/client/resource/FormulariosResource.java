@@ -33,7 +33,7 @@ public interface FormulariosResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<FormularioRepresentation> search(@QueryParam("titulo") String denominacion,
+    public List<FormularioRepresentation> search(@QueryParam("titulo") String titulo,
             @QueryParam("filterText") String filterText, @QueryParam("first") Integer firstResult,
             @QueryParam("max") Integer maxResults);
 
