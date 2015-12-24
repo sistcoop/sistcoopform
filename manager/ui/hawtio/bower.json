@@ -16,8 +16,8 @@
     "plugins"
   ],
   "dependencies": {
-    "hawtio-core": "~2.0.0",
-    "hawtio-core-navigation": "~2.0.0",
+    "hawtio-core": "~2.0.25",
+    "hawtio-core-navigation": "~2.0.54",
     "hawtio-utilities": "~2.0.0"
   },
   "devDependencies": {
