@@ -2,6 +2,8 @@ package org.sistcoopform.provider;
 
 import java.util.Set;
 
+import javax.ejb.Local;
+
 import io.apiman.manager.api.core.exceptions.StorageException;
 
 /**
@@ -9,6 +11,8 @@ import io.apiman.manager.api.core.exceptions.StorageException;
  *
  * @author eric.wittmann@redhat.com
  */
+
+@Local
 public interface IStorageQuery {
 
     /**
