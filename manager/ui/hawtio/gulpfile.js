@@ -209,7 +209,7 @@ gulp.task('watch', ['build', 'build-example'], function() {
 
 gulp.task('connect', ['watch'], function() {
   /*
-   * Example of fetching a URL from the environment, in this case for kubernetes
+   * MiMenu of fetching a URL from the environment, in this case for kubernetes
   var kube = uri(process.env.KUBERNETES_MASTER || 'http://localhost:8080');
   console.log("Connecting to Kubernetes on: " + kube);
   */
@@ -247,7 +247,7 @@ gulp.task('connect', ['watch'], function() {
     }
   });
   /*
-   * Example middleware that returns a 404 for templates
+   * MiMenu middleware that returns a 404 for templates
    * as they're already embedded in the js
   hawtio.use('/', function(req, res, next) {
           var path = req.originalUrl;
