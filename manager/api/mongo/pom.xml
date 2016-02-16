@@ -5,25 +5,12 @@
 		<artifactId>sistcoopform</artifactId>
 		<groupId>org.sistcoop</groupId>
 		<version>1.0.0.Final-SNAPSHOT</version>
-		<relativePath>../../pom.xml</relativePath>
+		<relativePath>../../../pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>sistcoopform-manager-api</artifactId>
-	<packaging>pom</packaging>
-	<name>Repeid Manager Api</name>
+	<artifactId>sistcoopform-manager-api-mongo</artifactId>
+	<name>Repeid Manager Api Beans</name>
 	<description />
-
-	<modules>
-		<module>beans</module>
-		<module>core</module>
-		<module>jpa</module>
-		<module>model</module>
-		<module>mongo</module>
-		<module>rest</module>
-		<module>rest-impl</module>
-		<module>security</module>
-		<module>war</module>
-	</modules>
 
 </project>

@@ -9,21 +9,9 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>sistcoopform-manager-api</artifactId>
+	<artifactId>sistcoopform-manager-ui</artifactId>
 	<packaging>pom</packaging>
 	<name>Repeid Manager Api</name>
 	<description />
-
-	<modules>
-		<module>beans</module>
-		<module>core</module>
-		<module>jpa</module>
-		<module>model</module>
-		<module>mongo</module>
-		<module>rest</module>
-		<module>rest-impl</module>
-		<module>security</module>
-		<module>war</module>
-	</modules>
 
 </project>
