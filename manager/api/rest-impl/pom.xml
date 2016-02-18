@@ -10,7 +10,105 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>sistcoopform-manager-api-rest-impl</artifactId>
-	<name>Repeid Manager Api Beans</name>
+	<name>sistcoopform Manager Api Beans</name>
 	<description />
+
+	<dependencies>
+		<dependency>
+			<groupId>org.sistcoop</groupId>
+			<artifactId>sistcoopform-manager-api-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sistcoop</groupId>
+			<artifactId>sistcoopform-manager-api-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sistcoop</groupId>
+			<artifactId>sistcoopform-manager-api-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sistcoop</groupId>
+			<artifactId>sistcoopform-manager-api-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sistcoop</groupId>
+			<artifactId>sistcoopform-manager-api-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging-annotations</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging-processor</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ws.rs</groupId>
+			<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<compilerArgument>
+						-AgeneratedTranslationFilesPath=${project.build.directory}/generated-translation-files
+					</compilerArgument>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

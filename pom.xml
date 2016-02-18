@@ -19,7 +19,8 @@
 
 	<properties>
 		<product.name>Sistcoop Form</product.name>
-		<product.name-html>\u003Cstrong\u003ESistcoop Form\u003C\u002Fstrong\u003E</product.name-html>
+		<product.name-html>\u003Cstrong\u003ESistcoop
+			Form\u003C\u002Fstrong\u003E</product.name-html>
 		<product.version>${project.version}</product.version>
 		<product.build-time>${timestamp}</product.build-time>
 
@@ -50,6 +51,7 @@
 		<jackson.version>2.5.4</jackson.version>
 		<jackson.mapper.version>1.9.13</jackson.mapper.version>
 		<javax.mail.version>1.5.5</javax.mail.version>
+		<javax.json.api>1.0</javax.json.api>
 		<javax.enterprise.cdi_api>1.2</javax.enterprise.cdi_api>
 		<jboss.logging.version>3.3.0.Final</jboss.logging.version>
 		<jboss.logging.tools.version>2.0.1.Final</jboss.logging.tools.version>
@@ -104,7 +106,7 @@
 		<wildfly.plugin.version>1.0.1.Final</wildfly.plugin.version>
 	</properties>
 
-	<url>http://repeid.org</url>
+	<url>http://sistcoopform.org</url>
 
 	<licenses>
 		<license>
@@ -115,9 +117,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/repeid/repeid.git</connection>
-		<developerConnection>scm:git:git@github.com:repeid/repeid.git</developerConnection>
-		<url>http://github.com/repeid/repeid/tree/master/</url>
+		<connection>scm:git:git://github.com/sistcoopform/sistcoopform.git</connection>
+		<developerConnection>scm:git:git@github.com:sistcoopform/sistcoopform.git</developerConnection>
+		<url>http://github.com/sistcoopform/sistcoopform/tree/master/</url>
 	</scm>
 
 	<distributionManagement>
@@ -130,7 +132,7 @@
 
 	<issueManagement>
 		<system>JIRA</system>
-		<url>http://jira.jboss.com/jira/browse/REPEID</url>
+		<url>http://jira.jboss.com/jira/browse/sistcoopform</url>
 	</issueManagement>
 
 	<developers>
@@ -205,6 +207,11 @@
 				<groupId>javax.mail</groupId>
 				<artifactId>javax.mail-api</artifactId>
 				<version>${javax.mail.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.json</groupId>
+				<artifactId>javax.json-api</artifactId>
+				<version>${javax.json.api}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.enterprise</groupId>
@@ -622,66 +629,64 @@
 				<artifactId>aesh</artifactId>
 				<version>${aesh.version}</version>
 			</dependency>
-
-			<!-- Repeid -->
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-common-auth</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-common-auth</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-common-config</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-common-config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-common-servlet</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-common-servlet</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-common-util</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-common-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-core</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-beans</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-beans</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-rest</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-rest</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-rest-impl</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-rest-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-security</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-security</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-model</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-model</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-jpa</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-jpa</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.repeid</groupId>
-				<artifactId>repeid-manager-api-mongo</artifactId>
+				<groupId>org.sistcoop</groupId>
+				<artifactId>sistcoopform-manager-api-mongo</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
