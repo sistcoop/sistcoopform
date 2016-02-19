@@ -119,7 +119,7 @@ public class ModelToRepresentation {
 
 		GridRowRepresentation rep = new GridRowRepresentation();
 		rep.setId(model.getId());
-		rep.setDenomination(model.getDenominacion());
+		rep.setDenomination(model.getDenomination());
 		rep.setNumber(model.getNumber());
 		rep.setEditable(model.isEditable());
 		return rep;
@@ -131,7 +131,7 @@ public class ModelToRepresentation {
 
 		GridColumnRepresentation rep = new GridColumnRepresentation();
 		rep.setId(model.getId());
-		rep.setDenomination(model.getDenominacion());
+		rep.setDenomination(model.getDenomination());
 		rep.setNumber(model.getNumber());
 		rep.setEditable(model.isEditable());
 		return rep;

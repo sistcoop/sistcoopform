@@ -8,9 +8,9 @@ public interface GridRowModel extends Model {
 
 	String getId();
 
-	String getDenominacion();
+	String getDenomination();
 
-	void setDenominacion(String denomination);
+	void setDenomination(String denomination);
 
 	int getNumber();
 
