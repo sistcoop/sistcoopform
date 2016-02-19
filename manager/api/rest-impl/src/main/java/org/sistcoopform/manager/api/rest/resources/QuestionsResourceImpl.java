@@ -1,9 +1,7 @@
 package org.sistcoopform.manager.api.rest.resources;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -12,21 +10,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.sistcoopform.manager.api.beans.representations.idm.FormRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.QuestionRepresentation;
-import org.sistcoopform.manager.api.beans.representations.idm.search.OrderByRepresentation;
-import org.sistcoopform.manager.api.beans.representations.idm.search.PagingRepresentation;
-import org.sistcoopform.manager.api.beans.representations.idm.search.SearchCriteriaFilterRepresentation;
-import org.sistcoopform.manager.api.beans.representations.idm.search.SearchCriteriaRepresentation;
-import org.sistcoopform.manager.api.beans.representations.idm.search.SearchResultsRepresentation;
-import org.sistcoopform.manager.api.model.FormModel;
-import org.sistcoopform.manager.api.model.FormProvider;
 import org.sistcoopform.manager.api.model.ModelDuplicateException;
+import org.sistcoopform.manager.api.model.QuestionModel;
+import org.sistcoopform.manager.api.model.QuestionProvider;
 import org.sistcoopform.manager.api.model.SectionModel;
 import org.sistcoopform.manager.api.model.SectionProvider;
-import org.sistcoopform.manager.api.model.search.SearchCriteriaFilterOperator;
-import org.sistcoopform.manager.api.model.search.SearchCriteriaModel;
-import org.sistcoopform.manager.api.model.search.SearchResultsModel;
 import org.sistcoopform.manager.api.model.utils.ModelToRepresentation;
 import org.sistcoopform.manager.api.model.utils.RepresentationToModel;
 import org.sistcoopform.manager.api.rest.services.ErrorResponse;
@@ -38,10 +27,10 @@ public class QuestionsResourceImpl implements QuestionsResource {
 	private String sectionId;
 
 	@Inject
-	private FormProvider formProvider;
+	private SectionProvider sectionProvider;
 
 	@Inject
-	private  sectionProvider;
+	private QuestionProvider questionProvider;
 
 	@Inject
 	private RepresentationToModel representationToModel;
@@ -63,14 +52,26 @@ public class QuestionsResourceImpl implements QuestionsResource {
 
 	@Override
 	public Response create(QuestionRepresentation rep) {
-		// TODO Auto-generated method stub
-		return null;
+		SectionModel section = getSectionModel();
+		try {
+			QuestionModel model = representationToModel.createQuestion(section, rep, questionProvider);
+			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build())
+					.header("Access-Control-Expose-Headers", "Location")
+					.entity(ModelToRepresentation.toRepresentation(model)).build();
+		} catch (ModelDuplicateException e) {
+			return ErrorResponse.exists("Section exists");
+		}
 	}
 
 	@Override
 	public List<QuestionRepresentation> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<QuestionRepresentation> results = new ArrayList<QuestionRepresentation>();
+		List<QuestionModel> models = questionProvider.getAll(getSectionModel());
+
+		for (QuestionModel model : models) {
+			results.add(ModelToRepresentation.toRepresentation(model));
+		}
+		return results;
 	}
 
 }

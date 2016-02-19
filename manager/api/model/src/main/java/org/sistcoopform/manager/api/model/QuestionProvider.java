@@ -4,48 +4,48 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import org.sistcoopform.manager.api.model.enums.TipoPreguntaNumero;
-import org.sistcoopform.manager.api.model.enums.TipoPreguntaSeleccion;
-import org.sistcoopform.manager.api.model.enums.TipoPreguntaTexto;
-import org.sistcoopform.manager.api.model.enums.TipoPreguntaTiempo;
+import org.sistcoopform.manager.api.model.enums.NumericType;
+import org.sistcoopform.manager.api.model.enums.SelectType;
+import org.sistcoopform.manager.api.model.enums.TextType;
+import org.sistcoopform.manager.api.model.enums.DateTimeType;
 import org.sistcoopform.manager.api.model.provider.Provider;
 
 @Local
 public interface QuestionProvider extends Provider {
 
-	PreguntaTiempoModel createTiempo(SectionModel seccion, String titulo, String descripcion, int numero,
-			TipoPreguntaTiempo tipoPregunta, boolean obligatorio);
+	TextQuestionModel createTextQuestion(SectionModel section, String title, String description, int number,
+			TextType type, boolean required);
 
-	PreguntaTextoModel createTexto(SectionModel seccion, String titulo, String descripcion, int numero,
-			TipoPreguntaTexto tipoPregunta, boolean obligatorio);
+	NumericQuestionModel createNumberQuestion(SectionModel section, String title, String description, int number,
+			NumericType type, boolean required);
 
-	PreguntaNumericaModel createNumero(SectionModel seccion, String titulo, String descripcion, int numero,
-			TipoPreguntaNumero tipoPregunta, boolean obligatorio);
+	DateTimeQuestionModel createDateTimeQuestion(SectionModel section, String title, String description, int number,
+			DateTimeType type, boolean required);
 
-	PreguntaSeleccionModel createSeleccion(SectionModel seccion, String titulo, String descripcion, int numero,
-			TipoPreguntaSeleccion tipoPregunta, boolean obligatorio);
+	SelectQuestionModel createSeleccion(SectionModel section, String title, String description, int number,
+			SelectType type, boolean required);
 
-	OpcionSeleccionModel createOpcionSeleccion(PreguntaSeleccionModel preguntaSeleccion, String denominacion,
-			int numero, boolean editable);
+	SelectOptionModel createOpcionSeleccion(SelectQuestionModel preguntaSeleccion, String denominacion, int number,
+			boolean editable);
 
-	PreguntaEscalaLinealModel createEscalaLineal(SectionModel seccion, String titulo, String descripcion, int numero,
-			String etiqueta1, String etiqueta2, int desde, int hasta, boolean obligatorio);
+	ScaleQuestionModel createEscalaLineal(SectionModel section, String title, String description, int number,
+			String etiqueta1, String etiqueta2, int desde, int hasta, boolean required);
 
-	PreguntaCuadriculaOpcionesModel createCuadricula(SectionModel seccion, String titulo, String descripcion,
-			int numero, boolean requiereRespuestaPorFila);
+	GridQuestionModel createCuadricula(SectionModel section, String title, String description, int number,
+			boolean requiereRespuestaPorFila);
 
-	FilaCuadriculaModel createFilaCuadricula(PreguntaCuadriculaOpcionesModel preguntaCuadricula, String denominacion,
-			int numero, boolean editable);
+	GridRowModel createFilaCuadricula(GridQuestionModel preguntaCuadricula, String denominacion, int number,
+			boolean editable);
 
-	ColumnaCuadriculaModel createColumnaCuadricula(PreguntaCuadriculaOpcionesModel preguntaCuadricula,
-			String denominacion, int numero, boolean editable);
+	GridColumnModel createColumnaCuadricula(GridQuestionModel preguntaCuadricula, String denominacion, int number,
+			boolean editable);
 
-	PreguntaModel findById(String id);
+	QuestionModel findById(String id);
 
-	boolean remove(PreguntaModel pregunta);
+	boolean remove(QuestionModel question);
 
-	List<PreguntaModel> getAll(SectionModel seccion);
+	List<QuestionModel> getAll(SectionModel section);
 
-	List<PreguntaModel> getAll(SectionModel seccion, int firstResult, int maxResults);
+	List<QuestionModel> getAll(SectionModel section, int firstResult, int maxResults);
 
 }

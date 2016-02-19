@@ -1,7 +1,7 @@
 package org.sistcoopform.manager.api.model.enums;
 
-public enum TipoPreguntaNumero {
+public enum DateTimeType {
 
-    ENTERO, DECIMAL
+	DATE, DATETIME, TIME
 
 }

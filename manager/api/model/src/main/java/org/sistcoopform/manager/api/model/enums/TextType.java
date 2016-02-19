@@ -1,7 +1,7 @@
 package org.sistcoopform.manager.api.model.enums;
 
-public enum TipoPreguntaTiempo {
+public enum TextType {
 
-    FECHA, HORA
+	SHORT, PARAGRAPH
 
 }

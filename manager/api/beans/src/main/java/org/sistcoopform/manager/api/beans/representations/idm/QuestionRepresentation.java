@@ -9,7 +9,7 @@ import org.sistcoopform.manager.api.beans.representations.enums.QuestionAvailabl
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
  */
 
-public abstract class QuestionRepresentation {
+public class QuestionRepresentation {
 
 	private QuestionAvailable question;
 
@@ -33,8 +33,8 @@ public abstract class QuestionRepresentation {
 	private Set<SelectOptionRepresentation> options = new HashSet<SelectOptionRepresentation>();
 
 	// Grid
-	private Set<FilaCuadriculaRepresentation> rows = new HashSet<FilaCuadriculaRepresentation>();
-	private Set<ColumnaCuadriculaEntity> columns = new HashSet<ColumnaCuadriculaEntity>();
+	private Set<GridRowRepresentation> rows = new HashSet<GridRowRepresentation>();
+	private Set<GridColumnRepresentation> columns = new HashSet<GridColumnRepresentation>();
 
 	private SectionRepresentation section;
 
@@ -134,19 +134,19 @@ public abstract class QuestionRepresentation {
 		this.options = options;
 	}
 
-	public Set<FilaCuadriculaRepresentation> getRows() {
+	public Set<GridRowRepresentation> getRows() {
 		return rows;
 	}
 
-	public void setRows(Set<FilaCuadriculaRepresentation> rows) {
+	public void setRows(Set<GridRowRepresentation> rows) {
 		this.rows = rows;
 	}
 
-	public Set<ColumnaCuadriculaEntity> getColumns() {
+	public Set<GridColumnRepresentation> getColumns() {
 		return columns;
 	}
 
-	public void setColumns(Set<ColumnaCuadriculaEntity> columns) {
+	public void setColumns(Set<GridColumnRepresentation> columns) {
 		this.columns = columns;
 	}
 
