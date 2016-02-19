@@ -20,6 +20,6 @@ public interface PreguntaModel extends Model {
 
     void setNumero(int numero);
 
-    SeccionModel getSeccion();
+    SectionModel getSeccion();
 
 }

@@ -1,13 +1,18 @@
 package org.sistcoopform.manager.api.jpa.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,8 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FORM")
-@NamedQueries(value = { 
-		@NamedQuery(name = "FormEntity.findAll", query = "SELECT f FROM FormEntity f"),
+@NamedQueries(value = { @NamedQuery(name = "FormEntity.findAll", query = "SELECT f FROM FormEntity f"),
 		@NamedQuery(name = "FormEntity.findByTitle", query = "SELECT f FROM FormEntity f WHERE f.title = :title"),
 		@NamedQuery(name = "FormEntity.findByFilterText", query = "SELECT f FROM FormEntity f WHERE LOWER(f.title) LIKE LOWER(:filterText)") })
 public class FormEntity implements Serializable {
@@ -36,6 +40,16 @@ public class FormEntity implements Serializable {
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "ID")
 	private String id;
+	
+	@NotNull
+	@Size(min = 1, max = 200)
+	private String title;
+
+	@Size(min = 0, max = 400)
+	private String description;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "form", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	private Set<SectionEntity> sections = new HashSet<SectionEntity>();
 
 	public String getId() {
 		return id;
@@ -60,13 +74,6 @@ public class FormEntity implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	@NotNull
-	@Size(min = 1, max = 200)
-	private String title;
-
-	@Size(min = 0, max = 400)
-	private String description;
 
 	@Override
 	public int hashCode() {

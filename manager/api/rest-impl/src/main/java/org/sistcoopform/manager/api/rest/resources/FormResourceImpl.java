@@ -25,6 +25,9 @@ public class FormResourceImpl implements FormResource {
 	@Inject
 	private FormularioManager formManager;
 
+	@Inject
+	private SectionsResource sectionsResource;
+	
 	private FormModel getFormularioModel() {
 		return formProvider.findById(formId);
 	}
@@ -60,8 +63,7 @@ public class FormResourceImpl implements FormResource {
 
 	@Override
 	public SectionsResource sections() {
-		// TODO Auto-generated method stub
-		return null;
+		return sectionsResource;
 	}
 
 }

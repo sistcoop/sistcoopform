@@ -1,7 +1,10 @@
 package org.sistcoopform.manager.api.jpa.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -57,6 +61,9 @@ public class SectionEntity implements Serializable {
 	@JoinColumn(name = "form_id", foreignKey = @ForeignKey )
 	protected FormEntity form;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "section", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	private Set<QuestionEntity> questions = new HashSet<QuestionEntity>();
+	
 	public String getId() {
 		return id;
 	}

@@ -1,6 +1,6 @@
 package org.sistcoopform.manager.api.model;
 
-public interface SeccionModel extends Model {
+public interface SectionModel extends Model {
 
 	String TITLE = "title";
 	String DESCRIPTION = "description";

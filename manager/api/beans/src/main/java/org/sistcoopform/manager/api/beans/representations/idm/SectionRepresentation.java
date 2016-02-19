@@ -6,50 +6,51 @@ package org.sistcoopform.manager.api.beans.representations.idm;
 
 public class SectionRepresentation {
 
-    private String id;
-    private String titulo;
-    private String descripcion;
-    private int numero;
-    private FormRepresentation formulario;
+	private String id;
+	private String title;
+	private String description;
+	private int number;
 
-    public String getId() {
-        return id;
-    }
+	private FormRepresentation form;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getTitulo() {
-        return titulo;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public int getNumero() {
-        return numero;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+	public int getNumber() {
+		return number;
+	}
 
-    public FormRepresentation getFormulario() {
-        return formulario;
-    }
+	public void setNumber(int number) {
+		this.number = number;
+	}
 
-    public void setFormulario(FormRepresentation formulario) {
-        this.formulario = formulario;
-    }
+	public FormRepresentation getForm() {
+		return form;
+	}
+
+	public void setForm(FormRepresentation form) {
+		this.form = form;
+	}
 
 }

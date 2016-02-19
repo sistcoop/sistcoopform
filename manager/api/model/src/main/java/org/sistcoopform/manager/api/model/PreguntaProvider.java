@@ -13,25 +13,25 @@ import org.sistcoopform.manager.api.model.provider.Provider;
 @Local
 public interface PreguntaProvider extends Provider {
 
-    PreguntaTiempoModel createTiempo(SeccionModel seccion, String titulo, String descripcion, int numero,
+    PreguntaTiempoModel createTiempo(SectionModel seccion, String titulo, String descripcion, int numero,
             TipoPreguntaTiempo tipoPregunta, boolean obligatorio);
 
-    PreguntaTextoModel createTexto(SeccionModel seccion, String titulo, String descripcion, int numero,
+    PreguntaTextoModel createTexto(SectionModel seccion, String titulo, String descripcion, int numero,
             TipoPreguntaTexto tipoPregunta, boolean obligatorio);
 
-    PreguntaNumericaModel createNumero(SeccionModel seccion, String titulo, String descripcion, int numero,
+    PreguntaNumericaModel createNumero(SectionModel seccion, String titulo, String descripcion, int numero,
             TipoPreguntaNumero tipoPregunta, boolean obligatorio);
 
-    PreguntaSeleccionModel createSeleccion(SeccionModel seccion, String titulo, String descripcion,
+    PreguntaSeleccionModel createSeleccion(SectionModel seccion, String titulo, String descripcion,
             int numero, TipoPreguntaSeleccion tipoPregunta, boolean obligatorio);
 
     OpcionSeleccionModel createOpcionSeleccion(PreguntaSeleccionModel preguntaSeleccion, String denominacion,
             int numero, boolean editable);
 
-    PreguntaEscalaLinealModel createEscalaLineal(SeccionModel seccion, String titulo, String descripcion,
+    PreguntaEscalaLinealModel createEscalaLineal(SectionModel seccion, String titulo, String descripcion,
             int numero, String etiqueta1, String etiqueta2, int desde, int hasta, boolean obligatorio);
 
-    PreguntaCuadriculaOpcionesModel createCuadricula(SeccionModel seccion, String titulo, String descripcion,
+    PreguntaCuadriculaOpcionesModel createCuadricula(SectionModel seccion, String titulo, String descripcion,
             int numero, boolean requiereRespuestaPorFila);
 
     FilaCuadriculaModel createFilaCuadricula(PreguntaCuadriculaOpcionesModel preguntaCuadricula,
@@ -44,8 +44,8 @@ public interface PreguntaProvider extends Provider {
 
     boolean remove(PreguntaModel pregunta);
 
-    List<PreguntaModel> getAll(SeccionModel seccion);
+    List<PreguntaModel> getAll(SectionModel seccion);
 
-    List<PreguntaModel> getAll(SeccionModel seccion, int firstResult, int maxResults);
+    List<PreguntaModel> getAll(SectionModel seccion, int firstResult, int maxResults);
 
 }

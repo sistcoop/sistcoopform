@@ -50,7 +50,7 @@ public class FormsResourceImpl implements FormsResource {
 	@Override
 	public Response create(FormRepresentation rep) {
 		try {
-			FormModel model = representationToModel.createFormulario(rep, formProvider);
+			FormModel model = representationToModel.createForm(rep, formProvider);
 			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build())
 					.header("Access-Control-Expose-Headers", "Location")
 					.entity(ModelToRepresentation.toRepresentation(model)).build();
