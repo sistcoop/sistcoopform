@@ -1,0 +1,9 @@
+{
+  "realm": "sistcoopform",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhud2LmDr5u5yb+H9NutNzUuup5GF5NPOYCG2SMvdzD4tfEg6htNy4/VZXwVaTdgmJR/ICMvZK4KdbqbR4C7BsjKrPIfHO9yuI8R4XemJv8wFp+1dmNiRgRF++IbMB8oX3ZttPLU2jF6EBZKp8hKUT8/A4ePHXN9eduwndK7kaxKl7ioZeq0vm60TJg78ZQtACf/EVUOKbtmUWPi4wlClCVvH/G4fOL4JJ5p1rB3cslDmSZr8jO40tPcdTL9DrWLfW9U2s7fKKmrG6x5kUyaDQiwMnBSZ1CJxgPCXx7iEBeguXIfamDJDgBdvQwE0SJ4dtZzvOu2dnS9rMfJusQURhQIDAQAB",
+  "bearer-only": true,
+  "auth-server-url": "http://localhost:8081/auth",
+  "ssl-required": "external",
+  "resource": "sistcoopform_rest",
+  "enable-cors": true
+}
