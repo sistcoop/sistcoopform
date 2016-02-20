@@ -1,13 +1,16 @@
 package org.sistcoopform.manager.api.jpa;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
 
+import org.sistcoopform.manager.api.jpa.entities.GridColumnEntity;
 import org.sistcoopform.manager.api.jpa.entities.GridQuestionEntity;
+import org.sistcoopform.manager.api.jpa.entities.GridRowEntity;
+import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
+import org.sistcoopform.manager.api.model.GridRowModel;
 import org.sistcoopform.manager.api.model.SectionModel;
 
 /**
@@ -93,23 +96,41 @@ public class GridQuestionAdapter implements GridQuestionModel {
 	}
 
 	@Override
-	public List<FilaCuadriculaModel> getFilas() {
-		Set<FilaCuadriculaEntity> filas = gridQuestionEntity.getFilas();
-		List<FilaCuadriculaModel> models = new ArrayList<>();
-		for (FilaCuadriculaEntity entity : filas) {
-			models.add(new GridRowAdapter(em, entity));
+	public Set<GridRowModel> getRows() {
+		Set<GridRowEntity> rows = gridQuestionEntity.getRows();
+		Set<GridRowModel> models = new HashSet<>();
+		for (GridRowEntity row : rows) {
+			models.add(new GridRowAdapter(em, row));
 		}
 		return models;
 	}
 
 	@Override
-	public List<ColumnaCuadriculaModel> getColumnas() {
-		Set<ColumnaCuadriculaEntity> filas = gridQuestionEntity.getColumnas();
-		List<ColumnaCuadriculaModel> models = new ArrayList<>();
-		for (ColumnaCuadriculaEntity entity : filas) {
-			models.add(new GridColumnAdapter(em, entity));
+	public void setRows(Set<GridRowModel> rows) {
+		Set<GridRowEntity> rowsEntity = new HashSet<>();
+		for (GridRowModel rowModel : rows) {
+			rowsEntity.add(GridRowAdapter.toGridRowEntity(rowModel, em));
+		}
+		gridQuestionEntity.setRows(rowsEntity);
+	}
+
+	@Override
+	public Set<GridColumnModel> getColumns() {
+		Set<GridColumnEntity> columns = gridQuestionEntity.getColumns();
+		Set<GridColumnModel> models = new HashSet<>();
+		for (GridColumnEntity column : columns) {
+			models.add(new GridColumnAdapter(em, column));
 		}
 		return models;
+	}
+
+	@Override
+	public void setColumns(Set<GridColumnModel> columns) {
+		Set<GridColumnEntity> columnsEntity = new HashSet<>();
+		for (GridColumnModel columnModel : columns) {
+			columnsEntity.add(GridColumnAdapter.toGridColumnEntity(columnModel, em));
+		}
+		gridQuestionEntity.setColumns(columnsEntity);
 	}
 
 	@Override
@@ -136,5 +157,4 @@ public class GridQuestionAdapter implements GridQuestionModel {
 			return false;
 		return true;
 	}
-
 }

@@ -10,7 +10,7 @@ import org.sistcoopform.manager.api.beans.representations.idm.FormRepresentation
 import org.sistcoopform.manager.api.model.FormModel;
 import org.sistcoopform.manager.api.model.FormProvider;
 import org.sistcoopform.manager.api.model.utils.ModelToRepresentation;
-import org.sistcoopform.manager.api.rest.managers.FormularioManager;
+import org.sistcoopform.manager.api.rest.managers.FormManager;
 import org.sistcoopform.manager.api.rest.services.ErrorResponse;
 
 @Stateless
@@ -23,7 +23,7 @@ public class FormResourceImpl implements FormResource {
 	private FormProvider formProvider;
 
 	@Inject
-	private FormularioManager formManager;
+	private FormManager formManager;
 
 	@Inject
 	private SectionsResource sectionsResource;

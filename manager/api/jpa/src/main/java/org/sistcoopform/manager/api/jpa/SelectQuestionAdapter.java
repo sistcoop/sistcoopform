@@ -1,7 +1,6 @@
 package org.sistcoopform.manager.api.jpa;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -106,13 +105,22 @@ public class SelectQuestionAdapter implements SelectQuestionModel {
 	}
 
 	@Override
-	public List<SelectOptionModel> getOptions() {
+	public Set<SelectOptionModel> getOptions() {
 		Set<SelectOptionEntity> optionsEntity = selectQuestionEntity.getOptions();
-		List<SelectOptionModel> models = new ArrayList<>();
+		Set<SelectOptionModel> models = new HashSet<>();
 		for (SelectOptionEntity entity : optionsEntity) {
 			models.add(new SelectOptionAdapter(em, entity));
 		}
 		return models;
+	}
+
+	@Override
+	public void setOptions(Set<SelectOptionModel> options) {
+		Set<SelectOptionEntity> optionsEntity = new HashSet<>();
+		for (SelectOptionModel optionModel : options) {
+			optionsEntity.add(SelectOptionAdapter.toSelectOptionEntity(optionModel, em));
+		}
+		selectQuestionEntity.setOptions(optionsEntity);
 	}
 
 	@Override

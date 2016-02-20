@@ -1,6 +1,6 @@
 package org.sistcoopform.manager.api.model;
 
-import java.util.List;
+import java.util.Set;
 
 import org.sistcoopform.manager.api.model.enums.SelectType;
 
@@ -17,6 +17,8 @@ public interface SelectQuestionModel extends QuestionModel {
 
 	void setType(SelectType type);
 
-	List<SelectOptionModel> getOptions();
+	Set<SelectOptionModel> getOptions();
+
+	void setOptions(Set<SelectOptionModel> options);
 
 }

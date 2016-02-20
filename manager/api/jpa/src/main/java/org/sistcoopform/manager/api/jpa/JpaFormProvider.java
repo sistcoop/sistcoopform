@@ -60,8 +60,10 @@ public class JpaFormProvider extends AbstractHibernateStorage implements FormPro
 	}
 
 	@Override
-	public boolean remove(FormModel tipoDocumentoModel) {
-		return false;
+	public boolean remove(FormModel form) {
+		FormEntity formEntity = em.find(FormEntity.class, form.getId());
+		em.remove(formEntity);
+		return true;
 	}
 
 	@Override

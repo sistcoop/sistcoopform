@@ -22,23 +22,21 @@ public interface QuestionProvider extends Provider {
 	DateTimeQuestionModel createDateTimeQuestion(SectionModel section, String title, String description, int number,
 			DateTimeType type, boolean required);
 
-	SelectQuestionModel createSeleccion(SectionModel section, String title, String description, int number,
+	ScaleQuestionModel createScaleQuestion(SectionModel section, String title, String description, int number,
+			String tag1, String tag2, int desde, int hasta, boolean required);
+
+	SelectQuestionModel createSelectQuestion(SectionModel section, String title, String description, int number,
 			SelectType type, boolean required);
 
-	SelectOptionModel createOpcionSeleccion(SelectQuestionModel preguntaSeleccion, String denominacion, int number,
+	SelectOptionModel createSelectOption(SelectQuestionModel question, String denominacion, int number,
 			boolean editable);
 
-	ScaleQuestionModel createEscalaLineal(SectionModel section, String title, String description, int number,
-			String etiqueta1, String etiqueta2, int desde, int hasta, boolean required);
+	GridQuestionModel createGridQuestion(SectionModel section, String title, String description, int number,
+			boolean required);
 
-	GridQuestionModel createCuadricula(SectionModel section, String title, String description, int number,
-			boolean requiereRespuestaPorFila);
+	GridRowModel createGridRow(GridQuestionModel question, String denomination, int number, boolean editable);
 
-	GridRowModel createFilaCuadricula(GridQuestionModel preguntaCuadricula, String denominacion, int number,
-			boolean editable);
-
-	GridColumnModel createColumnaCuadricula(GridQuestionModel preguntaCuadricula, String denominacion, int number,
-			boolean editable);
+	GridColumnModel createGridColumn(GridQuestionModel question, String denomination, int number, boolean editable);
 
 	QuestionModel findById(String id);
 

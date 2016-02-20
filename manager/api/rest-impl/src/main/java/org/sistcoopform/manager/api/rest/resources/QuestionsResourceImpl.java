@@ -59,7 +59,9 @@ public class QuestionsResourceImpl implements QuestionsResource {
 					.header("Access-Control-Expose-Headers", "Location")
 					.entity(ModelToRepresentation.toRepresentation(model)).build();
 		} catch (ModelDuplicateException e) {
-			return ErrorResponse.exists("Section exists");
+			return ErrorResponse.exists("Question exists");
+		} catch (Exception e) {
+			return ErrorResponse.exists(e.getMessage());
 		}
 	}
 

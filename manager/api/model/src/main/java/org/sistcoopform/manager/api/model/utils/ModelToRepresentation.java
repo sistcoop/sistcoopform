@@ -1,6 +1,6 @@
 package org.sistcoopform.manager.api.model.utils;
 
-import java.util.List;
+import java.util.Set;
 
 import org.sistcoopform.manager.api.beans.representations.idm.FormRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.GridColumnRepresentation;
@@ -79,7 +79,7 @@ public class ModelToRepresentation {
 			rep.setRequired(selectQuestion.isRequired());
 			rep.setType(selectQuestion.getType().toString());
 
-			List<SelectOptionModel> options = selectQuestion.getOptions();
+			Set<SelectOptionModel> options = selectQuestion.getOptions();
 			for (SelectOptionModel selectOptionModel : options) {
 				rep.getOptions().add(toRepresentation(selectOptionModel));
 			}
@@ -87,12 +87,12 @@ public class ModelToRepresentation {
 			GridQuestionModel gridQuestion = (GridQuestionModel) model;
 			rep.setRequired(gridQuestion.isRequired());
 
-			List<GridRowModel> rows = gridQuestion.getRows();
+			Set<GridRowModel> rows = gridQuestion.getRows();
 			for (GridRowModel gridRowModel : rows) {
 				rep.getRows().add(toRepresentation(gridRowModel));
 			}
 
-			List<GridColumnModel> columns = gridQuestion.getColumns();
+			Set<GridColumnModel> columns = gridQuestion.getColumns();
 			for (GridColumnModel gridColumnModel : columns) {
 				rep.getColumns().add(toRepresentation(gridColumnModel));
 			}

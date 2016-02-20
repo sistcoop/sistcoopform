@@ -10,7 +10,7 @@ import org.sistcoopform.manager.api.beans.representations.idm.SectionRepresentat
 import org.sistcoopform.manager.api.model.SectionModel;
 import org.sistcoopform.manager.api.model.SectionProvider;
 import org.sistcoopform.manager.api.model.utils.ModelToRepresentation;
-import org.sistcoopform.manager.api.rest.managers.FormularioManager;
+import org.sistcoopform.manager.api.rest.managers.FormManager;
 import org.sistcoopform.manager.api.rest.services.ErrorResponse;
 
 @Stateless
@@ -23,7 +23,7 @@ public class SectionResourceImpl implements SectionResource {
 	private SectionProvider sectionProvider;
 
 	@Inject
-	private FormularioManager formManager;
+	private FormManager formManager;
 
 	private SectionModel getSectionModel() {
 		return sectionProvider.findById(sectionId);

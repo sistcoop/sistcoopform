@@ -1,6 +1,6 @@
 package org.sistcoopform.manager.api.model;
 
-import java.util.List;
+import java.util.Set;
 
 public interface GridQuestionModel extends QuestionModel {
 
@@ -8,8 +8,12 @@ public interface GridQuestionModel extends QuestionModel {
 
 	void setRequired(boolean required);
 
-	List<GridRowModel> getRows();
+	Set<GridRowModel> getRows();
 
-	List<GridColumnModel> getColumns();
+	void setRows(Set<GridRowModel> rows);
+
+	Set<GridColumnModel> getColumns();
+
+	void setColumns(Set<GridColumnModel> columns);
 
 }

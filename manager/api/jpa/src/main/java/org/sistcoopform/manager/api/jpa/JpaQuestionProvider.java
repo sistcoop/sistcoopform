@@ -12,20 +12,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.sistcoopform.manager.api.jpa.entities.FormEntity;
+import org.sistcoopform.manager.api.jpa.entities.DateTimeQuestionEntity;
+import org.sistcoopform.manager.api.jpa.entities.GridColumnEntity;
+import org.sistcoopform.manager.api.jpa.entities.GridQuestionEntity;
+import org.sistcoopform.manager.api.jpa.entities.GridRowEntity;
+import org.sistcoopform.manager.api.jpa.entities.NumericQuestionEntity;
+import org.sistcoopform.manager.api.jpa.entities.QuestionEntity;
+import org.sistcoopform.manager.api.jpa.entities.ScaleQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.SectionEntity;
+import org.sistcoopform.manager.api.jpa.entities.SelectOptionEntity;
+import org.sistcoopform.manager.api.jpa.entities.SelectQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.TextQuestionEntity;
 import org.sistcoopform.manager.api.model.DateTimeQuestionModel;
-import org.sistcoopform.manager.api.model.FormModel;
 import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
+import org.sistcoopform.manager.api.model.ModelException;
 import org.sistcoopform.manager.api.model.NumericQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
 import org.sistcoopform.manager.api.model.ScaleQuestionModel;
 import org.sistcoopform.manager.api.model.SectionModel;
-import org.sistcoopform.manager.api.model.SectionProvider;
 import org.sistcoopform.manager.api.model.SelectOptionModel;
 import org.sistcoopform.manager.api.model.SelectQuestionModel;
 import org.sistcoopform.manager.api.model.TextQuestionModel;
@@ -60,111 +67,218 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 	}
 
 	@Override
-	public SectionModel create(FormModel form, String title, String description, int number) {
-		FormEntity formEntity = em.find(FormEntity.class, form.getId());
-
-		SectionEntity SectionEntity = new SectionEntity();
-		SectionEntity.setTitle(title);
-		SectionEntity.setDescription(description);
-		SectionEntity.setNumber(number);
-		SectionEntity.setForm(formEntity);
-		return new SectionAdapter(em, SectionEntity);
-	}
-
-	@Override
 	public TextQuestionModel createTextQuestion(SectionModel section, String title, String description, int number,
 			TextType type, boolean required) {
 		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
 
 		TextQuestionEntity question = new TextQuestionEntity();
-		question.setTitle(title);		
+		question.setTitle(title);
 		question.setDescription(description);
 		question.setNumber(number);
 		question.setType(type.toString());
 		question.setRequired(required);
-		question.setSection(sectionEntity)
+		question.setSection(sectionEntity);
 		em.persist(question);
-		return null;
+		return new TextQuestionAdapter(em, question);
 	}
 
 	@Override
 	public NumericQuestionModel createNumberQuestion(SectionModel section, String title, String description, int number,
 			NumericType type, boolean required) {
-		// TODO Auto-generated method stub
-		return null;
+		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
+
+		NumericQuestionEntity question = new NumericQuestionEntity();
+		question.setTitle(title);
+		question.setDescription(description);
+		question.setNumber(number);
+		question.setType(type.toString());
+		question.setRequired(required);
+		question.setSection(sectionEntity);
+		em.persist(question);
+		return new NumericQuestionAdapter(em, question);
 	}
 
 	@Override
 	public DateTimeQuestionModel createDateTimeQuestion(SectionModel section, String title, String description,
 			int number, DateTimeType type, boolean required) {
-		// TODO Auto-generated method stub
-		return null;
+		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
+
+		DateTimeQuestionEntity question = new DateTimeQuestionEntity();
+		question.setTitle(title);
+		question.setDescription(description);
+		question.setNumber(number);
+		question.setType(type.toString());
+		question.setRequired(required);
+		question.setSection(sectionEntity);
+		em.persist(question);
+		return new DateTimeQuestionAdapter(em, question);
 	}
 
 	@Override
-	public SelectQuestionModel createSeleccion(SectionModel section, String title, String description, int number,
+	public ScaleQuestionModel createScaleQuestion(SectionModel section, String title, String description, int number,
+			String tag1, String tag2, int min, int max, boolean required) {
+		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
+
+		ScaleQuestionEntity question = new ScaleQuestionEntity();
+		question.setTitle(title);
+		question.setDescription(description);
+		question.setNumber(number);
+		question.setRequired(required);
+		question.setTag1(tag1);
+		question.setTag2(tag2);
+		question.setMin(min);
+		question.setMax(max);
+		question.setSection(sectionEntity);
+		em.persist(question);
+		return new ScaleQuestionAdapter(em, question);
+	}
+
+	@Override
+	public SelectQuestionModel createSelectQuestion(SectionModel section, String title, String description, int number,
 			SelectType type, boolean required) {
-		// TODO Auto-generated method stub
-		return null;
+		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
+
+		SelectQuestionEntity question = new SelectQuestionEntity();
+		question.setTitle(title);
+		question.setDescription(description);
+		question.setNumber(number);
+		question.setType(type.toString());
+		question.setRequired(required);
+		question.setSection(sectionEntity);
+		em.persist(question);
+		return new SelectQuestionAdapter(em, question);
 	}
 
 	@Override
-	public SelectOptionModel createOpcionSeleccion(SelectQuestionModel preguntaSeleccion, String denominacion,
-			int number, boolean editable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ScaleQuestionModel createEscalaLineal(SectionModel section, String title, String description, int number,
-			String etiqueta1, String etiqueta2, int desde, int hasta, boolean required) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GridQuestionModel createCuadricula(SectionModel section, String title, String description, int number,
-			boolean requiereRespuestaPorFila) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GridRowModel createFilaCuadricula(GridQuestionModel preguntaCuadricula, String denominacion, int number,
+	public SelectOptionModel createSelectOption(SelectQuestionModel question, String denomination, int number,
 			boolean editable) {
-		// TODO Auto-generated method stub
-		return null;
+		SelectQuestionEntity questionEntity = em.find(SelectQuestionEntity.class, question.getId());
+
+		SelectOptionEntity option = new SelectOptionEntity();
+		option.setDenomination(denomination);
+		option.setEditable(editable);
+		option.setNumber(number);
+		option.setSelectQuestion(questionEntity);
+		em.persist(option);
+		return new SelectOptionAdapter(em, option);
 	}
 
 	@Override
-	public GridColumnModel createColumnaCuadricula(GridQuestionModel preguntaCuadricula, String denominacion,
-			int number, boolean editable) {
-		// TODO Auto-generated method stub
-		return null;
+	public GridQuestionModel createGridQuestion(SectionModel section, String title, String description, int number,
+			boolean required) {
+		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
+
+		GridQuestionEntity question = new GridQuestionEntity();
+		question.setTitle(title);
+		question.setDescription(description);
+		question.setNumber(number);
+		question.setRequired(required);
+		question.setSection(sectionEntity);
+		em.persist(question);
+		return new GridQuestionAdapter(em, question);
+	}
+
+	@Override
+	public GridRowModel createGridRow(GridQuestionModel question, String denomination, int number, boolean editable) {
+		GridQuestionEntity questionEntity = em.find(GridQuestionEntity.class, question.getId());
+
+		GridRowEntity row = new GridRowEntity();
+		row.setDenomination(denomination);
+		row.setEditable(editable);
+		row.setNumber(number);
+		row.setGridQuestion(questionEntity);
+		em.persist(row);
+		return new GridRowAdapter(em, row);
+	}
+
+	@Override
+	public GridColumnModel createGridColumn(GridQuestionModel question, String denomination, int number,
+			boolean editable) {
+		GridQuestionEntity questionEntity = em.find(GridQuestionEntity.class, question.getId());
+
+		GridColumnEntity row = new GridColumnEntity();
+		row.setDenomination(denomination);
+		row.setEditable(editable);
+		row.setNumber(number);
+		row.setGridQuestion(questionEntity);
+		em.persist(row);
+		return new GridColumnAdapter(em, row);
 	}
 
 	@Override
 	public QuestionModel findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		QuestionEntity questionEntity = em.find(QuestionEntity.class, id);
+		if (questionEntity instanceof TextQuestionEntity) {
+			TextQuestionEntity textQuestion = (TextQuestionEntity) questionEntity;
+			return new TextQuestionAdapter(em, textQuestion);
+		} else if (questionEntity instanceof DateTimeQuestionEntity) {
+			DateTimeQuestionEntity textQuestion = (DateTimeQuestionEntity) questionEntity;
+			return new DateTimeQuestionAdapter(em, textQuestion);
+		} else if (questionEntity instanceof NumericQuestionEntity) {
+			NumericQuestionEntity numericQuestion = (NumericQuestionEntity) questionEntity;
+			return new NumericQuestionAdapter(em, numericQuestion);
+		} else if (questionEntity instanceof ScaleQuestionEntity) {
+			ScaleQuestionEntity scaleQuestion = (ScaleQuestionEntity) questionEntity;
+			return new ScaleQuestionAdapter(em, scaleQuestion);
+		} else if (questionEntity instanceof SelectQuestionEntity) {
+			SelectQuestionEntity selectQuestion = (SelectQuestionEntity) questionEntity;
+			return new SelectQuestionAdapter(em, selectQuestion);
+		} else if (questionEntity instanceof GridQuestionEntity) {
+			GridQuestionEntity gridQuestion = (GridQuestionEntity) questionEntity;
+			return new GridQuestionAdapter(em, gridQuestion);
+		} else {
+			throw new ModelException("Entity no encontrado");
+		}
 	}
 
 	@Override
 	public boolean remove(QuestionModel question) {
-		// TODO Auto-generated method stub
-		return false;
+		QuestionEntity questionEntity = em.find(QuestionEntity.class, question.getId());
+		em.remove(questionEntity);
+		return true;
 	}
 
 	@Override
 	public List<QuestionModel> getAll(SectionModel section) {
-		// TODO Auto-generated method stub
-		return null;
+		return getAll(section, -1, -1);
 	}
 
 	@Override
 	public List<QuestionModel> getAll(SectionModel section, int firstResult, int maxResults) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<QuestionEntity> query = em.createNamedQuery("QuestionEntity.findBySectionId", QuestionEntity.class);
+		query.setParameter("sectionId", section.getId());
+		if (firstResult != -1) {
+			query.setFirstResult(firstResult);
+		}
+		if (maxResults != -1) {
+			query.setMaxResults(maxResults);
+		}
+		List<QuestionEntity> entities = query.getResultList();
+		List<QuestionModel> models = new ArrayList<QuestionModel>();
+		for (QuestionEntity questionEntity : entities) {
+			if (questionEntity instanceof TextQuestionEntity) {
+				TextQuestionEntity textQuestion = (TextQuestionEntity) questionEntity;
+				models.add(new TextQuestionAdapter(em, textQuestion));
+			} else if (questionEntity instanceof DateTimeQuestionEntity) {
+				DateTimeQuestionEntity textQuestion = (DateTimeQuestionEntity) questionEntity;
+				models.add(new DateTimeQuestionAdapter(em, textQuestion));
+			} else if (questionEntity instanceof NumericQuestionEntity) {
+				NumericQuestionEntity numericQuestion = (NumericQuestionEntity) questionEntity;
+				models.add(new NumericQuestionAdapter(em, numericQuestion));
+			} else if (questionEntity instanceof ScaleQuestionEntity) {
+				ScaleQuestionEntity scaleQuestion = (ScaleQuestionEntity) questionEntity;
+				models.add(new ScaleQuestionAdapter(em, scaleQuestion));
+			} else if (questionEntity instanceof SelectQuestionEntity) {
+				SelectQuestionEntity selectQuestion = (SelectQuestionEntity) questionEntity;
+				models.add(new SelectQuestionAdapter(em, selectQuestion));
+			} else if (questionEntity instanceof GridQuestionEntity) {
+				GridQuestionEntity gridQuestion = (GridQuestionEntity) questionEntity;
+				models.add(new GridQuestionAdapter(em, gridQuestion));
+			} else {
+				throw new ModelException("Entity no encontrado");
+			}
+		}
+		return models;
 	}
 
 }

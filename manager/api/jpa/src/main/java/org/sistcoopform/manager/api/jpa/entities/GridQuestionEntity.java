@@ -31,10 +31,10 @@ public class GridQuestionEntity extends QuestionEntity {
     @Type(type = "org.hibernate.type.TrueFalseType")
     private boolean required;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "gridQuestion", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "gridQuestion", orphanRemoval = true, cascade = { CascadeType.ALL })
     private Set<GridRowEntity> rows = new HashSet<GridRowEntity>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "gridQuestion", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "gridQuestion", orphanRemoval = true, cascade = { CascadeType.ALL })
     private Set<GridColumnEntity> columns = new HashSet<GridColumnEntity>();
 
 	public boolean isRequired() {

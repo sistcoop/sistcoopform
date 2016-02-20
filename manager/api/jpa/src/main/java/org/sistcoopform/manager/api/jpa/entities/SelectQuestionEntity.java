@@ -36,7 +36,7 @@ public class SelectQuestionEntity extends QuestionEntity {
 	@Size(min = 1, max = 100)
 	private String type;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "selectQuestion", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "selectQuestion", orphanRemoval = true, cascade = { CascadeType.ALL })
 	private Set<SelectOptionEntity> options = new HashSet<SelectOptionEntity>();
 
 	public boolean isRequired() {
