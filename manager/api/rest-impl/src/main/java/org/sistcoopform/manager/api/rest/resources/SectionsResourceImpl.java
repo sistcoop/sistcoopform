@@ -53,11 +53,10 @@ public class SectionsResourceImpl implements SectionsResource {
 	@Override
 	public Response create(SectionRepresentation rep) {
 		FormModel form = getFormModel();
+		System.out.println("mi form es:" + form.getId());
 		try {
 			SectionModel model = representationToModel.createSection(form, rep, sectionProvider);
-			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build())
-					.header("Access-Control-Expose-Headers", "Location")
-					.entity(ModelToRepresentation.toRepresentation(model)).build();
+			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build()).build();
 		} catch (ModelDuplicateException e) {
 			return ErrorResponse.exists("Section exists");
 		}

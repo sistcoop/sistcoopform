@@ -29,7 +29,7 @@ public interface FormResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response remove();
 
-	@Path("section")
+	@Path("sections")
 	public SectionsResource sections();
 
 }

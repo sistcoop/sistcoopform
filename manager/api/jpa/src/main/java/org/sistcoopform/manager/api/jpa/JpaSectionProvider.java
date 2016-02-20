@@ -47,12 +47,13 @@ public class JpaSectionProvider extends AbstractHibernateStorage implements Sect
 	public SectionModel create(FormModel form, String title, String description, int number) {
 		FormEntity formEntity = em.find(FormEntity.class, form.getId());
 
-		SectionEntity SectionEntity = new SectionEntity();
-		SectionEntity.setTitle(title);
-		SectionEntity.setDescription(description);
-		SectionEntity.setNumber(number);
-		SectionEntity.setForm(formEntity);
-		return new SectionAdapter(em, SectionEntity);
+		SectionEntity sectionEntity = new SectionEntity();
+		sectionEntity.setTitle(title);
+		sectionEntity.setDescription(description);
+		sectionEntity.setNumber(number);
+		sectionEntity.setForm(formEntity);
+		em.persist(sectionEntity);
+		return new SectionAdapter(em, sectionEntity);
 	}
 
 	@Override
