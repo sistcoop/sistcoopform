@@ -82,7 +82,7 @@ public class FormManager {
 			selectQuestion.setType(SelectType.valueOf(rep.getType()));
 
 			selectQuestion.setOptions(new HashSet<SelectOptionModel>());
-			Set<SelectOptionRepresentation> options = rep.getOptions();
+			Set<SelectOptionRepresentation> options = rep.getSelectOptions();
 			for (SelectOptionRepresentation option : options) {
 				SelectOptionModel optionModel = questionProvider.createSelectOption(selectQuestion,
 						option.getDenomination(), option.getNumber(), option.isEditable());

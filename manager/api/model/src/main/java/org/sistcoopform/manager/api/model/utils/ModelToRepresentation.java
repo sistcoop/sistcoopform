@@ -87,7 +87,7 @@ public class ModelToRepresentation {
 
 			Set<SelectOptionModel> options = selectQuestion.getOptions();
 			for (SelectOptionModel selectOptionModel : options) {
-				rep.getOptions().add(toRepresentation(selectOptionModel));
+				rep.getSelectOptions().add(toRepresentation(selectOptionModel));
 			}
 		} else if (model instanceof GridQuestionModel) {
 			GridQuestionModel gridQuestion = (GridQuestionModel) model;

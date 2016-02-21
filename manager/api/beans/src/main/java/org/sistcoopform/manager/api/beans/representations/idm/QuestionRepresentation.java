@@ -30,7 +30,7 @@ public class QuestionRepresentation {
 	private int max;
 
 	// Select
-	private Set<SelectOptionRepresentation> options = new HashSet<SelectOptionRepresentation>();
+	private Set<SelectOptionRepresentation> selectOptions = new HashSet<SelectOptionRepresentation>();
 
 	// Grid
 	private Set<GridRowRepresentation> rows = new HashSet<GridRowRepresentation>();
@@ -126,12 +126,12 @@ public class QuestionRepresentation {
 		this.max = max;
 	}
 
-	public Set<SelectOptionRepresentation> getOptions() {
-		return options;
+	public Set<SelectOptionRepresentation> getSelectOptions() {
+		return selectOptions;
 	}
 
-	public void setOptions(Set<SelectOptionRepresentation> options) {
-		this.options = options;
+	public void setSelectOptions(Set<SelectOptionRepresentation> selectOptions) {
+		this.selectOptions = selectOptions;
 	}
 
 	public Set<GridRowRepresentation> getRows() {
@@ -157,5 +157,7 @@ public class QuestionRepresentation {
 	public void setSection(SectionRepresentation section) {
 		this.section = section;
 	}
+
+	
 
 }

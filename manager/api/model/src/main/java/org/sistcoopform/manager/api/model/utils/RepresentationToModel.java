@@ -59,7 +59,7 @@ public class RepresentationToModel {
 			SelectQuestionModel question = questionProvider.createSelectQuestion(section, rep.getTitle(),
 					rep.getDescription(), rep.getNumber(), SelectType.valueOf(rep.getType()), rep.isRequired());
 
-			Set<SelectOptionRepresentation> options = rep.getOptions();
+			Set<SelectOptionRepresentation> options = rep.getSelectOptions();
 			for (SelectOptionRepresentation option : options) {
 				SelectOptionModel optionModel = questionProvider.createSelectOption(question, option.getDenomination(),
 						option.getNumber(), option.isEditable());
