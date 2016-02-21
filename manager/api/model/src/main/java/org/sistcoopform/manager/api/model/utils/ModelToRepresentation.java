@@ -2,6 +2,7 @@ package org.sistcoopform.manager.api.model.utils;
 
 import java.util.Set;
 
+import org.sistcoopform.manager.api.beans.representations.enums.QuestionAvailable;
 import org.sistcoopform.manager.api.beans.representations.idm.FormRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.GridColumnRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.GridRowRepresentation;
@@ -58,24 +59,29 @@ public class ModelToRepresentation {
 
 		if (model instanceof TextQuestionModel) {
 			TextQuestionModel textQuestion = (TextQuestionModel) model;
+			rep.setQuestion(QuestionAvailable.TEXT);
 			rep.setRequired(textQuestion.isRequired());
 			rep.setType(textQuestion.getType().toString());
 		} else if (model instanceof DateTimeQuestionModel) {
 			DateTimeQuestionModel datetimeQuestion = (DateTimeQuestionModel) model;
+			rep.setQuestion(QuestionAvailable.DATETIME);
 			rep.setRequired(datetimeQuestion.isRequired());
 			rep.setType(datetimeQuestion.getType().toString());
 		} else if (model instanceof NumericQuestionModel) {
 			NumericQuestionModel numericQuestion = (NumericQuestionModel) model;
+			rep.setQuestion(QuestionAvailable.NUMERIC);
 			rep.setRequired(numericQuestion.isRequired());
 			rep.setType(numericQuestion.getType().toString());
 		} else if (model instanceof ScaleQuestionModel) {
 			ScaleQuestionModel scaleQuestion = (ScaleQuestionModel) model;
+			rep.setQuestion(QuestionAvailable.SCALE);
 			rep.setTag1(scaleQuestion.getTag1());
 			rep.setTag2(scaleQuestion.getTag2());
 			rep.setMin(scaleQuestion.getMin());
 			rep.setMax(scaleQuestion.getMax());
 		} else if (model instanceof SelectQuestionModel) {
 			SelectQuestionModel selectQuestion = (SelectQuestionModel) model;
+			rep.setQuestion(QuestionAvailable.SELECT);
 			rep.setRequired(selectQuestion.isRequired());
 			rep.setType(selectQuestion.getType().toString());
 
@@ -85,6 +91,7 @@ public class ModelToRepresentation {
 			}
 		} else if (model instanceof GridQuestionModel) {
 			GridQuestionModel gridQuestion = (GridQuestionModel) model;
+			rep.setQuestion(QuestionAvailable.GRID);
 			rep.setRequired(gridQuestion.isRequired());
 
 			Set<GridRowModel> rows = gridQuestion.getRows();

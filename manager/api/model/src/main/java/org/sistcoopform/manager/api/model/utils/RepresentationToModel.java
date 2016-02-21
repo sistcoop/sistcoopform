@@ -46,7 +46,7 @@ public class RepresentationToModel {
 		if (rep.getQuestion().equals(QuestionAvailable.TEXT)) {
 			return questionProvider.createTextQuestion(section, rep.getTitle(), rep.getDescription(), rep.getNumber(),
 					TextType.valueOf(rep.getType()), rep.isRequired());
-		} else if (rep.getQuestion().equals(QuestionAvailable.NUMBER)) {
+		} else if (rep.getQuestion().equals(QuestionAvailable.NUMERIC)) {
 			return questionProvider.createNumberQuestion(section, rep.getTitle(), rep.getDescription(), rep.getNumber(),
 					NumericType.valueOf(rep.getType()), rep.isRequired());
 		} else if (rep.getQuestion().equals(QuestionAvailable.DATETIME)) {
@@ -55,7 +55,7 @@ public class RepresentationToModel {
 		} else if (rep.getQuestion().equals(QuestionAvailable.SCALE)) {
 			return questionProvider.createScaleQuestion(section, rep.getTitle(), rep.getDescription(), rep.getNumber(),
 					rep.getTag1(), rep.getTag2(), rep.getMin(), rep.getMax(), rep.isRequired());
-		} else if (rep.getQuestion().equals(QuestionAvailable.OPTIONS)) {
+		} else if (rep.getQuestion().equals(QuestionAvailable.SELECT)) {
 			SelectQuestionModel question = questionProvider.createSelectQuestion(section, rep.getTitle(),
 					rep.getDescription(), rep.getNumber(), SelectType.valueOf(rep.getType()), rep.isRequired());
 

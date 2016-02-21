@@ -55,7 +55,9 @@ public class SectionsResourceImpl implements SectionsResource {
 		FormModel form = getFormModel();
 		try {
 			SectionModel model = representationToModel.createSection(form, rep, sectionProvider);
-			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build()).build();
+			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build())
+					.header("Access-Control-Expose-Headers", "Location")
+					.entity(ModelToRepresentation.toRepresentation(model)).build();
 		} catch (ModelDuplicateException e) {
 			return ErrorResponse.exists("Section exists");
 		}
