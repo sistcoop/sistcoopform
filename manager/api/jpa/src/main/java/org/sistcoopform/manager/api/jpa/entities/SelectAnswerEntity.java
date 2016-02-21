@@ -3,7 +3,6 @@ package org.sistcoopform.manager.api.jpa.entities;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
-import javax.persistence.Convert;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
