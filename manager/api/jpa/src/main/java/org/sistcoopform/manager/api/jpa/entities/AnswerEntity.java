@@ -1,10 +1,7 @@
 package org.sistcoopform.manager.api.jpa.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -17,13 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,12 +24,10 @@ import org.hibernate.annotations.GenericGenerator;
  */
 
 @Entity
-@Table(name = "QUESTION")
+@Table(name = "ANSWER")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@NamedQueries(value = {
-		@NamedQuery(name = "QuestionEntity.findBySectionId", query = "SELECT q FROM QuestionEntity q INNER JOIN q.section s WHERE s.id = :sectionId") })
-public abstract class QuestionEntity implements Serializable {
+public abstract class AnswerEntity implements Serializable {
 
 	/**
 	 * 
@@ -51,23 +41,14 @@ public abstract class QuestionEntity implements Serializable {
 	private String id;
 
 	@NotNull
-	@Size(min = 1, max = 200)
-	private String title;
-
-	@Size(min = 0, max = 400)
-	private String description;
-
-	@NotNull
-	@Min(value = 0)
-	private int number;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "form_answer_id", foreignKey = @ForeignKey )
+	protected FormAnswerEntity formAnswer;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "section_id", foreignKey = @ForeignKey )
-	protected SectionEntity section;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question", orphanRemoval = true, cascade = { CascadeType.REMOVE })
-	private Set<AnswerEntity> answers = new HashSet<AnswerEntity>();
+	@JoinColumn(name = "question_id", foreignKey = @ForeignKey )
+	protected QuestionEntity question;
 
 	public String getId() {
 		return id;
@@ -77,44 +58,20 @@ public abstract class QuestionEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public FormAnswerEntity getFormAnswer() {
+		return formAnswer;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setFormAnswer(FormAnswerEntity formAnswer) {
+		this.formAnswer = formAnswer;
 	}
 
-	public String getDescription() {
-		return description;
+	public QuestionEntity getQuestion() {
+		return question;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
-	public SectionEntity getSection() {
-		return section;
-	}
-
-	public void setSection(SectionEntity section) {
-		this.section = section;
-	}
-
-	public Set<AnswerEntity> getAnswers() {
-		return answers;
-	}
-
-	public void setAnswers(Set<AnswerEntity> answers) {
-		this.answers = answers;
+	public void setQuestion(QuestionEntity question) {
+		this.question = question;
 	}
 
 	@Override
@@ -133,7 +90,7 @@ public abstract class QuestionEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		QuestionEntity other = (QuestionEntity) obj;
+		AnswerEntity other = (AnswerEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

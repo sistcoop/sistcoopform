@@ -1,43 +1,33 @@
 package org.sistcoopform.manager.api.jpa.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
  */
 
 @Entity
-@Table(name = "QUESTION")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@NamedQueries(value = {
-		@NamedQuery(name = "QuestionEntity.findBySectionId", query = "SELECT q FROM QuestionEntity q INNER JOIN q.section s WHERE s.id = :sectionId") })
-public abstract class QuestionEntity implements Serializable {
+@Table(name = "FORM_ANSWER")
+public class FormAnswerEntity implements Serializable {
 
 	/**
 	 * 
@@ -51,22 +41,21 @@ public abstract class QuestionEntity implements Serializable {
 	private String id;
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date date;
+
+	@NotNull
 	@Size(min = 1, max = 200)
-	private String title;
+	private String user;
 
 	@Size(min = 0, max = 400)
-	private String description;
+	private String note;
 
 	@NotNull
-	@Min(value = 0)
-	private int number;
+	@Type(type = "org.hibernate.type.TrueFalseType")
+	private boolean valid;
 
-	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "section_id", foreignKey = @ForeignKey )
-	protected SectionEntity section;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "formAnswer", orphanRemoval = true, cascade = { CascadeType.REMOVE })
 	private Set<AnswerEntity> answers = new HashSet<AnswerEntity>();
 
 	public String getId() {
@@ -77,36 +66,36 @@ public abstract class QuestionEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getUser() {
+		return user;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
-	public int getNumber() {
-		return number;
+	public String getNote() {
+		return note;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNote(String note) {
+		this.note = note;
 	}
 
-	public SectionEntity getSection() {
-		return section;
+	public boolean isValid() {
+		return valid;
 	}
 
-	public void setSection(SectionEntity section) {
-		this.section = section;
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
 
 	public Set<AnswerEntity> getAnswers() {
@@ -133,7 +122,7 @@ public abstract class QuestionEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		QuestionEntity other = (QuestionEntity) obj;
+		FormAnswerEntity other = (FormAnswerEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
