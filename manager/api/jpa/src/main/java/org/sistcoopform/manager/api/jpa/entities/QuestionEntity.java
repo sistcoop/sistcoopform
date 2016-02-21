@@ -14,6 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -29,6 +31,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "QUESTION")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@NamedQueries(value = {
+		@NamedQuery(name = "QuestionEntity.findBySectionId", query = "SELECT q FROM QuestionEntity q INNER JOIN q.section s WHERE s.id = :sectionId") })
 public abstract class QuestionEntity implements Serializable {
 
 	/**

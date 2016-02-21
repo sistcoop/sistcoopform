@@ -24,6 +24,9 @@ public class SectionResourceImpl implements SectionResource {
 
 	@Inject
 	private FormManager formManager;
+	
+	@Inject
+	private QuestionsResource questionsResource;
 
 	private SectionModel getSectionModel() {
 		return sectionProvider.findById(sectionId);
@@ -60,8 +63,7 @@ public class SectionResourceImpl implements SectionResource {
 
 	@Override
 	public QuestionsResource questions() {
-		// TODO Auto-generated method stub
-		return null;
+		return questionsResource;
 	}
 
 }
