@@ -19,6 +19,7 @@ import org.sistcoopform.manager.api.model.FormModel;
 import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
+import org.sistcoopform.manager.api.model.ModelException;
 import org.sistcoopform.manager.api.model.NumericQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
@@ -57,25 +58,25 @@ public class FormManager {
 		model.setNumber(rep.getNumber());
 		model.setDescription(rep.getDescription());
 
-		if (model instanceof TextQuestionModel) {
+		if (model instanceof TextQuestionModel) {			
 			TextQuestionModel textQuestion = (TextQuestionModel) model;
 			textQuestion.setRequired(rep.isRequired());
 			textQuestion.setType(TextType.valueOf(rep.getType()));
-		} else if (rep instanceof DateTimeQuestionModel) {
+		} else if (model instanceof DateTimeQuestionModel) {
 			DateTimeQuestionModel datetimeQuestion = (DateTimeQuestionModel) model;
 			datetimeQuestion.setRequired(rep.isRequired());
 			datetimeQuestion.setType(DateTimeType.valueOf(rep.getType()));
-		} else if (rep instanceof NumericQuestionModel) {
+		} else if (model instanceof NumericQuestionModel) {			
 			NumericQuestionModel numericQuestion = (NumericQuestionModel) model;
 			numericQuestion.setRequired(rep.isRequired());
 			numericQuestion.setType(NumericType.valueOf(rep.getType()));
-		} else if (rep instanceof ScaleQuestionModel) {
+		} else if (model instanceof ScaleQuestionModel) {			
 			ScaleQuestionModel scaleQuestion = (ScaleQuestionModel) model;
 			scaleQuestion.setTag1(rep.getTag1());
 			scaleQuestion.setTag2(rep.getTag2());
 			scaleQuestion.setMin(rep.getMin());
 			scaleQuestion.setMax(rep.getMax());
-		} else if (rep instanceof SelectQuestionModel) {
+		} else if (model instanceof SelectQuestionModel) {			
 			SelectQuestionModel selectQuestion = (SelectQuestionModel) model;
 			selectQuestion.setRequired(rep.isRequired());
 			selectQuestion.setType(SelectType.valueOf(rep.getType()));
@@ -87,7 +88,7 @@ public class FormManager {
 						option.getDenomination(), option.getNumber(), option.isEditable());
 				selectQuestion.getOptions().add(optionModel);
 			}
-		} else if (rep instanceof GridQuestionModel) {
+		} else if (model instanceof GridQuestionModel) {			
 			GridQuestionModel gridQuestion = (GridQuestionModel) model;
 			gridQuestion.setRequired(rep.isRequired());
 
@@ -106,7 +107,9 @@ public class FormManager {
 						column.getNumber(), column.isEditable());
 				gridQuestion.getColumns().add(columnModel);
 			}
-		}
+		} else {
+			throw new ModelException("No se reconoce el tipo de la pregunta");
+		}		
 
 		model.commit();
 	}

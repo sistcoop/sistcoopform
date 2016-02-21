@@ -69,7 +69,7 @@ public class ModelToRepresentation {
 			rep.setType(datetimeQuestion.getType().toString());
 		} else if (model instanceof NumericQuestionModel) {
 			NumericQuestionModel numericQuestion = (NumericQuestionModel) model;
-			rep.setQuestion(QuestionAvailable.NUMERIC);
+			rep.setQuestion(QuestionAvailable.NUMBER);
 			rep.setRequired(numericQuestion.isRequired());
 			rep.setType(numericQuestion.getType().toString());
 		} else if (model instanceof ScaleQuestionModel) {

@@ -46,7 +46,7 @@ public class RepresentationToModel {
 		if (rep.getQuestion().equals(QuestionAvailable.TEXT)) {
 			return questionProvider.createTextQuestion(section, rep.getTitle(), rep.getDescription(), rep.getNumber(),
 					TextType.valueOf(rep.getType()), rep.isRequired());
-		} else if (rep.getQuestion().equals(QuestionAvailable.NUMERIC)) {
+		} else if (rep.getQuestion().equals(QuestionAvailable.NUMBER)) {
 			return questionProvider.createNumberQuestion(section, rep.getTitle(), rep.getDescription(), rep.getNumber(),
 					NumericType.valueOf(rep.getType()), rep.isRequired());
 		} else if (rep.getQuestion().equals(QuestionAvailable.DATETIME)) {
