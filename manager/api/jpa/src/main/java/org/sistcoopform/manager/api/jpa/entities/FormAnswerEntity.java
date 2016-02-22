@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,6 +29,9 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "FORM_ANSWER")
+@NamedQueries(value = { 
+		@NamedQuery(name = "FormAnswerEntity.findAll", query = "SELECT f FROM FormAnswerEntity f"),
+		@NamedQuery(name = "FormAnswerEntity.findByFilterText", query = "SELECT f FROM FormAnswerEntity f WHERE LOWER(f.user) LIKE LOWER(:filterText)") })
 public class FormAnswerEntity implements Serializable {
 
 	/**

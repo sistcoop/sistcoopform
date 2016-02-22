@@ -1,12 +1,11 @@
 package org.sistcoopform.manager.api.model;
 
 import java.util.Date;
-import java.util.Set;
 
 public interface FormAnswerModel extends Model {
 
-	String TITLE = "title";
-	String DESCRIPTION = "description";
+	static final String USER = "user";
+	static final String VALID = "valid";
 
 	public String getId();
 
@@ -23,7 +22,5 @@ public interface FormAnswerModel extends Model {
 	public void setNote(String note);
 
 	public boolean isValid();
-
-	public Set<AnswerModel> getAnswers();
 
 }

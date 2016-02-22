@@ -25,7 +25,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FORM")
-@NamedQueries(value = { @NamedQuery(name = "FormEntity.findAll", query = "SELECT f FROM FormEntity f"),
+@NamedQueries(value = { 
+		@NamedQuery(name = "FormEntity.findAll", query = "SELECT f FROM FormEntity f"),
 		@NamedQuery(name = "FormEntity.findByTitle", query = "SELECT f FROM FormEntity f WHERE f.title = :title"),
 		@NamedQuery(name = "FormEntity.findByFilterText", query = "SELECT f FROM FormEntity f WHERE LOWER(f.title) LIKE LOWER(:filterText)") })
 public class FormEntity implements Serializable {

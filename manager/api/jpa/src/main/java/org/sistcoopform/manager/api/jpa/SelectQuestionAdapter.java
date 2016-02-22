@@ -7,8 +7,6 @@ import javax.persistence.EntityManager;
 
 import org.sistcoopform.manager.api.jpa.entities.SelectOptionEntity;
 import org.sistcoopform.manager.api.jpa.entities.SelectQuestionEntity;
-import org.sistcoopform.manager.api.model.QuestionModel;
-import org.sistcoopform.manager.api.model.SectionModel;
 import org.sistcoopform.manager.api.model.SelectOptionModel;
 import org.sistcoopform.manager.api.model.SelectQuestionModel;
 import org.sistcoopform.manager.api.model.enums.SelectType;
@@ -17,16 +15,17 @@ import org.sistcoopform.manager.api.model.enums.SelectType;
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
  */
 
-public class SelectQuestionAdapter implements SelectQuestionModel {
+public class SelectQuestionAdapter extends AbstractQuestionAdapter implements SelectQuestionModel {
 
 	private static final long serialVersionUID = 1L;
 
 	private SelectQuestionEntity selectQuestionEntity;
 	private EntityManager em;
 
-	public SelectQuestionAdapter(EntityManager em, SelectQuestionEntity preguntaSeleccionEntity) {
+	public SelectQuestionAdapter(EntityManager em, SelectQuestionEntity selectQuestionEntity) {
+		super(em, selectQuestionEntity);
 		this.em = em;
-		this.selectQuestionEntity = preguntaSeleccionEntity;
+		this.selectQuestionEntity = selectQuestionEntity;
 	}
 
 	public static SelectQuestionEntity toSelectQuestionEntity(SelectQuestionModel model, EntityManager em) {
@@ -38,46 +37,6 @@ public class SelectQuestionAdapter implements SelectQuestionModel {
 
 	public SelectQuestionEntity getSelectQuestionEntity() {
 		return selectQuestionEntity;
-	}
-
-	@Override
-	public void commit() {
-		em.merge(selectQuestionEntity);
-	}
-
-	@Override
-	public String getId() {
-		return selectQuestionEntity.getId();
-	}
-
-	@Override
-	public String getTitle() {
-		return selectQuestionEntity.getTitle();
-	}
-
-	@Override
-	public void setTitle(String title) {
-		selectQuestionEntity.setTitle(title);
-	}
-
-	@Override
-	public String getDescription() {
-		return selectQuestionEntity.getDescription();
-	}
-
-	@Override
-	public void setDescription(String description) {
-		selectQuestionEntity.setDescription(description);
-	}
-
-	@Override
-	public int getNumber() {
-		return selectQuestionEntity.getNumber();
-	}
-
-	@Override
-	public void setNumber(int number) {
-		selectQuestionEntity.setNumber(number);
 	}
 
 	@Override
@@ -121,36 +80,6 @@ public class SelectQuestionAdapter implements SelectQuestionModel {
 			optionsEntity.add(SelectOptionAdapter.toSelectOptionEntity(optionModel, em));
 		}
 		selectQuestionEntity.setOptions(optionsEntity);
-	}
-
-	@Override
-	public SectionModel getSection() {
-		return new SectionAdapter(em, selectQuestionEntity.getSection());
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof QuestionModel))
-			return false;
-		QuestionModel other = (QuestionModel) obj;
-		if (getId() == null) {
-			if (other.getId() != null)
-				return false;
-		} else if (!getId().equals(other.getId()))
-			return false;
-		return true;
 	}
 
 }

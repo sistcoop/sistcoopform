@@ -27,7 +27,6 @@ import org.sistcoopform.manager.api.model.DateTimeQuestionModel;
 import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
-import org.sistcoopform.manager.api.model.ModelException;
 import org.sistcoopform.manager.api.model.NumericQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
@@ -51,7 +50,7 @@ import org.sistcoopform.manager.api.model.enums.TextType;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class JpaQuestionProvider extends AbstractHibernateStorage implements QuestionProvider {
 
-	// private static final String TITULO = "titulo";
+	private static final String TITLE = "title";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -208,27 +207,7 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 	@Override
 	public QuestionModel findById(String id) {
 		QuestionEntity questionEntity = em.find(QuestionEntity.class, id);
-		if (questionEntity instanceof TextQuestionEntity) {
-			TextQuestionEntity textQuestion = (TextQuestionEntity) questionEntity;
-			return new TextQuestionAdapter(em, textQuestion);
-		} else if (questionEntity instanceof DateTimeQuestionEntity) {
-			DateTimeQuestionEntity textQuestion = (DateTimeQuestionEntity) questionEntity;
-			return new DateTimeQuestionAdapter(em, textQuestion);
-		} else if (questionEntity instanceof NumericQuestionEntity) {
-			NumericQuestionEntity numericQuestion = (NumericQuestionEntity) questionEntity;
-			return new NumericQuestionAdapter(em, numericQuestion);
-		} else if (questionEntity instanceof ScaleQuestionEntity) {
-			ScaleQuestionEntity scaleQuestion = (ScaleQuestionEntity) questionEntity;
-			return new ScaleQuestionAdapter(em, scaleQuestion);
-		} else if (questionEntity instanceof SelectQuestionEntity) {
-			SelectQuestionEntity selectQuestion = (SelectQuestionEntity) questionEntity;
-			return new SelectQuestionAdapter(em, selectQuestion);
-		} else if (questionEntity instanceof GridQuestionEntity) {
-			GridQuestionEntity gridQuestion = (GridQuestionEntity) questionEntity;
-			return new GridQuestionAdapter(em, gridQuestion);
-		} else {
-			throw new ModelException("Entity no encontrado");
-		}
+		return AbstractQuestionAdapter.toQuestionModel(questionEntity, em);
 	}
 
 	@Override
@@ -256,27 +235,7 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 		List<QuestionEntity> entities = query.getResultList();
 		List<QuestionModel> models = new ArrayList<QuestionModel>();
 		for (QuestionEntity questionEntity : entities) {
-			if (questionEntity instanceof TextQuestionEntity) {
-				TextQuestionEntity textQuestion = (TextQuestionEntity) questionEntity;
-				models.add(new TextQuestionAdapter(em, textQuestion));
-			} else if (questionEntity instanceof DateTimeQuestionEntity) {
-				DateTimeQuestionEntity textQuestion = (DateTimeQuestionEntity) questionEntity;
-				models.add(new DateTimeQuestionAdapter(em, textQuestion));
-			} else if (questionEntity instanceof NumericQuestionEntity) {
-				NumericQuestionEntity numericQuestion = (NumericQuestionEntity) questionEntity;
-				models.add(new NumericQuestionAdapter(em, numericQuestion));
-			} else if (questionEntity instanceof ScaleQuestionEntity) {
-				ScaleQuestionEntity scaleQuestion = (ScaleQuestionEntity) questionEntity;
-				models.add(new ScaleQuestionAdapter(em, scaleQuestion));
-			} else if (questionEntity instanceof SelectQuestionEntity) {
-				SelectQuestionEntity selectQuestion = (SelectQuestionEntity) questionEntity;
-				models.add(new SelectQuestionAdapter(em, selectQuestion));
-			} else if (questionEntity instanceof GridQuestionEntity) {
-				GridQuestionEntity gridQuestion = (GridQuestionEntity) questionEntity;
-				models.add(new GridQuestionAdapter(em, gridQuestion));
-			} else {
-				throw new ModelException("Entity no encontrado");
-			}
+			models.add(AbstractQuestionAdapter.toQuestionModel(questionEntity, em));
 		}
 		return models;
 	}

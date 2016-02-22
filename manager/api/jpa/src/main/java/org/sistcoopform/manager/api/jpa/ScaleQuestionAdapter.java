@@ -4,22 +4,22 @@ import javax.persistence.EntityManager;
 
 import org.sistcoopform.manager.api.jpa.entities.ScaleQuestionEntity;
 import org.sistcoopform.manager.api.model.ScaleQuestionModel;
-import org.sistcoopform.manager.api.model.SectionModel;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
  */
 
-public class ScaleQuestionAdapter implements ScaleQuestionModel {
+public class ScaleQuestionAdapter extends AbstractQuestionAdapter implements ScaleQuestionModel {
 
 	private static final long serialVersionUID = 1L;
 
 	private ScaleQuestionEntity scaleQuestionEntity;
 	private EntityManager em;
 
-	public ScaleQuestionAdapter(EntityManager em, ScaleQuestionEntity preguntaEscalaLinealEntity) {
+	public ScaleQuestionAdapter(EntityManager em, ScaleQuestionEntity scaleQuestionEntity) {
+		super(em, scaleQuestionEntity);
 		this.em = em;
-		this.scaleQuestionEntity = preguntaEscalaLinealEntity;
+		this.scaleQuestionEntity = scaleQuestionEntity;
 	}
 
 	public static ScaleQuestionEntity toScaleQuestionEntity(ScaleQuestionModel model, EntityManager em) {
@@ -31,46 +31,6 @@ public class ScaleQuestionAdapter implements ScaleQuestionModel {
 
 	public ScaleQuestionEntity getScaleQuestionEntity() {
 		return scaleQuestionEntity;
-	}
-
-	@Override
-	public void commit() {
-		em.merge(scaleQuestionEntity);
-	}
-
-	@Override
-	public String getId() {
-		return scaleQuestionEntity.getId();
-	}
-
-	@Override
-	public String getTitle() {
-		return scaleQuestionEntity.getTitle();
-	}
-
-	@Override
-	public void setTitle(String title) {
-		scaleQuestionEntity.setTitle(title);
-	}
-
-	@Override
-	public String getDescription() {
-		return scaleQuestionEntity.getDescription();
-	}
-
-	@Override
-	public void setDescription(String description) {
-		scaleQuestionEntity.setDescription(description);
-	}
-
-	@Override
-	public int getNumber() {
-		return scaleQuestionEntity.getNumber();
-	}
-
-	@Override
-	public void setNumber(int number) {
-		scaleQuestionEntity.setNumber(number);
 	}
 
 	@Override
@@ -121,36 +81,6 @@ public class ScaleQuestionAdapter implements ScaleQuestionModel {
 	@Override
 	public void setMax(int max) {
 		scaleQuestionEntity.setMax(max);
-	}
-
-	@Override
-	public SectionModel getSection() {
-		return new SectionAdapter(em, scaleQuestionEntity.getSection());
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof ScaleQuestionModel))
-			return false;
-		ScaleQuestionModel other = (ScaleQuestionModel) obj;
-		if (getId() == null) {
-			if (other.getId() != null)
-				return false;
-		} else if (!getId().equals(other.getId()))
-			return false;
-		return true;
 	}
 
 }

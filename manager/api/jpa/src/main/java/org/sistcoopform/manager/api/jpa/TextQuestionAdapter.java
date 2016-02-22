@@ -3,8 +3,6 @@ package org.sistcoopform.manager.api.jpa;
 import javax.persistence.EntityManager;
 
 import org.sistcoopform.manager.api.jpa.entities.TextQuestionEntity;
-import org.sistcoopform.manager.api.model.QuestionModel;
-import org.sistcoopform.manager.api.model.SectionModel;
 import org.sistcoopform.manager.api.model.TextQuestionModel;
 import org.sistcoopform.manager.api.model.enums.TextType;
 
@@ -12,7 +10,7 @@ import org.sistcoopform.manager.api.model.enums.TextType;
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
  */
 
-public class TextQuestionAdapter implements TextQuestionModel {
+public class TextQuestionAdapter extends AbstractQuestionAdapter implements TextQuestionModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,6 +18,7 @@ public class TextQuestionAdapter implements TextQuestionModel {
 	private EntityManager em;
 
 	public TextQuestionAdapter(EntityManager em, TextQuestionEntity textQuestionEntity) {
+		super(em, textQuestionEntity);
 		this.em = em;
 		this.textQuestionEntity = textQuestionEntity;
 	}
@@ -33,46 +32,6 @@ public class TextQuestionAdapter implements TextQuestionModel {
 
 	public TextQuestionEntity getTextQuestionEntity() {
 		return textQuestionEntity;
-	}
-
-	@Override
-	public void commit() {
-		em.merge(textQuestionEntity);
-	}
-
-	@Override
-	public String getId() {
-		return textQuestionEntity.getId();
-	}
-
-	@Override
-	public String getTitle() {
-		return textQuestionEntity.getTitle();
-	}
-
-	@Override
-	public void setTitle(String title) {
-		textQuestionEntity.setTitle(title);
-	}
-
-	@Override
-	public String getDescription() {
-		return textQuestionEntity.getDescription();
-	}
-
-	@Override
-	public void setDescription(String description) {
-		textQuestionEntity.setDescription(description);
-	}
-
-	@Override
-	public int getNumber() {
-		return textQuestionEntity.getNumber();
-	}
-
-	@Override
-	public void setNumber(int number) {
-		textQuestionEntity.setNumber(number);
 	}
 
 	@Override
@@ -97,36 +56,6 @@ public class TextQuestionAdapter implements TextQuestionModel {
 		} else {
 			textQuestionEntity.setType(null);
 		}
-	}
-
-	@Override
-	public SectionModel getSection() {
-		return new SectionAdapter(em, textQuestionEntity.getSection());
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof QuestionModel))
-			return false;
-		QuestionModel other = (QuestionModel) obj;
-		if (getId() == null) {
-			if (other.getId() != null)
-				return false;
-		} else if (!getId().equals(other.getId()))
-			return false;
-		return true;
 	}
 
 }

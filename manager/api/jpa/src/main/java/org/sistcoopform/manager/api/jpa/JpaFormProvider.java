@@ -46,11 +46,11 @@ public class JpaFormProvider extends AbstractHibernateStorage implements FormPro
 
 	@Override
 	public FormModel create(String title, String description) {
-		FormEntity formularioEntity = new FormEntity();
-		formularioEntity.setTitle(title);
-		formularioEntity.setDescription(description);
-		em.persist(formularioEntity);
-		return new FormAdapter(em, formularioEntity);
+		FormEntity formEntity = new FormEntity();
+		formEntity.setTitle(title);
+		formEntity.setDescription(description);
+		em.persist(formEntity);
+		return new FormAdapter(em, formEntity);
 	}
 
 	@Override
@@ -82,8 +82,8 @@ public class JpaFormProvider extends AbstractHibernateStorage implements FormPro
 		}
 		List<FormEntity> entities = query.getResultList();
 		List<FormModel> models = new ArrayList<FormModel>();
-		for (FormEntity tipoDocumentoEntity : entities) {
-			models.add(new FormAdapter(em, tipoDocumentoEntity));
+		for (FormEntity formEntity : entities) {
+			models.add(new FormAdapter(em, formEntity));
 		}
 		return models;
 	}
@@ -105,8 +105,8 @@ public class JpaFormProvider extends AbstractHibernateStorage implements FormPro
 		}
 		List<FormEntity> entities = query.getResultList();
 		List<FormModel> models = new ArrayList<FormModel>();
-		for (FormEntity tipoDocumentoEntity : entities) {
-			models.add(new FormAdapter(em, tipoDocumentoEntity));
+		for (FormEntity formEntity : entities) {
+			models.add(new FormAdapter(em, formEntity));
 		}
 
 		return models;
@@ -173,10 +173,12 @@ public class JpaFormProvider extends AbstractHibernateStorage implements FormPro
 			query.setMaxResults(maxResults);
 		}
 		List<FormEntity> results = query.getResultList();
-		List<FormModel> formularioModels = new ArrayList<FormModel>();
-		for (FormEntity entity : results)
-			formularioModels.add(new FormAdapter(em, entity));
-		return formularioModels;
+		List<FormModel> formModels = new ArrayList<FormModel>();
+		for (FormEntity entity : results){
+			formModels.add(new FormAdapter(em, entity));
+		}
+			
+		return formModels;
 	}
 
 	@Override
