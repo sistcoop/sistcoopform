@@ -108,7 +108,7 @@ public class FormManager {
 				gridQuestion.getColumns().add(columnModel);
 			}
 		} else {
-			throw new ModelException("No se reconoce el tipo de la pregunta");
+			throw new ModelException("Question type is not valid on updateQuestion");
 		}		
 
 		model.commit();

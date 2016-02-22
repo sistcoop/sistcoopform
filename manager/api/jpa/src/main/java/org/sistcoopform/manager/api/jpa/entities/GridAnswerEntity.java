@@ -26,7 +26,7 @@ public class GridAnswerEntity extends AnswerEntity {
 	@ElementCollection
 	@MapKeyColumn(name = "name")
 	@Column(name = "value")
-	@CollectionTable(name = "GRID_ANSWER_ROW", joinColumns = @JoinColumn(name = "GRID_ANSWER_ID") )
+	@CollectionTable(name = "GRID_ANSWER_VALUES", joinColumns = @JoinColumn(name = "GRID_ANSWER_ID") )
 	private Map<String, String> values = new HashMap<String, String>();
 
 	public Map<String, String> getValues() {

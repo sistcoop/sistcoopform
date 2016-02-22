@@ -42,7 +42,7 @@ public abstract class AnswerEntity implements Serializable {
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "ID")
-	private String id;
+	protected String id;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)

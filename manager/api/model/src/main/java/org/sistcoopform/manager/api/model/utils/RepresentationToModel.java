@@ -7,23 +7,34 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import org.sistcoopform.manager.api.beans.representations.enums.QuestionAvailable;
+import org.sistcoopform.manager.api.beans.representations.idm.AnswerRepresentation;
+import org.sistcoopform.manager.api.beans.representations.idm.FormAnswerRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.FormRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.GridColumnRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.GridRowRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.QuestionRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.SectionRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.SelectOptionRepresentation;
+import org.sistcoopform.manager.api.model.AnswerModel;
+import org.sistcoopform.manager.api.model.AnswerProvider;
+import org.sistcoopform.manager.api.model.DateTimeQuestionModel;
+import org.sistcoopform.manager.api.model.FormAnswerModel;
+import org.sistcoopform.manager.api.model.FormAnswerProvider;
 import org.sistcoopform.manager.api.model.FormModel;
 import org.sistcoopform.manager.api.model.FormProvider;
 import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
+import org.sistcoopform.manager.api.model.ModelException;
+import org.sistcoopform.manager.api.model.NumericQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
+import org.sistcoopform.manager.api.model.ScaleQuestionModel;
 import org.sistcoopform.manager.api.model.SectionModel;
 import org.sistcoopform.manager.api.model.SectionProvider;
 import org.sistcoopform.manager.api.model.SelectOptionModel;
 import org.sistcoopform.manager.api.model.SelectQuestionModel;
+import org.sistcoopform.manager.api.model.TextQuestionModel;
 import org.sistcoopform.manager.api.model.enums.DateTimeType;
 import org.sistcoopform.manager.api.model.enums.NumericType;
 import org.sistcoopform.manager.api.model.enums.SelectType;
@@ -89,8 +100,31 @@ public class RepresentationToModel {
 
 			return question;
 		} else {
-			throw new Exception("Tipo de pregunta no soportado por el sistema");
+			throw new Exception("Question is not supported by the system");
 		}
+	}
+
+	public FormAnswerModel createFormAnswer(FormAnswerRepresentation rep, FormAnswerProvider provider) {
+		return provider.create(rep.getUser());
+	}
+
+	public AnswerModel createAnswer(FormAnswerModel formAnswer, QuestionModel question, AnswerRepresentation rep,
+			AnswerProvider answerProvider) {
+		if (question instanceof TextQuestionModel) {			
+			return answerProvider.createTextAnswer(formAnswer, question, rep.getStringValue());
+		} else if (question instanceof DateTimeQuestionModel) {
+			return answerProvider.createDateTimeAnswer(formAnswer, question, rep.getDateValue());
+		} else if (question instanceof NumericQuestionModel) {			
+			return answerProvider.createNumberAnswer(formAnswer, question, rep.getNumberValue());
+		} else if (question instanceof ScaleQuestionModel) {			
+			return answerProvider.createScaleAnswer(formAnswer, question, rep.getIntegerValue());
+		} else if (question instanceof SelectQuestionModel) {			
+			return answerProvider.createSelectAnswer(formAnswer, question, rep.getListValues());
+		} else if (question instanceof GridQuestionModel) {			
+			return answerProvider.createGridAnswer(formAnswer, question, rep.getMapValues());
+		} else {
+			throw new ModelException("Question type is not valid on createAnswer");
+		}	
 	}
 
 }

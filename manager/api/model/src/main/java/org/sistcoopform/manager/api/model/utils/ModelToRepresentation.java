@@ -3,23 +3,33 @@ package org.sistcoopform.manager.api.model.utils;
 import java.util.Set;
 
 import org.sistcoopform.manager.api.beans.representations.enums.QuestionAvailable;
+import org.sistcoopform.manager.api.beans.representations.idm.AnswerRepresentation;
+import org.sistcoopform.manager.api.beans.representations.idm.FormAnswerRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.FormRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.GridColumnRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.GridRowRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.QuestionRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.SectionRepresentation;
 import org.sistcoopform.manager.api.beans.representations.idm.SelectOptionRepresentation;
+import org.sistcoopform.manager.api.model.AnswerModel;
+import org.sistcoopform.manager.api.model.DateTimeAnswerModel;
 import org.sistcoopform.manager.api.model.DateTimeQuestionModel;
+import org.sistcoopform.manager.api.model.FormAnswerModel;
 import org.sistcoopform.manager.api.model.FormModel;
+import org.sistcoopform.manager.api.model.GridAnswerModel;
 import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
+import org.sistcoopform.manager.api.model.NumericAnswerModel;
 import org.sistcoopform.manager.api.model.NumericQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
+import org.sistcoopform.manager.api.model.ScaleAnswerModel;
 import org.sistcoopform.manager.api.model.ScaleQuestionModel;
 import org.sistcoopform.manager.api.model.SectionModel;
+import org.sistcoopform.manager.api.model.SelectAnswerModel;
 import org.sistcoopform.manager.api.model.SelectOptionModel;
 import org.sistcoopform.manager.api.model.SelectQuestionModel;
+import org.sistcoopform.manager.api.model.TextAnswerModel;
 import org.sistcoopform.manager.api.model.TextQuestionModel;
 
 public class ModelToRepresentation {
@@ -141,6 +151,57 @@ public class ModelToRepresentation {
 		rep.setDenomination(model.getDenomination());
 		rep.setNumber(model.getNumber());
 		rep.setEditable(model.isEditable());
+		return rep;
+	}
+
+	public static FormAnswerRepresentation toRepresentation(FormAnswerModel model) {
+		if (model == null)
+			return null;
+
+		FormAnswerRepresentation rep = new FormAnswerRepresentation();
+		rep.setId(model.getId());
+		rep.setUser(model.getUser());
+		rep.setDate(model.getDate());
+		rep.setNote(model.getNote());
+		rep.setValid(model.isValid());
+		return rep;
+	}
+
+	public static AnswerRepresentation toRepresentation(AnswerModel model) {
+		if (model == null)
+			return null;
+
+		AnswerRepresentation rep = new AnswerRepresentation();
+		rep.setId(model.getId());
+		
+		QuestionModel question = model.getQuestion();
+		QuestionRepresentation questionRepresentation = new QuestionRepresentation();
+		questionRepresentation.setId(question.getId());
+		questionRepresentation.setTitle(question.getTitle());
+		questionRepresentation.setDescription(question.getDescription());
+		questionRepresentation.setNumber(question.getNumber());		
+		rep.setQuestion(questionRepresentation);
+
+		if (model instanceof TextAnswerModel) {
+			TextAnswerModel textAnswer = (TextAnswerModel) model;
+			rep.setStringValue(textAnswer.getValue());
+		} else if (model instanceof DateTimeAnswerModel) {
+			DateTimeAnswerModel datetimeAnswer = (DateTimeAnswerModel) model;
+			rep.setDateValue(datetimeAnswer.getDate());
+		} else if (model instanceof NumericAnswerModel) {
+			NumericAnswerModel numericAnswer = (NumericAnswerModel) model;
+			rep.setNumberValue(numericAnswer.getValue());
+		} else if (model instanceof ScaleAnswerModel) {
+			ScaleAnswerModel scaleAnswer = (ScaleAnswerModel) model;
+			rep.setIntegerValue(scaleAnswer.getValue());
+		} else if (model instanceof SelectAnswerModel) {
+			SelectAnswerModel selectAnswer = (SelectAnswerModel) model;
+			rep.setListValues(selectAnswer.getValues());
+		} else if (model instanceof GridAnswerModel) {
+			GridAnswerModel gridAnswer = (GridAnswerModel) model;
+			rep.setMapValues(gridAnswer.getValues());
+		}
+
 		return rep;
 	}
 
