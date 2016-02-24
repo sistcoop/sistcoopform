@@ -54,6 +54,12 @@ public class ModelToRepresentation {
 		rep.setTitle(model.getTitle());
 		rep.setNumber(model.getNumber());
 		rep.setDescription(model.getDescription());
+		
+		FormModel formModel = model.getForm();
+		FormRepresentation formRepresentation = new FormRepresentation();
+		formRepresentation.setId(formModel.getId());
+		rep.setForm(formRepresentation);
+		
 		return rep;
 	}
 
@@ -66,7 +72,13 @@ public class ModelToRepresentation {
 		rep.setTitle(model.getTitle());
 		rep.setNumber(model.getNumber());
 		rep.setDescription(model.getDescription());
-
+		
+		SectionModel sectionModel = model.getSection();
+		SectionRepresentation sectionRep = new SectionRepresentation();
+		sectionRep.setId(sectionModel.getId());
+		sectionRep.setTitle(sectionModel.getTitle());
+		rep.setSection(sectionRep);
+		
 		if (model instanceof TextQuestionModel) {
 			TextQuestionModel textQuestion = (TextQuestionModel) model;
 			rep.setQuestion(QuestionAvailable.TEXT);
