@@ -79,7 +79,8 @@ public class SelectQuestionAdapter extends AbstractQuestionAdapter implements Se
 		for (SelectOptionModel optionModel : options) {
 			optionsEntity.add(SelectOptionAdapter.toSelectOptionEntity(optionModel, em));
 		}
-		selectQuestionEntity.setOptions(optionsEntity);
+		selectQuestionEntity.getOptions().clear();
+		selectQuestionEntity.getOptions().addAll(optionsEntity);
 	}
 
 }
