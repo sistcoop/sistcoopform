@@ -9,8 +9,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,8 +32,7 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "FORM_ANSWER")
-@NamedQueries(value = { 
-		@NamedQuery(name = "FormAnswerEntity.findAll", query = "SELECT f FROM FormAnswerEntity f"),
+@NamedQueries(value = { @NamedQuery(name = "FormAnswerEntity.findAll", query = "SELECT f FROM FormAnswerEntity f"),
 		@NamedQuery(name = "FormAnswerEntity.findByFilterText", query = "SELECT f FROM FormAnswerEntity f WHERE LOWER(f.user) LIKE LOWER(:filterText)") })
 public class FormAnswerEntity implements Serializable {
 
@@ -59,6 +61,11 @@ public class FormAnswerEntity implements Serializable {
 	@NotNull
 	@Type(type = "org.hibernate.type.TrueFalseType")
 	private boolean valid;
+
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "form_id", foreignKey = @ForeignKey )
+	protected FormEntity form;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "formAnswer", orphanRemoval = true, cascade = { CascadeType.REMOVE })
 	private Set<AnswerEntity> answers = new HashSet<AnswerEntity>();
@@ -109,6 +116,14 @@ public class FormAnswerEntity implements Serializable {
 
 	public void setAnswers(Set<AnswerEntity> answers) {
 		this.answers = answers;
+	}
+
+	public FormEntity getForm() {
+		return form;
+	}
+
+	public void setForm(FormEntity form) {
+		this.form = form;
 	}
 
 	@Override

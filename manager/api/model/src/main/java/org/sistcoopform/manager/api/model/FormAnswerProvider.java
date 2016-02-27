@@ -14,7 +14,7 @@ public interface FormAnswerProvider extends Provider {
 	
 	FormAnswerModel findById(String id);
 
-	FormAnswerModel create(String user);
+	FormAnswerModel create(FormModel form, String user);
 
 	boolean remove(FormAnswerModel formAnswer);
 

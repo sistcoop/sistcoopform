@@ -15,8 +15,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.sistcoopform.manager.api.jpa.entities.FormAnswerEntity;
+import org.sistcoopform.manager.api.jpa.entities.FormEntity;
 import org.sistcoopform.manager.api.model.FormAnswerModel;
 import org.sistcoopform.manager.api.model.FormAnswerProvider;
+import org.sistcoopform.manager.api.model.FormModel;
 import org.sistcoopform.manager.api.model.search.SearchCriteriaModel;
 import org.sistcoopform.manager.api.model.search.SearchResultsModel;
 
@@ -48,16 +50,19 @@ public class JpaFormAnswerProvider extends AbstractHibernateStorage implements F
 
 	@Override
 	public FormAnswerModel findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		FormAnswerEntity formAnswerEntity = em.find(FormAnswerEntity.class, id);
+		return formAnswerEntity != null ? new FormAnswerAdapter(em, formAnswerEntity) : null;
 	}
 
 	@Override
-	public FormAnswerModel create(String user) {
+	public FormAnswerModel create(FormModel form, String user) {
+		FormEntity formEntity = em.find(FormEntity.class, form.getId());
+		
 		FormAnswerEntity formAnswerEntity = new FormAnswerEntity();
 		formAnswerEntity.setUser(user);
 		formAnswerEntity.setDate(Calendar.getInstance().getTime());
 		formAnswerEntity.setValid(false);
+		formAnswerEntity.setForm(formEntity);
 		em.persist(formAnswerEntity);
 		return new FormAnswerAdapter(em, formAnswerEntity);
 	}

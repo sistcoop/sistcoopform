@@ -176,6 +176,14 @@ public class ModelToRepresentation {
 		rep.setDate(model.getDate());
 		rep.setNote(model.getNote());
 		rep.setValid(model.isValid());
+		
+		FormModel form = model.getForm();
+		FormRepresentation formRepresentation = new FormRepresentation();
+		formRepresentation.setId(form.getId());
+		formRepresentation.setTitle(form.getTitle());
+		formRepresentation.setDescription(form.getDescription());
+		rep.setForm(formRepresentation);
+		
 		return rep;
 	}
 

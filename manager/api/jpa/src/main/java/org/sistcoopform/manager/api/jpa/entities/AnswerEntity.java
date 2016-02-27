@@ -29,8 +29,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "ANSWER")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@NamedQueries(value = {
-		@NamedQuery(name = "AnswerEntity.findByFormAnswerId", query = "SELECT a FROM AnswerEntity a INNER JOIN a.formAnswer f WHERE f.id = :formAnswerId") })
+@NamedQueries(value = {		
+		@NamedQuery(name = "AnswerEntity.findByFormAnswerId", query = "SELECT a FROM AnswerEntity a INNER JOIN a.formAnswer f WHERE f.id = :formAnswerId"),
+		@NamedQuery(name = "AnswerEntity.findByQuestionId", query = "SELECT a FROM AnswerEntity a INNER JOIN a.question q WHERE q.id = :questionId"),
+		@NamedQuery(name = "AnswerEntity.findByFormAnswerIdAndQuestionId", query = "SELECT a FROM AnswerEntity a INNER JOIN a.formAnswer f INNER JOIN a.question q WHERE f.id = :formAnswerId AND q.id = :questionId") })
 public abstract class AnswerEntity implements Serializable {
 
 	/**

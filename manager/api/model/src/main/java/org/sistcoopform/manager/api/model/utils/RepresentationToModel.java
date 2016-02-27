@@ -43,7 +43,7 @@ import org.sistcoopform.manager.api.model.enums.TextType;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class RepresentationToModel {
-
+	
 	public FormModel createForm(FormRepresentation rep, FormProvider formProvider) {
 		return formProvider.create(rep.getTitle(), rep.getDescription());
 	}
@@ -104,8 +104,8 @@ public class RepresentationToModel {
 		}
 	}
 
-	public FormAnswerModel createFormAnswer(FormAnswerRepresentation rep, FormAnswerProvider provider) {
-		return provider.create(rep.getUser());
+	public FormAnswerModel createFormAnswer(FormModel form, FormAnswerRepresentation rep, FormAnswerProvider provider) {
+		return provider.create(form, rep.getUser());
 	}
 
 	public AnswerModel createAnswer(FormAnswerModel formAnswer, QuestionModel question, AnswerRepresentation rep,

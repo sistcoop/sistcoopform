@@ -16,6 +16,8 @@ public class FormAnswerRepresentation {
 	private String note;
 	private boolean valid;
 
+	private FormRepresentation form;
+
 	private Set<AnswerRepresentation> answers = new HashSet<AnswerRepresentation>();
 
 	public String getId() {
@@ -64,6 +66,14 @@ public class FormAnswerRepresentation {
 
 	public void setAnswers(Set<AnswerRepresentation> answers) {
 		this.answers = answers;
+	}
+
+	public FormRepresentation getForm() {
+		return form;
+	}
+
+	public void setForm(FormRepresentation form) {
+		this.form = form;
 	}
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.sistcoopform.manager.api.jpa.entities.FormAnswerEntity;
 import org.sistcoopform.manager.api.model.FormAnswerModel;
+import org.sistcoopform.manager.api.model.FormModel;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -77,6 +78,11 @@ public class FormAnswerAdapter implements FormAnswerModel {
 	@Override
 	public boolean isValid() {
 		return formAnswerEntity.isValid();
+	}
+	
+	@Override
+	public FormModel getForm() {
+		return new FormAdapter(em, formAnswerEntity.getForm());
 	}
 
 	@Override

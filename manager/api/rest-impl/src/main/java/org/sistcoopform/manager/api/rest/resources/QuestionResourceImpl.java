@@ -11,6 +11,8 @@ import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
 import org.sistcoopform.manager.api.model.utils.ModelToRepresentation;
 import org.sistcoopform.manager.api.rest.managers.FormManager;
+import org.sistcoopform.manager.api.rest.resources.config.AnswerResourceQualifer;
+import org.sistcoopform.manager.api.rest.resources.config.AnswerResourceQualifer.AnswerResourceType;
 import org.sistcoopform.manager.api.rest.services.ErrorResponse;
 
 @Stateless
@@ -24,6 +26,10 @@ public class QuestionResourceImpl implements QuestionResource {
 
 	@Inject
 	private FormManager formManager;
+
+	@Inject
+	@AnswerResourceQualifer(AnswerResourceType.QUESTION_PARENT)
+	private AnswersResource answersResource;
 
 	private QuestionModel getQuestionModel() {
 		return questionProvider.findById(questionId);
@@ -56,6 +62,11 @@ public class QuestionResourceImpl implements QuestionResource {
 		} else {
 			return ErrorResponse.error("Question could'nt delete", Response.Status.BAD_REQUEST);
 		}
+	}
+
+	@Override
+	public AnswersResource answers() {
+		return answersResource;
 	}
 
 }

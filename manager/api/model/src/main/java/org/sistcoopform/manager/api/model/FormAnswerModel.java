@@ -7,20 +7,22 @@ public interface FormAnswerModel extends Model {
 	static final String USER = "user";
 	static final String VALID = "valid";
 
-	public String getId();
+	String getId();
 
-	public Date getDate();
+	Date getDate();
 
-	public void setDate(Date date);
+	void setDate(Date date);
 
-	public String getUser();
+	String getUser();
 
-	public void setUser(String user);
+	void setUser(String user);
 
-	public String getNote();
+	String getNote();
 
-	public void setNote(String note);
+	void setNote(String note);
 
-	public boolean isValid();
+	boolean isValid();
+	
+	FormModel getForm();
 
 }

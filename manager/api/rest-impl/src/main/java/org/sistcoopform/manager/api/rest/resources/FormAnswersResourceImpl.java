@@ -19,6 +19,8 @@ import org.sistcoopform.manager.api.beans.representations.idm.search.SearchCrite
 import org.sistcoopform.manager.api.beans.representations.idm.search.SearchResultsRepresentation;
 import org.sistcoopform.manager.api.model.FormAnswerModel;
 import org.sistcoopform.manager.api.model.FormAnswerProvider;
+import org.sistcoopform.manager.api.model.FormModel;
+import org.sistcoopform.manager.api.model.FormProvider;
 import org.sistcoopform.manager.api.model.ModelDuplicateException;
 import org.sistcoopform.manager.api.model.search.SearchCriteriaFilterOperator;
 import org.sistcoopform.manager.api.model.search.SearchCriteriaModel;
@@ -30,6 +32,9 @@ import org.sistcoopform.manager.api.rest.services.ErrorResponse;
 @Stateless
 public class FormAnswersResourceImpl implements FormAnswersResource {
 
+	@Inject
+	private FormProvider formProvider;
+	
 	@Inject
 	private FormAnswerProvider formAnswerProvider;
 
@@ -50,7 +55,8 @@ public class FormAnswersResourceImpl implements FormAnswersResource {
 	@Override
 	public Response create(FormAnswerRepresentation rep) {
 		try {
-			FormAnswerModel model = representationToModel.createFormAnswer(rep, formAnswerProvider);
+			FormModel form = formProvider.findById(rep.getForm().getId());
+			FormAnswerModel model = representationToModel.createFormAnswer(form, rep, formAnswerProvider);
 			return Response.created(uriInfo.getAbsolutePathBuilder().path(model.getId()).build())
 					.header("Access-Control-Expose-Headers", "Location")
 					.entity(ModelToRepresentation.toRepresentation(model)).build();

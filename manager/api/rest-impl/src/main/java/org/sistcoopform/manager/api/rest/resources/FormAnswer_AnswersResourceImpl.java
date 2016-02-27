@@ -20,23 +20,30 @@ import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
 import org.sistcoopform.manager.api.model.utils.ModelToRepresentation;
 import org.sistcoopform.manager.api.model.utils.RepresentationToModel;
+import org.sistcoopform.manager.api.rest.managers.FormAnswerManager;
+import org.sistcoopform.manager.api.rest.resources.config.AnswerResourceQualifer;
+import org.sistcoopform.manager.api.rest.resources.config.AnswerResourceQualifer.AnswerResourceType;
 import org.sistcoopform.manager.api.rest.services.ErrorResponse;
 
 @Stateless
-public class AnswersResourceImpl implements AnswersResource {
+@AnswerResourceQualifer(AnswerResourceType.FORM_ANSWER_PARENT)
+public class FormAnswer_AnswersResourceImpl implements AnswersResource {
 
 	@PathParam("formAnswerId")
 	private String formAnswerId;
 
 	@Inject
 	private FormAnswerProvider formAnswerProvider;
-	
+
+	@Inject
+	private FormAnswerManager formAnswerManager;
+
 	@Inject
 	private AnswerProvider answerProvider;
 
 	@Inject
 	private QuestionProvider questionProvider;
-	
+
 	@Inject
 	private RepresentationToModel representationToModel;
 
@@ -72,12 +79,41 @@ public class AnswersResourceImpl implements AnswersResource {
 	}
 
 	@Override
-	public List<AnswerRepresentation> getAll() {
-		List<AnswerRepresentation> results = new ArrayList<AnswerRepresentation>();
-		List<AnswerModel> models = answerProvider.getAll(getFormAnswerModel());
+	public Response save(List<AnswerRepresentation> reps) {
+		for (AnswerRepresentation rep : reps) {
+			FormAnswerModel formAnswer = getFormAnswerModel();
+			QuestionModel question = questionProvider.findById(rep.getQuestion().getId());
+			try {
+				if (rep.getId() != null) {
+					representationToModel.createAnswer(formAnswer, question, rep, answerProvider);
+				} else {
+					AnswerModel answer = answerProvider.findById(rep.getId());
+					formAnswerManager.updateAnswer(answer, rep);
+				}
+			} catch (ModelDuplicateException e) {
+				return ErrorResponse.exists("Question exists");
+			} catch (Exception e) {
+				return ErrorResponse.exists(e.getMessage());
+			}
+		}
+		return Response.ok().build();
+	}
 
-		for (AnswerModel model : models) {
-			results.add(ModelToRepresentation.toRepresentation(model));
+	@Override
+	public List<AnswerRepresentation> getAll(String formAnswerId, String questionId) {
+		// formAnswers/{formAnswerId}/answers?questionId
+		List<AnswerRepresentation> results = new ArrayList<AnswerRepresentation>();
+		if (questionId != null) {
+			QuestionModel question = questionProvider.findById(questionId);
+			AnswerModel model = answerProvider.findByFormAnswerAndQuestion(getFormAnswerModel(), question);
+			if (model != null) {
+				results.add(ModelToRepresentation.toRepresentation(model));
+			}
+		} else {
+			List<AnswerModel> models = answerProvider.getAll(getFormAnswerModel());
+			for (AnswerModel model : models) {
+				results.add(ModelToRepresentation.toRepresentation(model));
+			}
 		}
 		return results;
 	}

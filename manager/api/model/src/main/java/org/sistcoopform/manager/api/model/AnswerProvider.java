@@ -26,10 +26,16 @@ public interface AnswerProvider extends Provider {
 
 	AnswerModel findById(String id);
 
+	AnswerModel findByFormAnswerAndQuestion(FormAnswerModel formAnswer, QuestionModel question);
+
 	boolean remove(AnswerModel answer);
 
 	List<AnswerModel> getAll(FormAnswerModel formAnswer);
 
 	List<AnswerModel> getAll(FormAnswerModel formAnswer, int firstResult, int maxResults);
+
+	List<AnswerModel> getAll(QuestionModel question);
+
+	List<AnswerModel> getAll(QuestionModel question, int firstResult, int maxResults);
 
 }

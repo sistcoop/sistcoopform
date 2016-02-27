@@ -156,6 +156,23 @@ public class JpaAnswerProvider extends AbstractHibernateStorage implements Answe
 	}
 
 	@Override
+	public AnswerModel findByFormAnswerAndQuestion(FormAnswerModel formAnswer, QuestionModel question) {
+		TypedQuery<AnswerEntity> query = em.createNamedQuery("AnswerEntity.findByFormAnswerIdAndQuestionId",
+				AnswerEntity.class);
+		query.setParameter("formAnswerId", formAnswer.getId());
+		query.setParameter("questionId", question.getId());
+		List<AnswerEntity> results = query.getResultList();
+		if (results.isEmpty()) {
+			return null;
+		} else if (results.size() > 1) {
+			throw new IllegalStateException("More than one AnswerEntity with formAnswerId=" + formAnswer.getId()
+					+ " and questionId=" + question.getId() + ", results=" + results);
+		} else {
+			return AbstractAnswerAdapter.toAnswerModel(results.get(0), em);
+		}
+	}
+
+	@Override
 	public boolean remove(AnswerModel question) {
 		AnswerEntity questionEntity = em.find(AnswerEntity.class, question.getId());
 		em.remove(questionEntity);
@@ -171,6 +188,29 @@ public class JpaAnswerProvider extends AbstractHibernateStorage implements Answe
 	public List<AnswerModel> getAll(FormAnswerModel formAnswer, int firstResult, int maxResults) {
 		TypedQuery<AnswerEntity> query = em.createNamedQuery("AnswerEntity.findByFormAnswerId", AnswerEntity.class);
 		query.setParameter("answerId", formAnswer.getId());
+		if (firstResult != -1) {
+			query.setFirstResult(firstResult);
+		}
+		if (maxResults != -1) {
+			query.setMaxResults(maxResults);
+		}
+		List<AnswerEntity> entities = query.getResultList();
+		List<AnswerModel> models = new ArrayList<AnswerModel>();
+		for (AnswerEntity questionEntity : entities) {
+			models.add(AbstractAnswerAdapter.toAnswerModel(questionEntity, em));
+		}
+		return models;
+	}
+
+	@Override
+	public List<AnswerModel> getAll(QuestionModel question) {
+		return getAll(question, -1, -1);
+	}
+
+	@Override
+	public List<AnswerModel> getAll(QuestionModel question, int firstResult, int maxResults) {
+		TypedQuery<AnswerEntity> query = em.createNamedQuery("AnswerEntity.findByQuestionId", AnswerEntity.class);
+		query.setParameter("questionId", question.getId());
 		if (firstResult != -1) {
 			query.setFirstResult(firstResult);
 		}

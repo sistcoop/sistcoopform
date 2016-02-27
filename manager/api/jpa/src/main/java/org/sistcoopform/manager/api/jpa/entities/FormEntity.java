@@ -25,8 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FORM")
-@NamedQueries(value = { 
-		@NamedQuery(name = "FormEntity.findAll", query = "SELECT f FROM FormEntity f"),
+@NamedQueries(value = { @NamedQuery(name = "FormEntity.findAll", query = "SELECT f FROM FormEntity f"),
 		@NamedQuery(name = "FormEntity.findByTitle", query = "SELECT f FROM FormEntity f WHERE f.title = :title"),
 		@NamedQuery(name = "FormEntity.findByFilterText", query = "SELECT f FROM FormEntity f WHERE LOWER(f.title) LIKE LOWER(:filterText)") })
 public class FormEntity implements Serializable {
@@ -41,16 +40,19 @@ public class FormEntity implements Serializable {
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "ID")
 	private String id;
-	
+
 	@NotNull
 	@Size(min = 1, max = 200)
 	private String title;
 
 	@Size(min = 0, max = 400)
 	private String description;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "form", orphanRemoval = true, cascade = { CascadeType.REMOVE })
 	private Set<SectionEntity> sections = new HashSet<SectionEntity>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "form", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	private Set<FormAnswerEntity> formAnswers = new HashSet<FormAnswerEntity>();
 
 	public String getId() {
 		return id;
@@ -74,6 +76,22 @@ public class FormEntity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<SectionEntity> getSections() {
+		return sections;
+	}
+
+	public void setSections(Set<SectionEntity> sections) {
+		this.sections = sections;
+	}
+
+	public Set<FormAnswerEntity> getFormAnswers() {
+		return formAnswers;
+	}
+
+	public void setFormAnswers(Set<FormAnswerEntity> formAnswers) {
+		this.formAnswers = formAnswers;
 	}
 
 	@Override

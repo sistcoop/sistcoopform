@@ -11,6 +11,8 @@ import org.sistcoopform.manager.api.model.FormAnswerModel;
 import org.sistcoopform.manager.api.model.FormAnswerProvider;
 import org.sistcoopform.manager.api.model.utils.ModelToRepresentation;
 import org.sistcoopform.manager.api.rest.managers.FormAnswerManager;
+import org.sistcoopform.manager.api.rest.resources.config.AnswerResourceQualifer;
+import org.sistcoopform.manager.api.rest.resources.config.AnswerResourceQualifer.AnswerResourceType;
 import org.sistcoopform.manager.api.rest.services.ErrorResponse;
 
 @Stateless
@@ -26,15 +28,16 @@ public class FormAnswerResourceImpl implements FormAnswerResource {
 	private FormAnswerManager formAnswerManager;
 
 	@Inject
+	@AnswerResourceQualifer(AnswerResourceType.FORM_ANSWER_PARENT)
 	private AnswersResource answersResource;
 
-	private FormAnswerModel getFormAnswerularioModel() {
+	private FormAnswerModel getFormAnswerModel() {
 		return formAnswerProvider.findById(formAnswerId);
 	}
 
 	@Override
 	public FormAnswerRepresentation toRepresentation() {
-		FormAnswerRepresentation rep = ModelToRepresentation.toRepresentation(getFormAnswerularioModel());
+		FormAnswerRepresentation rep = ModelToRepresentation.toRepresentation(getFormAnswerModel());
 		if (rep != null) {
 			return rep;
 		} else {
@@ -44,12 +47,12 @@ public class FormAnswerResourceImpl implements FormAnswerResource {
 
 	@Override
 	public void update(FormAnswerRepresentation rep) {
-		formAnswerManager.update(getFormAnswerularioModel(), rep);
+		formAnswerManager.update(getFormAnswerModel(), rep);
 	}
 
 	@Override
 	public Response remove() {
-		FormAnswerModel model = getFormAnswerularioModel();
+		FormAnswerModel model = getFormAnswerModel();
 		if (model == null) {
 			throw new NotFoundException("FormAnswer not found");
 		}
