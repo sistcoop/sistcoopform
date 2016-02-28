@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 import org.sistcoopform.manager.api.jpa.entities.AnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.DateTimeAnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.GridAnswerEntity;
-import org.sistcoopform.manager.api.jpa.entities.NumericAnswerEntity;
+import org.sistcoopform.manager.api.jpa.entities.NumberAnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.QuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.ScaleAnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.SelectAnswerEntity;
@@ -45,9 +45,9 @@ public abstract class AbstractAnswerAdapter implements AnswerModel {
 		} else if (answerEntity instanceof DateTimeAnswerEntity) {
 			DateTimeAnswerEntity textAnswer = (DateTimeAnswerEntity) answerEntity;
 			return new DateTimeAnswerAdapter(em, textAnswer);
-		} else if (answerEntity instanceof NumericAnswerEntity) {
-			NumericAnswerEntity numericAnswer = (NumericAnswerEntity) answerEntity;
-			return new NumericAnswerAdapter(em, numericAnswer);
+		} else if (answerEntity instanceof NumberAnswerEntity) {
+			NumberAnswerEntity numericAnswer = (NumberAnswerEntity) answerEntity;
+			return new NumberAnswerAdapter(em, numericAnswer);
 		} else if (answerEntity instanceof ScaleAnswerEntity) {
 			ScaleAnswerEntity scaleAnswer = (ScaleAnswerEntity) answerEntity;
 			return new ScaleAnswerAdapter(em, scaleAnswer);

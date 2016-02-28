@@ -65,8 +65,9 @@ public class GridQuestionAdapter extends AbstractQuestionAdapter implements Grid
 		Set<GridRowEntity> rowsEntity = new HashSet<>();
 		for (GridRowModel rowModel : rows) {
 			rowsEntity.add(GridRowAdapter.toGridRowEntity(rowModel, em));
-		}
-		gridQuestionEntity.setRows(rowsEntity);
+		}		
+		gridQuestionEntity.getRows().clear();
+		gridQuestionEntity.getRows().addAll(rowsEntity);
 	}
 
 	@Override
@@ -85,7 +86,8 @@ public class GridQuestionAdapter extends AbstractQuestionAdapter implements Grid
 		for (GridColumnModel columnModel : columns) {
 			columnsEntity.add(GridColumnAdapter.toGridColumnEntity(columnModel, em));
 		}
-		gridQuestionEntity.setColumns(columnsEntity);
+		gridQuestionEntity.getColumns().clear();
+		gridQuestionEntity.getColumns().addAll(columnsEntity);
 	}
 
 }

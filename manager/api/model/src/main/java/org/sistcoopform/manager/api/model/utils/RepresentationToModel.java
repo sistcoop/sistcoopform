@@ -26,7 +26,7 @@ import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
 import org.sistcoopform.manager.api.model.ModelException;
-import org.sistcoopform.manager.api.model.NumericQuestionModel;
+import org.sistcoopform.manager.api.model.NumberQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
 import org.sistcoopform.manager.api.model.ScaleQuestionModel;
@@ -36,7 +36,7 @@ import org.sistcoopform.manager.api.model.SelectOptionModel;
 import org.sistcoopform.manager.api.model.SelectQuestionModel;
 import org.sistcoopform.manager.api.model.TextQuestionModel;
 import org.sistcoopform.manager.api.model.enums.DateTimeType;
-import org.sistcoopform.manager.api.model.enums.NumericType;
+import org.sistcoopform.manager.api.model.enums.NumberType;
 import org.sistcoopform.manager.api.model.enums.SelectType;
 import org.sistcoopform.manager.api.model.enums.TextType;
 
@@ -59,7 +59,7 @@ public class RepresentationToModel {
 					TextType.valueOf(rep.getType()), rep.isRequired());
 		} else if (rep.getQuestion().equals(QuestionAvailable.NUMBER)) {
 			return questionProvider.createNumberQuestion(section, rep.getTitle(), rep.getDescription(), rep.getNumber(),
-					NumericType.valueOf(rep.getType()), rep.isRequired());
+					NumberType.valueOf(rep.getType()), rep.isRequired());
 		} else if (rep.getQuestion().equals(QuestionAvailable.DATETIME)) {
 			return questionProvider.createDateTimeQuestion(section, rep.getTitle(), rep.getDescription(),
 					rep.getNumber(), DateTimeType.valueOf(rep.getType()), rep.isRequired());
@@ -114,7 +114,7 @@ public class RepresentationToModel {
 			return answerProvider.createTextAnswer(formAnswer, question, rep.getStringValue());
 		} else if (question instanceof DateTimeQuestionModel) {
 			return answerProvider.createDateTimeAnswer(formAnswer, question, rep.getDateValue());
-		} else if (question instanceof NumericQuestionModel) {			
+		} else if (question instanceof NumberQuestionModel) {			
 			return answerProvider.createNumberAnswer(formAnswer, question, rep.getNumberValue());
 		} else if (question instanceof ScaleQuestionModel) {			
 			return answerProvider.createScaleAnswer(formAnswer, question, rep.getIntegerValue());

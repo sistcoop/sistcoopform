@@ -16,7 +16,7 @@ import org.sistcoopform.manager.api.jpa.entities.DateTimeQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.GridColumnEntity;
 import org.sistcoopform.manager.api.jpa.entities.GridQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.GridRowEntity;
-import org.sistcoopform.manager.api.jpa.entities.NumericQuestionEntity;
+import org.sistcoopform.manager.api.jpa.entities.NumberQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.QuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.ScaleQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.SectionEntity;
@@ -24,10 +24,12 @@ import org.sistcoopform.manager.api.jpa.entities.SelectOptionEntity;
 import org.sistcoopform.manager.api.jpa.entities.SelectQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.TextQuestionEntity;
 import org.sistcoopform.manager.api.model.DateTimeQuestionModel;
+import org.sistcoopform.manager.api.model.FormModel;
 import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
-import org.sistcoopform.manager.api.model.NumericQuestionModel;
+import org.sistcoopform.manager.api.model.ModelException;
+import org.sistcoopform.manager.api.model.NumberQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
 import org.sistcoopform.manager.api.model.ScaleQuestionModel;
@@ -36,7 +38,7 @@ import org.sistcoopform.manager.api.model.SelectOptionModel;
 import org.sistcoopform.manager.api.model.SelectQuestionModel;
 import org.sistcoopform.manager.api.model.TextQuestionModel;
 import org.sistcoopform.manager.api.model.enums.DateTimeType;
-import org.sistcoopform.manager.api.model.enums.NumericType;
+import org.sistcoopform.manager.api.model.enums.NumberType;
 import org.sistcoopform.manager.api.model.enums.SelectType;
 import org.sistcoopform.manager.api.model.enums.TextType;
 
@@ -64,10 +66,18 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 	public void close() {
 		// TODO Auto-generated method stub
 	}
+	
+	private void validateFormAnswer(FormModel form) {
+		if (form.isActive()) {
+			throw new ModelException("Form is active, it is not posible to set a new question");
+		}
+	}
 
 	@Override
 	public TextQuestionModel createTextQuestion(SectionModel section, String title, String description, int number,
 			TextType type, boolean required) {
+		validateFormAnswer(section.getForm());
+		
 		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
 
 		TextQuestionEntity question = new TextQuestionEntity();
@@ -82,11 +92,13 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 	}
 
 	@Override
-	public NumericQuestionModel createNumberQuestion(SectionModel section, String title, String description, int number,
-			NumericType type, boolean required) {
+	public NumberQuestionModel createNumberQuestion(SectionModel section, String title, String description, int number,
+			NumberType type, boolean required) {
+		validateFormAnswer(section.getForm());
+		
 		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
 
-		NumericQuestionEntity question = new NumericQuestionEntity();
+		NumberQuestionEntity question = new NumberQuestionEntity();
 		question.setTitle(title);
 		question.setDescription(description);
 		question.setNumber(number);
@@ -94,12 +106,14 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 		question.setRequired(required);
 		question.setSection(sectionEntity);
 		em.persist(question);
-		return new NumericQuestionAdapter(em, question);
+		return new NumberQuestionAdapter(em, question);
 	}
 
 	@Override
 	public DateTimeQuestionModel createDateTimeQuestion(SectionModel section, String title, String description,
 			int number, DateTimeType type, boolean required) {
+		validateFormAnswer(section.getForm());
+		
 		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
 
 		DateTimeQuestionEntity question = new DateTimeQuestionEntity();
@@ -116,6 +130,8 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 	@Override
 	public ScaleQuestionModel createScaleQuestion(SectionModel section, String title, String description, int number,
 			String tag1, String tag2, int min, int max, boolean required) {
+		validateFormAnswer(section.getForm());
+		
 		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
 
 		ScaleQuestionEntity question = new ScaleQuestionEntity();
@@ -135,6 +151,8 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 	@Override
 	public SelectQuestionModel createSelectQuestion(SectionModel section, String title, String description, int number,
 			SelectType type, boolean required) {
+		validateFormAnswer(section.getForm());
+		
 		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
 
 		SelectQuestionEntity question = new SelectQuestionEntity();
@@ -150,7 +168,7 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 
 	@Override
 	public SelectOptionModel createSelectOption(SelectQuestionModel question, String denomination, int number,
-			boolean editable) {
+			boolean editable) {		
 		SelectQuestionEntity questionEntity = em.find(SelectQuestionEntity.class, question.getId());
 
 		SelectOptionEntity option = new SelectOptionEntity();
@@ -165,6 +183,8 @@ public class JpaQuestionProvider extends AbstractHibernateStorage implements Que
 	@Override
 	public GridQuestionModel createGridQuestion(SectionModel section, String title, String description, int number,
 			boolean required) {
+		validateFormAnswer(section.getForm());
+		
 		SectionEntity sectionEntity = em.find(SectionEntity.class, section.getId());
 
 		GridQuestionEntity question = new GridQuestionEntity();

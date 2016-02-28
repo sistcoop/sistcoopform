@@ -14,7 +14,7 @@ public interface AnswerProvider extends Provider {
 
 	TextAnswerModel createTextAnswer(FormAnswerModel formAnswer, QuestionModel question, String value);
 
-	NumericAnswerModel createNumberAnswer(FormAnswerModel formAnswer, QuestionModel question, double value);
+	NumberAnswerModel createNumberAnswer(FormAnswerModel formAnswer, QuestionModel question, double value);
 
 	DateTimeAnswerModel createDateTimeAnswer(FormAnswerModel formAnswer, QuestionModel question, Date datetime);
 

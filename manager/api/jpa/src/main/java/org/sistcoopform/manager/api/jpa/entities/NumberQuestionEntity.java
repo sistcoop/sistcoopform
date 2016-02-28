@@ -13,9 +13,9 @@ import org.hibernate.annotations.Type;
  */
 
 @Entity
-@Table(name = "NUMERIC_QUESTION")
+@Table(name = "NUMBER_QUESTION")
 @DiscriminatorValue("number")
-public class NumericQuestionEntity extends QuestionEntity {
+public class NumberQuestionEntity extends QuestionEntity {
 
 	/**
 	 * 

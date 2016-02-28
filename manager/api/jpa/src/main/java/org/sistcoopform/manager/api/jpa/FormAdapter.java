@@ -63,6 +63,16 @@ public class FormAdapter implements FormModel {
 	}
 
 	@Override
+	public boolean isActive() {
+		return formEntity.isActive();
+	}
+
+	@Override
+	public void active() {
+		formEntity.setActive(true);
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

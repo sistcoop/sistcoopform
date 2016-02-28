@@ -20,8 +20,8 @@ import org.sistcoopform.manager.api.model.GridAnswerModel;
 import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
-import org.sistcoopform.manager.api.model.NumericAnswerModel;
-import org.sistcoopform.manager.api.model.NumericQuestionModel;
+import org.sistcoopform.manager.api.model.NumberAnswerModel;
+import org.sistcoopform.manager.api.model.NumberQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.ScaleAnswerModel;
 import org.sistcoopform.manager.api.model.ScaleQuestionModel;
@@ -42,6 +42,7 @@ public class ModelToRepresentation {
 		rep.setId(model.getId());
 		rep.setTitle(model.getTitle());
 		rep.setDescription(model.getDescription());
+		rep.setActive(model.isActive());
 		return rep;
 	}
 
@@ -89,8 +90,8 @@ public class ModelToRepresentation {
 			rep.setQuestion(QuestionAvailable.DATETIME);
 			rep.setRequired(datetimeQuestion.isRequired());
 			rep.setType(datetimeQuestion.getType().toString());
-		} else if (model instanceof NumericQuestionModel) {
-			NumericQuestionModel numericQuestion = (NumericQuestionModel) model;
+		} else if (model instanceof NumberQuestionModel) {
+			NumberQuestionModel numericQuestion = (NumberQuestionModel) model;
 			rep.setQuestion(QuestionAvailable.NUMBER);
 			rep.setRequired(numericQuestion.isRequired());
 			rep.setType(numericQuestion.getType().toString());
@@ -208,8 +209,8 @@ public class ModelToRepresentation {
 		} else if (model instanceof DateTimeAnswerModel) {
 			DateTimeAnswerModel datetimeAnswer = (DateTimeAnswerModel) model;
 			rep.setDateValue(datetimeAnswer.getDate());
-		} else if (model instanceof NumericAnswerModel) {
-			NumericAnswerModel numericAnswer = (NumericAnswerModel) model;
+		} else if (model instanceof NumberAnswerModel) {
+			NumberAnswerModel numericAnswer = (NumberAnswerModel) model;
 			rep.setNumberValue(numericAnswer.getValue());
 		} else if (model instanceof ScaleAnswerModel) {
 			ScaleAnswerModel scaleAnswer = (ScaleAnswerModel) model;

@@ -22,11 +22,8 @@ public class DateTimeAnswerEntity extends AnswerEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
-
-	@Temporal(TemporalType.TIME)
-	private Date time;
 
 	public Date getDate() {
 		return date;
@@ -34,14 +31,6 @@ public class DateTimeAnswerEntity extends AnswerEntity {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
 	}
 
 }

@@ -50,14 +50,4 @@ public class DateTimeAnswerAdapter extends AbstractAnswerAdapter implements Date
 		dateTimeAnswerEntity.setDate(date);
 	}
 
-	@Override
-	public Date getTime() {
-		return dateTimeAnswerEntity.getTime();
-	}
-
-	@Override
-	public void setTime(Date time) {
-		dateTimeAnswerEntity.setTime(time);
-	}
-
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import org.sistcoopform.manager.api.model.enums.NumericType;
+import org.sistcoopform.manager.api.model.enums.NumberType;
 import org.sistcoopform.manager.api.model.enums.SelectType;
 import org.sistcoopform.manager.api.model.enums.TextType;
 import org.sistcoopform.manager.api.model.enums.DateTimeType;
@@ -16,8 +16,8 @@ public interface QuestionProvider extends Provider {
 	TextQuestionModel createTextQuestion(SectionModel section, String title, String description, int number,
 			TextType type, boolean required);
 
-	NumericQuestionModel createNumberQuestion(SectionModel section, String title, String description, int number,
-			NumericType type, boolean required);
+	NumberQuestionModel createNumberQuestion(SectionModel section, String title, String description, int number,
+			NumberType type, boolean required);
 
 	DateTimeQuestionModel createDateTimeQuestion(SectionModel section, String title, String description, int number,
 			DateTimeType type, boolean required);

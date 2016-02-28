@@ -27,7 +27,7 @@ public class FormResourceImpl implements FormResource {
 
 	@Inject
 	private SectionsResource sectionsResource;
-	
+
 	private FormModel getFormularioModel() {
 		return formProvider.findById(formId);
 	}
@@ -43,8 +43,13 @@ public class FormResourceImpl implements FormResource {
 	}
 
 	@Override
+	public void active() {
+		formManager.activeForm(getFormularioModel());
+	}
+
+	@Override
 	public void update(FormRepresentation rep) {
-		formManager.update(getFormularioModel(), rep);
+		formManager.updateForm(getFormularioModel(), rep);
 	}
 
 	@Override

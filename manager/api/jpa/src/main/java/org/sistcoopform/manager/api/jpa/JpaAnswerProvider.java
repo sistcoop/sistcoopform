@@ -19,7 +19,7 @@ import org.sistcoopform.manager.api.jpa.entities.AnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.DateTimeAnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.FormAnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.GridAnswerEntity;
-import org.sistcoopform.manager.api.jpa.entities.NumericAnswerEntity;
+import org.sistcoopform.manager.api.jpa.entities.NumberAnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.QuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.ScaleAnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.SelectAnswerEntity;
@@ -28,8 +28,10 @@ import org.sistcoopform.manager.api.model.AnswerModel;
 import org.sistcoopform.manager.api.model.AnswerProvider;
 import org.sistcoopform.manager.api.model.DateTimeAnswerModel;
 import org.sistcoopform.manager.api.model.FormAnswerModel;
+import org.sistcoopform.manager.api.model.FormModel;
 import org.sistcoopform.manager.api.model.GridAnswerModel;
-import org.sistcoopform.manager.api.model.NumericAnswerModel;
+import org.sistcoopform.manager.api.model.ModelException;
+import org.sistcoopform.manager.api.model.NumberAnswerModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.ScaleAnswerModel;
 import org.sistcoopform.manager.api.model.SelectAnswerModel;
@@ -68,8 +70,16 @@ public class JpaAnswerProvider extends AbstractHibernateStorage implements Answe
 		return em.find(QuestionEntity.class, question.getId());
 	}
 
+	private void validateFormAnswer(FormModel form) {
+		if (!form.isActive()) {
+			throw new ModelException("Form is not active for set answers");
+		}
+	}
+
 	@Override
 	public TextAnswerModel createTextAnswer(FormAnswerModel formAnswer, QuestionModel question, String value) {
+		validateFormAnswer(formAnswer.getForm());
+		
 		FormAnswerEntity formAnswerEntity = getFormAnswerEntity(formAnswer);
 		QuestionEntity questionEntity = getQuestionEntity(question);
 
@@ -82,20 +92,24 @@ public class JpaAnswerProvider extends AbstractHibernateStorage implements Answe
 	}
 
 	@Override
-	public NumericAnswerModel createNumberAnswer(FormAnswerModel formAnswer, QuestionModel question, double value) {
+	public NumberAnswerModel createNumberAnswer(FormAnswerModel formAnswer, QuestionModel question, double value) {
+		validateFormAnswer(formAnswer.getForm());
+		
 		FormAnswerEntity formAnswerEntity = getFormAnswerEntity(formAnswer);
 		QuestionEntity questionEntity = getQuestionEntity(question);
 
-		NumericAnswerEntity entity = new NumericAnswerEntity();
+		NumberAnswerEntity entity = new NumberAnswerEntity();
 		entity.setFormAnswer(formAnswerEntity);
 		entity.setQuestion(questionEntity);
 		entity.setValue(value);
 		em.persist(entity);
-		return new NumericAnswerAdapter(em, entity);
+		return new NumberAnswerAdapter(em, entity);
 	}
 
 	@Override
 	public DateTimeAnswerModel createDateTimeAnswer(FormAnswerModel formAnswer, QuestionModel question, Date datetime) {
+		validateFormAnswer(formAnswer.getForm());
+		
 		FormAnswerEntity formAnswerEntity = getFormAnswerEntity(formAnswer);
 		QuestionEntity questionEntity = getQuestionEntity(question);
 
@@ -103,13 +117,14 @@ public class JpaAnswerProvider extends AbstractHibernateStorage implements Answe
 		entity.setFormAnswer(formAnswerEntity);
 		entity.setQuestion(questionEntity);
 		entity.setDate(datetime);
-		entity.setTime(datetime);
 		em.persist(entity);
 		return new DateTimeAnswerAdapter(em, entity);
 	}
 
 	@Override
 	public ScaleAnswerModel createScaleAnswer(FormAnswerModel formAnswer, QuestionModel question, int value) {
+		validateFormAnswer(formAnswer.getForm());
+		
 		FormAnswerEntity formAnswerEntity = getFormAnswerEntity(formAnswer);
 		QuestionEntity questionEntity = getQuestionEntity(question);
 
@@ -124,6 +139,8 @@ public class JpaAnswerProvider extends AbstractHibernateStorage implements Answe
 	@Override
 	public SelectAnswerModel createSelectAnswer(FormAnswerModel formAnswer, QuestionModel question,
 			Set<String> values) {
+		validateFormAnswer(formAnswer.getForm());
+		
 		FormAnswerEntity formAnswerEntity = getFormAnswerEntity(formAnswer);
 		QuestionEntity questionEntity = getQuestionEntity(question);
 
@@ -138,6 +155,8 @@ public class JpaAnswerProvider extends AbstractHibernateStorage implements Answe
 	@Override
 	public GridAnswerModel createGridAnswer(FormAnswerModel formAnswer, QuestionModel question,
 			Map<String, String> values) {
+		validateFormAnswer(formAnswer.getForm());
+		
 		FormAnswerEntity formAnswerEntity = getFormAnswerEntity(formAnswer);
 		QuestionEntity questionEntity = getQuestionEntity(question);
 

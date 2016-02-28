@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -48,6 +49,10 @@ public class FormEntity implements Serializable {
 	@Size(min = 0, max = 400)
 	private String description;
 
+	@NotNull
+	@Type(type = "org.hibernate.type.TrueFalseType")
+	private boolean active;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "form", orphanRemoval = true, cascade = { CascadeType.REMOVE })
 	private Set<SectionEntity> sections = new HashSet<SectionEntity>();
 
@@ -76,6 +81,14 @@ public class FormEntity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public Set<SectionEntity> getSections() {

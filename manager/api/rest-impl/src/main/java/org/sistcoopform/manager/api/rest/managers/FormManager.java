@@ -20,7 +20,7 @@ import org.sistcoopform.manager.api.model.GridColumnModel;
 import org.sistcoopform.manager.api.model.GridQuestionModel;
 import org.sistcoopform.manager.api.model.GridRowModel;
 import org.sistcoopform.manager.api.model.ModelException;
-import org.sistcoopform.manager.api.model.NumericQuestionModel;
+import org.sistcoopform.manager.api.model.NumberQuestionModel;
 import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.QuestionProvider;
 import org.sistcoopform.manager.api.model.ScaleQuestionModel;
@@ -29,7 +29,7 @@ import org.sistcoopform.manager.api.model.SelectOptionModel;
 import org.sistcoopform.manager.api.model.SelectQuestionModel;
 import org.sistcoopform.manager.api.model.TextQuestionModel;
 import org.sistcoopform.manager.api.model.enums.DateTimeType;
-import org.sistcoopform.manager.api.model.enums.NumericType;
+import org.sistcoopform.manager.api.model.enums.NumberType;
 import org.sistcoopform.manager.api.model.enums.SelectType;
 import org.sistcoopform.manager.api.model.enums.TextType;
 
@@ -40,13 +40,25 @@ public class FormManager {
 	@Inject
 	private QuestionProvider questionProvider;
 
-	public void update(FormModel model, FormRepresentation rep) {
+	public void updateForm(FormModel model, FormRepresentation rep) {
+		if(model.isActive()) {
+			throw new ModelException("Form is active, it's not posible to update");
+		}
 		model.setTitle(rep.getTitle());
 		model.setDescription(rep.getDescription());
 		model.commit();
 	}
 
+	public void activeForm(FormModel form) {
+		form.active();
+		form.commit();
+	}
+
 	public void updateSection(SectionModel model, SectionRepresentation rep) {
+		if(model.getForm().isActive()) {
+			throw new ModelException("Form is active, it's not posible to update");
+		}
+		
 		model.setTitle(rep.getTitle());
 		model.setDescription(rep.getDescription());
 		model.setNumber(rep.getNumber());
@@ -54,11 +66,15 @@ public class FormManager {
 	}
 
 	public void updateQuestion(QuestionModel model, QuestionRepresentation rep) {
+		if(model.getSection().getForm().isActive()) {
+			throw new ModelException("Form is active, it's not posible to update");
+		}
+		
 		model.setTitle(rep.getTitle());
 		model.setNumber(rep.getNumber());
 		model.setDescription(rep.getDescription());
 
-		if (model instanceof TextQuestionModel) {			
+		if (model instanceof TextQuestionModel) {
 			TextQuestionModel textQuestion = (TextQuestionModel) model;
 			textQuestion.setRequired(rep.isRequired());
 			textQuestion.setType(TextType.valueOf(rep.getType()));
@@ -66,17 +82,18 @@ public class FormManager {
 			DateTimeQuestionModel datetimeQuestion = (DateTimeQuestionModel) model;
 			datetimeQuestion.setRequired(rep.isRequired());
 			datetimeQuestion.setType(DateTimeType.valueOf(rep.getType()));
-		} else if (model instanceof NumericQuestionModel) {			
-			NumericQuestionModel numericQuestion = (NumericQuestionModel) model;
+		} else if (model instanceof NumberQuestionModel) {
+			NumberQuestionModel numericQuestion = (NumberQuestionModel) model;
 			numericQuestion.setRequired(rep.isRequired());
-			numericQuestion.setType(NumericType.valueOf(rep.getType()));
-		} else if (model instanceof ScaleQuestionModel) {			
+			numericQuestion.setType(NumberType.valueOf(rep.getType()));
+		} else if (model instanceof ScaleQuestionModel) {
 			ScaleQuestionModel scaleQuestion = (ScaleQuestionModel) model;
 			scaleQuestion.setTag1(rep.getTag1());
 			scaleQuestion.setTag2(rep.getTag2());
 			scaleQuestion.setMin(rep.getMin());
 			scaleQuestion.setMax(rep.getMax());
-		} else if (model instanceof SelectQuestionModel) {			
+			scaleQuestion.setRequired(rep.isRequired());
+		} else if (model instanceof SelectQuestionModel) {
 			SelectQuestionModel selectQuestion = (SelectQuestionModel) model;
 			selectQuestion.setRequired(rep.isRequired());
 			selectQuestion.setType(SelectType.valueOf(rep.getType()));
@@ -88,7 +105,7 @@ public class FormManager {
 						option.getDenomination(), option.getNumber(), option.isEditable());
 				selectQuestion.getOptions().add(optionModel);
 			}
-		} else if (model instanceof GridQuestionModel) {			
+		} else if (model instanceof GridQuestionModel) {
 			GridQuestionModel gridQuestion = (GridQuestionModel) model;
 			gridQuestion.setRequired(rep.isRequired());
 
@@ -109,7 +126,7 @@ public class FormManager {
 			}
 		} else {
 			throw new ModelException("Question type is not valid on updateQuestion");
-		}		
+		}
 
 		model.commit();
 	}

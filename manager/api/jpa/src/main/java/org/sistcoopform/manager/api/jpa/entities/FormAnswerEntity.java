@@ -32,7 +32,8 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "FORM_ANSWER")
-@NamedQueries(value = { @NamedQuery(name = "FormAnswerEntity.findAll", query = "SELECT f FROM FormAnswerEntity f"),
+@NamedQueries(value = { 
+		@NamedQuery(name = "FormAnswerEntity.findAll", query = "SELECT f FROM FormAnswerEntity f"),
 		@NamedQuery(name = "FormAnswerEntity.findByFilterText", query = "SELECT f FROM FormAnswerEntity f WHERE LOWER(f.user) LIKE LOWER(:filterText)") })
 public class FormAnswerEntity implements Serializable {
 

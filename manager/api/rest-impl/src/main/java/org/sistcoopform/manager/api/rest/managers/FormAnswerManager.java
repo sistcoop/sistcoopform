@@ -13,7 +13,7 @@ import org.sistcoopform.manager.api.model.DateTimeAnswerModel;
 import org.sistcoopform.manager.api.model.FormAnswerModel;
 import org.sistcoopform.manager.api.model.GridAnswerModel;
 import org.sistcoopform.manager.api.model.ModelException;
-import org.sistcoopform.manager.api.model.NumericAnswerModel;
+import org.sistcoopform.manager.api.model.NumberAnswerModel;
 import org.sistcoopform.manager.api.model.ScaleAnswerModel;
 import org.sistcoopform.manager.api.model.SelectAnswerModel;
 import org.sistcoopform.manager.api.model.TextAnswerModel;
@@ -36,9 +36,8 @@ public class FormAnswerManager {
 		} else if (model instanceof DateTimeAnswerModel) {
 			DateTimeAnswerModel datetimeAnswer = (DateTimeAnswerModel) model;
 			datetimeAnswer.setDate(rep.getDateValue());
-			datetimeAnswer.setTime(rep.getDateValue());
-		} else if (model instanceof NumericAnswerModel) {			
-			NumericAnswerModel numericAnswer = (NumericAnswerModel) model;
+		} else if (model instanceof NumberAnswerModel) {			
+			NumberAnswerModel numericAnswer = (NumberAnswerModel) model;
 			numericAnswer.setValue(rep.getNumberValue());
 		} else if (model instanceof ScaleAnswerModel) {			
 			ScaleAnswerModel scaleAnswer = (ScaleAnswerModel) model;

@@ -8,8 +8,4 @@ public interface DateTimeAnswerModel extends AnswerModel {
 
 	void setDate(Date date);
 
-	Date getTime();
-
-	void setTime(Date time);
-
 }

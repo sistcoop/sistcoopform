@@ -1,6 +1,6 @@
 package org.sistcoopform.manager.api.model;
 
-public interface NumericAnswerModel extends AnswerModel {
+public interface NumberAnswerModel extends AnswerModel {
 
 	double getValue();
 

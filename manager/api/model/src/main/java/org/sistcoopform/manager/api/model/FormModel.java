@@ -15,4 +15,8 @@ public interface FormModel extends Model {
 
 	void setDescription(String description);
 
+	boolean isActive();
+
+	void active();
+
 }

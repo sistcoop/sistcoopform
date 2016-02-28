@@ -31,7 +31,7 @@ public interface AnswersResource {
 	@POST
 	@Path("save")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response save(List<AnswerRepresentation> reps);
+	public Response save(AnswerRepresentation[] reps);
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

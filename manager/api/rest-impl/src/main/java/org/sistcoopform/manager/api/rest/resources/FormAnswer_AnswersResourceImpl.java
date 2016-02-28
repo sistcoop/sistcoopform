@@ -79,12 +79,12 @@ public class FormAnswer_AnswersResourceImpl implements AnswersResource {
 	}
 
 	@Override
-	public Response save(List<AnswerRepresentation> reps) {
+	public Response save(AnswerRepresentation[] reps) {
 		for (AnswerRepresentation rep : reps) {
 			FormAnswerModel formAnswer = getFormAnswerModel();
 			QuestionModel question = questionProvider.findById(rep.getQuestion().getId());
 			try {
-				if (rep.getId() != null) {
+				if (rep.getId() == null) {
 					representationToModel.createAnswer(formAnswer, question, rep, answerProvider);
 				} else {
 					AnswerModel answer = answerProvider.findById(rep.getId());

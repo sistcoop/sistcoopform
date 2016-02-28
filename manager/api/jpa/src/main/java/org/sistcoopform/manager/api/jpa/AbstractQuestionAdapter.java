@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import org.sistcoopform.manager.api.jpa.entities.DateTimeQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.GridQuestionEntity;
-import org.sistcoopform.manager.api.jpa.entities.NumericQuestionEntity;
+import org.sistcoopform.manager.api.jpa.entities.NumberQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.QuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.ScaleQuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.SelectQuestionEntity;
@@ -43,9 +43,9 @@ public abstract class AbstractQuestionAdapter implements QuestionModel {
 		} else if (questionEntity instanceof DateTimeQuestionEntity) {
 			DateTimeQuestionEntity textQuestion = (DateTimeQuestionEntity) questionEntity;
 			return new DateTimeQuestionAdapter(em, textQuestion);
-		} else if (questionEntity instanceof NumericQuestionEntity) {
-			NumericQuestionEntity numericQuestion = (NumericQuestionEntity) questionEntity;
-			return new NumericQuestionAdapter(em, numericQuestion);
+		} else if (questionEntity instanceof NumberQuestionEntity) {
+			NumberQuestionEntity numericQuestion = (NumberQuestionEntity) questionEntity;
+			return new NumberQuestionAdapter(em, numericQuestion);
 		} else if (questionEntity instanceof ScaleQuestionEntity) {
 			ScaleQuestionEntity scaleQuestion = (ScaleQuestionEntity) questionEntity;
 			return new ScaleQuestionAdapter(em, scaleQuestion);

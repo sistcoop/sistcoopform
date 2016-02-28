@@ -9,9 +9,9 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "NUMERIC_ANSWER")
+@Table(name = "NUMBER_ANSWER")
 @DiscriminatorValue("number")
-public class NumericAnswerEntity extends AnswerEntity {
+public class NumberAnswerEntity extends AnswerEntity {
 
 	/**
 	 * 

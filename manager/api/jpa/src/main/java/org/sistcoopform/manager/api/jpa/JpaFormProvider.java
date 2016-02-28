@@ -49,6 +49,7 @@ public class JpaFormProvider extends AbstractHibernateStorage implements FormPro
 		FormEntity formEntity = new FormEntity();
 		formEntity.setTitle(title);
 		formEntity.setDescription(description);
+		formEntity.setActive(false);
 		em.persist(formEntity);
 		return new FormAdapter(em, formEntity);
 	}
