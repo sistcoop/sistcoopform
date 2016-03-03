@@ -1,5 +1,8 @@
 package org.sistcoopform.manager.api.model.utils;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.sistcoopform.manager.api.beans.representations.enums.QuestionAvailable;
@@ -55,12 +58,12 @@ public class ModelToRepresentation {
 		rep.setTitle(model.getTitle());
 		rep.setNumber(model.getNumber());
 		rep.setDescription(model.getDescription());
-		
+
 		FormModel formModel = model.getForm();
 		FormRepresentation formRepresentation = new FormRepresentation();
 		formRepresentation.setId(formModel.getId());
 		rep.setForm(formRepresentation);
-		
+
 		return rep;
 	}
 
@@ -73,13 +76,13 @@ public class ModelToRepresentation {
 		rep.setTitle(model.getTitle());
 		rep.setNumber(model.getNumber());
 		rep.setDescription(model.getDescription());
-		
+
 		SectionModel sectionModel = model.getSection();
 		SectionRepresentation sectionRep = new SectionRepresentation();
 		sectionRep.setId(sectionModel.getId());
 		sectionRep.setTitle(sectionModel.getTitle());
 		rep.setSection(sectionRep);
-		
+
 		if (model instanceof TextQuestionModel) {
 			TextQuestionModel textQuestion = (TextQuestionModel) model;
 			rep.setQuestion(QuestionAvailable.TEXT);
@@ -177,14 +180,14 @@ public class ModelToRepresentation {
 		rep.setDate(model.getDate());
 		rep.setNote(model.getNote());
 		rep.setValid(model.isValid());
-		
+
 		FormModel form = model.getForm();
 		FormRepresentation formRepresentation = new FormRepresentation();
 		formRepresentation.setId(form.getId());
 		formRepresentation.setTitle(form.getTitle());
 		formRepresentation.setDescription(form.getDescription());
 		rep.setForm(formRepresentation);
-		
+
 		return rep;
 	}
 
@@ -194,13 +197,13 @@ public class ModelToRepresentation {
 
 		AnswerRepresentation rep = new AnswerRepresentation();
 		rep.setId(model.getId());
-		
+
 		QuestionModel question = model.getQuestion();
 		QuestionRepresentation questionRepresentation = new QuestionRepresentation();
 		questionRepresentation.setId(question.getId());
 		questionRepresentation.setTitle(question.getTitle());
 		questionRepresentation.setDescription(question.getDescription());
-		questionRepresentation.setNumber(question.getNumber());		
+		questionRepresentation.setNumber(question.getNumber());
 		rep.setQuestion(questionRepresentation);
 
 		if (model instanceof TextAnswerModel) {
@@ -217,10 +220,14 @@ public class ModelToRepresentation {
 			rep.setIntegerValue(scaleAnswer.getValue());
 		} else if (model instanceof SelectAnswerModel) {
 			SelectAnswerModel selectAnswer = (SelectAnswerModel) model;
-			rep.setListValues(selectAnswer.getValues());
+			Set<String> values = new HashSet<>();
+			values.addAll(selectAnswer.getValues());			
+			rep.setListValues(values);
 		} else if (model instanceof GridAnswerModel) {
 			GridAnswerModel gridAnswer = (GridAnswerModel) model;
-			rep.setMapValues(gridAnswer.getValues());
+			Map<String, String> values = new HashMap<>();
+			values.putAll(gridAnswer.getValues());			
+			rep.setMapValues(values);
 		}
 
 		return rep;

@@ -1,8 +1,6 @@
 package org.sistcoopform.manager.api.beans.representations.idm;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,8 +17,8 @@ public class AnswerRepresentation {
 	private double numberValue;
 	private int integerValue;
 
-	private Set<String> listValues = new HashSet<String>();
-	private Map<String, String> mapValues = new HashMap<String, String>();
+	private Set<String> listValues;
+	private Map<String, String> mapValues;
 
 	private FormAnswerRepresentation formAnswer;
 	private QuestionRepresentation question;
