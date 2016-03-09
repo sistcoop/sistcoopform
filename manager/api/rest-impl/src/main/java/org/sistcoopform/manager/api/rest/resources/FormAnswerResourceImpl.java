@@ -46,6 +46,16 @@ public class FormAnswerResourceImpl implements FormAnswerResource {
 	}
 
 	@Override
+	public Response active() {
+		boolean result = formAnswerManager.activeFormAnswer(getFormAnswerModel());
+		if (result) {
+			return Response.noContent().build();
+		} else {
+			return ErrorResponse.error("FormAnswer couldn't not active", Response.Status.BAD_REQUEST);
+		}
+	}
+
+	@Override
 	public void update(FormAnswerRepresentation rep) {
 		formAnswerManager.update(getFormAnswerModel(), rep);
 	}

@@ -1,6 +1,7 @@
 package org.sistcoopform.manager.api.model;
 
 import java.util.Date;
+import java.util.Set;
 
 public interface FormAnswerModel extends Model {
 
@@ -22,7 +23,11 @@ public interface FormAnswerModel extends Model {
 	void setNote(String note);
 
 	boolean isValid();
-	
+
+	void active();
+
 	FormModel getForm();
+
+	Set<AnswerModel> getAnswers();
 
 }

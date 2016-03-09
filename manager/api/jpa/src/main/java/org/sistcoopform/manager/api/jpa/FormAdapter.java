@@ -1,9 +1,14 @@
 package org.sistcoopform.manager.api.jpa;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 
 import org.sistcoopform.manager.api.jpa.entities.FormEntity;
+import org.sistcoopform.manager.api.jpa.entities.SectionEntity;
 import org.sistcoopform.manager.api.model.FormModel;
+import org.sistcoopform.manager.api.model.SectionModel;
 
 /**
  * @author <a href="mailto:carlosthe19916@sistcoop.com">Carlos Feria</a>
@@ -70,6 +75,16 @@ public class FormAdapter implements FormModel {
 	@Override
 	public void active() {
 		formEntity.setActive(true);
+	}
+
+	@Override
+	public Set<SectionModel> getSections() {
+		Set<SectionEntity> sectionEntities = formEntity.getSections();
+		Set<SectionModel> result = new HashSet<>();
+		for (SectionEntity sectionEntity : sectionEntities) {
+			result.add(new SectionAdapter(em, sectionEntity));
+		}
+		return result;
 	}
 
 	@Override

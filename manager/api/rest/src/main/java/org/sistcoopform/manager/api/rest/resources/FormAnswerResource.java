@@ -3,6 +3,7 @@ package org.sistcoopform.manager.api.rest.resources;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,6 +22,11 @@ public interface FormAnswerResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public FormAnswerRepresentation toRepresentation();
 
+	@POST
+	@Path("active")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response active();
+	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void update(FormAnswerRepresentation rep);

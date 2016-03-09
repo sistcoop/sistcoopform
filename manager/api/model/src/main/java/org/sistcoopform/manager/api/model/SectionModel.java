@@ -1,5 +1,7 @@
 package org.sistcoopform.manager.api.model;
 
+import java.util.Set;
+
 public interface SectionModel extends Model {
 
 	String TITLE = "title";
@@ -21,5 +23,7 @@ public interface SectionModel extends Model {
 	void setNumber(int number);
 
 	FormModel getForm();
+
+	Set<QuestionModel> getQuestions();
 
 }

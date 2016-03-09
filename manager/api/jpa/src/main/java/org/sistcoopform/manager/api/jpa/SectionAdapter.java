@@ -1,9 +1,14 @@
 package org.sistcoopform.manager.api.jpa;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 
+import org.sistcoopform.manager.api.jpa.entities.QuestionEntity;
 import org.sistcoopform.manager.api.jpa.entities.SectionEntity;
 import org.sistcoopform.manager.api.model.FormModel;
+import org.sistcoopform.manager.api.model.QuestionModel;
 import org.sistcoopform.manager.api.model.SectionModel;
 
 /**
@@ -17,9 +22,9 @@ public class SectionAdapter implements SectionModel {
 	private SectionEntity sectionEntity;
 	private EntityManager em;
 
-	public SectionAdapter(EntityManager em, SectionEntity SectionEntity) {
+	public SectionAdapter(EntityManager em, SectionEntity sectionEntity) {
 		this.em = em;
-		this.sectionEntity = SectionEntity;
+		this.sectionEntity = sectionEntity;
 	}
 
 	public static SectionEntity toSectionEntity(SectionModel model, EntityManager em) {
@@ -76,6 +81,16 @@ public class SectionAdapter implements SectionModel {
 	@Override
 	public FormModel getForm() {
 		return new FormAdapter(em, sectionEntity.getForm());
+	}
+
+	@Override
+	public Set<QuestionModel> getQuestions() {
+		Set<QuestionEntity> questionEntities = sectionEntity.getQuestions();
+		Set<QuestionModel> result = new HashSet<>();
+		for (QuestionEntity questionEntity : questionEntities) {
+			result.add(AbstractQuestionAdapter.toQuestionModel(questionEntity, em));
+		}
+		return result;
 	}
 
 	@Override

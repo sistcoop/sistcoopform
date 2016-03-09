@@ -1,10 +1,14 @@
 package org.sistcoopform.manager.api.jpa;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 
+import org.sistcoopform.manager.api.jpa.entities.AnswerEntity;
 import org.sistcoopform.manager.api.jpa.entities.FormAnswerEntity;
+import org.sistcoopform.manager.api.model.AnswerModel;
 import org.sistcoopform.manager.api.model.FormAnswerModel;
 import org.sistcoopform.manager.api.model.FormModel;
 
@@ -79,10 +83,25 @@ public class FormAnswerAdapter implements FormAnswerModel {
 	public boolean isValid() {
 		return formAnswerEntity.isValid();
 	}
-	
+
+	@Override
+	public void active() {
+		formAnswerEntity.setValid(true);
+	}
+
 	@Override
 	public FormModel getForm() {
 		return new FormAdapter(em, formAnswerEntity.getForm());
+	}
+
+	@Override
+	public Set<AnswerModel> getAnswers() {
+		Set<AnswerEntity> answerEntities = formAnswerEntity.getAnswers();
+		Set<AnswerModel> result = new HashSet<>();
+		for (AnswerEntity answerEntity : answerEntities) {
+			result.add(AbstractAnswerAdapter.toAnswerModel(answerEntity, em));
+		}
+		return result;
 	}
 
 	@Override

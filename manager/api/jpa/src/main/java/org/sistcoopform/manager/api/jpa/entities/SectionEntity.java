@@ -29,8 +29,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "SECTION")
-@NamedQueries(value = { 
-		@NamedQuery(name = "SectionEntity.findAll", query = "SELECT s FROM SectionEntity s"),
+@NamedQueries(value = { @NamedQuery(name = "SectionEntity.findAll", query = "SELECT s FROM SectionEntity s"),
 		@NamedQuery(name = "SectionEntity.findByFormId", query = "SELECT s FROM SectionEntity s INNER JOIN s.form f WHERE f.id = :formId") })
 public class SectionEntity implements Serializable {
 
@@ -63,7 +62,7 @@ public class SectionEntity implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "section", orphanRemoval = true, cascade = { CascadeType.REMOVE })
 	private Set<QuestionEntity> questions = new HashSet<QuestionEntity>();
-	
+
 	public String getId() {
 		return id;
 	}
@@ -104,6 +103,14 @@ public class SectionEntity implements Serializable {
 		this.form = form;
 	}
 
+	public Set<QuestionEntity> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(Set<QuestionEntity> questions) {
+		this.questions = questions;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -128,4 +135,5 @@ public class SectionEntity implements Serializable {
 			return false;
 		return true;
 	}
+
 }

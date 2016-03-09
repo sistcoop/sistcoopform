@@ -1,5 +1,7 @@
 package org.sistcoopform.manager.api.model;
 
+import java.util.Set;
+
 public interface FormModel extends Model {
 
 	String TITLE = "title";
@@ -18,5 +20,7 @@ public interface FormModel extends Model {
 	boolean isActive();
 
 	void active();
+	
+	Set<SectionModel> getSections();
 
 }
